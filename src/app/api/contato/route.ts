@@ -1,11 +1,5 @@
 import { Resend } from 'resend'
 
-const apiKey = process.env.RESEND_API_KEY
-if (!apiKey) {
-  throw new Error('RESEND_API_KEY is not set')
-}
-const resend = new Resend(apiKey)
-
 const toEmail = process.env.CONTACT_TO_EMAIL ?? 'tiago.trcz@gmail.com'
 
 function escapeHtml(str: string) {
@@ -19,6 +13,12 @@ function escapeHtml(str: string) {
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(req: Request) {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    return Response.json({ error: 'Serviço de e-mail não configurado.' }, { status: 500 })
+  }
+  const resend = new Resend(apiKey)
+
   let body: { name?: unknown; email?: unknown; message?: unknown }
   try {
     body = await req.json()
