@@ -35,6 +35,14 @@ export default function HomePage() {
     <main>
       {/* ── Hero ── */}
       <section className="pt-32 pb-24 px-6 md:px-12 max-w-screen-xl mx-auto">
+        <Image
+          src="/images/logo-harpialab.png"
+          alt="Harpia Lab"
+          width={1280}
+          height={1280}
+          className="h-16 w-auto mb-10"
+          priority
+        />
         <span className="inline-block text-xs font-bold tracking-widest uppercase text-primary bg-primary/10 px-3 py-1 rounded-full mb-8">
           Consultoria &amp; Fábrica de Software
         </span>
