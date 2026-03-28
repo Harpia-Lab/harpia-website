@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-const toEmail = process.env.CONTACT_TO_EMAIL ?? 'tiago.trcz@gmail.com'
+const toEmail = process.env.CONTACT_TO_EMAIL
 
 function escapeHtml(str: string) {
   return str
@@ -14,7 +14,7 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(req: Request) {
   const apiKey = process.env.RESEND_API_KEY
-  if (!apiKey) {
+  if (!apiKey || !toEmail) {
     return Response.json({ error: 'Serviço de e-mail não configurado.' }, { status: 500 })
   }
   const resend = new Resend(apiKey)
@@ -36,7 +36,11 @@ export async function POST(req: Request) {
   const emailStr = String(email)
   const messageStr = String(message)
 
-  if (!emailRegex.test(emailStr)) {
+  if (nameStr.length > 200) {
+    return Response.json({ error: 'Nome muito longo (máx. 200 caracteres).' }, { status: 400 })
+  }
+
+  if (!emailRegex.test(emailStr) || emailStr.length > 254) {
     return Response.json({ error: 'E-mail inválido.' }, { status: 400 })
   }
 
