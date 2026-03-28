@@ -52,19 +52,19 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           type="button"
-          className="md:hidden p-3 text-on-surface"
-          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden p-3 text-primary relative z-50 cursor-pointer touch-manipulation"
+          onClick={() => setMenuOpen((prev) => !prev)}
           aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={menuOpen}
         >
-          <span className="block w-5 h-0.5 bg-current mb-1" />
-          <span className="block w-5 h-0.5 bg-current mb-1" />
-          <span className="block w-5 h-0.5 bg-current" />
+          <span className="block w-6 h-0.5 bg-current mb-1.5 pointer-events-none transition-transform duration-300" />
+          <span className="block w-6 h-0.5 bg-current mb-1.5 pointer-events-none transition-opacity duration-300" />
+          <span className="block w-6 h-0.5 bg-current pointer-events-none transition-transform duration-300" />
         </button>
       </div>
 
       {/* Mobile menu */}
-      <div className={`${menuOpen ? 'flex' : 'hidden'} flex-col bg-white border-t border-outline-variant px-6 py-5 gap-4`}>
+      <div className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col bg-white border-b border-outline-variant px-6 py-5 gap-4 shadow-lg md:hidden`}>
         <a href="#servicos" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
           {dict.services}
         </a>

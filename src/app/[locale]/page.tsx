@@ -4,8 +4,8 @@ import { getDictionary } from '@/lib/getDictionary'
 
 const team = [
   { src: '/images/ttt.jpeg', name: 'Tiago Thomen Taraczuk' },
-  { src: '/images/ggr.png',  name: 'Gabriel Gomes Rapozo' },
-  { src: '/images/cm.png',   name: 'Cezar Mauricio' },
+  { src: '/images/ggr.png', name: 'Gabriel Gomes Rapozo' },
+  { src: '/images/cm.png', name: 'Cezar Mauricio' },
 ]
 
 export function generateStaticParams() {
