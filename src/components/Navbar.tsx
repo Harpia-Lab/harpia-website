@@ -13,8 +13,8 @@ export default function Navbar() {
           <Image
             src="/images/logo-harpialab.png"
             alt="Harpia Lab"
-            width={120}
-            height={44}
+            width={1280}
+            height={1280}
             className="h-10 w-auto"
             priority
           />
@@ -51,10 +51,10 @@ export default function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-outline-variant px-6 py-5 flex flex-col gap-4">
-          <a href="#servicos" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant">
+          <a href="#servicos" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
             Serviços
           </a>
-          <a href="#equipe" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant">
+          <a href="#equipe" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
             Equipe
           </a>
           <a
