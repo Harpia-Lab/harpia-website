@@ -51,9 +51,11 @@ export default function Navbar({ locale, dict }: NavbarProps) {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 text-on-surface"
+          type="button"
+          className="md:hidden p-3 text-on-surface"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={menuOpen}
         >
           <span className="block w-5 h-0.5 bg-current mb-1" />
           <span className="block w-5 h-0.5 bg-current mb-1" />
@@ -62,30 +64,28 @@ export default function Navbar({ locale, dict }: NavbarProps) {
       </div>
 
       {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-outline-variant px-6 py-5 flex flex-col gap-4">
-          <a href="#servicos" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
-            {dict.services}
-          </a>
-          <a href="#equipe" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
-            {dict.team}
-          </a>
-          <a
-            href="#contato"
-            onClick={() => setMenuOpen(false)}
-            className="bg-primary text-on-primary px-5 py-3 rounded-lg text-sm font-semibold text-center"
-          >
-            {dict.cta}
-          </a>
-          <a
-            href={`/${otherLocale}`}
-            onClick={() => setMenuOpen(false)}
-            className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors"
-          >
-            {otherLocaleLabel}
-          </a>
-        </div>
-      )}
+      <div className={`${menuOpen ? 'flex' : 'hidden'} flex-col bg-white border-t border-outline-variant px-6 py-5 gap-4`}>
+        <a href="#servicos" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
+          {dict.services}
+        </a>
+        <a href="#equipe" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
+          {dict.team}
+        </a>
+        <a
+          href="#contato"
+          onClick={() => setMenuOpen(false)}
+          className="bg-primary text-on-primary px-5 py-3 rounded-lg text-sm font-semibold text-center"
+        >
+          {dict.cta}
+        </a>
+        <a
+          href={`/${otherLocale}`}
+          onClick={() => setMenuOpen(false)}
+          className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors"
+        >
+          {otherLocaleLabel}
+        </a>
+      </div>
     </nav>
   )
 }
