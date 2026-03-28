@@ -11,7 +11,7 @@ Site institucional da [Harpia Lab](https://harpialab.com), uma software factory 
 | Linguagem | TypeScript |
 | Envio de e-mail | Resend |
 | Fontes | Manrope + Inter (Google Fonts via `next/font`) |
-| Deploy | Netlify |
+| Deploy | Vercel |
 
 ## Páginas
 
@@ -52,17 +52,17 @@ npm run dev
 
 Acesse [http://localhost:3000](http://localhost:3000).
 
-## Deploy no Netlify
+## Deploy no Vercel
 
 ### 1. Importe o projeto
 
-1. Acesse [app.netlify.com](https://app.netlify.com) → **Add new site → Import an existing project**
+1. Acesse [vercel.com/new](https://vercel.com/new)
 2. Conecte sua conta do GitHub e selecione o repositório `Harpia-Lab/harpia-website`
-3. As configurações de build são detectadas automaticamente via `netlify.toml`
+3. Clique em **Deploy** — as configurações são detectadas automaticamente
 
 ### 2. Configure a variável de ambiente
 
-Em **Site configuration → Environment variables**, adicione:
+Em **Settings → Environment Variables**, adicione:
 
 | Variável | Valor |
 |----------|-------|
@@ -70,12 +70,12 @@ Em **Site configuration → Environment variables**, adicione:
 
 ### 3. Configure o domínio
 
-Em **Domain management**, adicione `harpialab.com` e configure os registros DNS na GoDaddy:
+Em **Settings → Domains**, adicione `harpialab.com` e configure os registros DNS na GoDaddy:
 
 | Tipo | Nome | Valor |
 |------|------|-------|
-| `A` | `@` | IP exibido pelo Netlify |
-| `CNAME` | `www` | `[seu-site].netlify.app` |
+| `A` | `@` | `76.76.21.21` |
+| `CNAME` | `www` | `cname.vercel-dns.com` |
 
 O certificado SSL é emitido automaticamente.
 
