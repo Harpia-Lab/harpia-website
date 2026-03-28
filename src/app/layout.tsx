@@ -17,9 +17,9 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: 'Harpia Lab | High-Precision Engineering',
+  title: 'Harpia Lab | Consultoria & Fábrica de Software',
   description:
-    'Transformamos ideias complexas em software de alta performance através de engenharia de precisão e design centrado no usuário.',
+    'Desenvolvemos produtos digitais e oferecemos consultoria técnica para empresas que precisam de resultado — do MVP ao sistema em produção.',
 }
 
 export default function RootLayout({
@@ -28,14 +28,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" className={`dark ${inter.variable} ${manrope.variable}`}>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-      </head>
-      <body className="font-body bg-background text-on-surface selection:bg-primary/30 selection:text-primary">
+    <html lang="pt-BR" className={`${inter.variable} ${manrope.variable}`}>
+      <body className="font-body bg-background text-on-surface">
         <Navbar />
         {children}
         <Footer />
