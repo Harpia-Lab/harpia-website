@@ -6,6 +6,8 @@ if (!apiKey) {
 }
 const resend = new Resend(apiKey)
 
+const toEmail = process.env.CONTACT_TO_EMAIL ?? 'tiago.trcz@gmail.com'
+
 function escapeHtml(str: string) {
   return str
     .replace(/&/g, '&amp;')
@@ -44,7 +46,7 @@ export async function POST(req: Request) {
 
   const { error } = await resend.emails.send({
     from: 'Harpia Lab <onboarding@resend.dev>',
-    to: 'tiago.trcz@gmail.com',
+    to: toEmail,
     replyTo: emailStr,
     subject: `Novo contato: ${escapeHtml(nameStr)}`,
     html: `

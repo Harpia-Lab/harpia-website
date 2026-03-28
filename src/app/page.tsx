@@ -35,7 +35,7 @@ export default function HomePage() {
     <main>
       {/* ── Hero ── */}
       <section className="pt-32 pb-24 px-6 md:px-12 max-w-screen-xl mx-auto">
-        <span className="inline-block text-xs font-bold tracking-widest uppercase text-primary bg-blue-50 px-3 py-1 rounded-full mb-8">
+        <span className="inline-block text-xs font-bold tracking-widest uppercase text-primary bg-primary/10 px-3 py-1 rounded-full mb-8">
           Consultoria &amp; Fábrica de Software
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-extrabold tracking-tight text-on-surface leading-tight mb-6 max-w-2xl">
@@ -64,7 +64,7 @@ export default function HomePage() {
       <div className="border-t border-outline-variant max-w-screen-xl mx-auto" />
 
       {/* ── Serviços ── */}
-      <section id="servicos" className="py-24 px-6 md:px-12 max-w-screen-xl mx-auto">
+      <section id="servicos" className="scroll-mt-16 py-24 px-6 md:px-12 max-w-screen-xl mx-auto">
         <span className="text-xs font-bold tracking-widest uppercase text-primary block mb-4">
           O que fazemos
         </span>
@@ -91,7 +91,7 @@ export default function HomePage() {
       <div className="border-t border-outline-variant max-w-screen-xl mx-auto" />
 
       {/* ── Equipe ── */}
-      <section id="equipe" className="py-24 px-6 md:px-12 bg-surface-container-low">
+      <section id="equipe" className="scroll-mt-16 py-24 px-6 md:px-12 bg-surface-container-low">
         <div className="max-w-screen-xl mx-auto">
           <span className="text-xs font-bold tracking-widest uppercase text-primary block mb-4">
             Quem somos
@@ -107,7 +107,7 @@ export default function HomePage() {
             {team.map(({ src, name, role }) => (
               <div
                 key={name}
-                className="bg-white border border-outline-variant rounded-2xl overflow-hidden"
+                className="bg-surface border border-outline-variant rounded-2xl overflow-hidden"
               >
                 <div className="relative aspect-square w-full">
                   <Image
@@ -129,7 +129,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Contato ── */}
-      <section id="contato" className="py-24 px-6 md:px-12 max-w-screen-xl mx-auto">
+      <section id="contato" className="scroll-mt-16 py-24 px-6 md:px-12 max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <div>
             <span className="text-xs font-bold tracking-widest uppercase text-primary block mb-4">

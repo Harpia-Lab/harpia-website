@@ -55,22 +55,23 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
-        <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
+        <label htmlFor="name" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
           Nome
         </label>
-        <input name="name" required type="text" placeholder="Seu nome" className={inputClass} />
+        <input id="name" name="name" required type="text" placeholder="Seu nome" className={inputClass} />
       </div>
       <div>
-        <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
+        <label htmlFor="email" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
           E-mail
         </label>
-        <input name="email" required type="email" placeholder="seu@email.com" className={inputClass} />
+        <input id="email" name="email" required type="email" placeholder="seu@email.com" className={inputClass} />
       </div>
       <div>
-        <label className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
+        <label htmlFor="message" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
           Mensagem
         </label>
         <textarea
+          id="message"
           name="message"
           required
           rows={5}
