@@ -19,10 +19,10 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // Pass locale via header so root layout can set lang attr
-  const response = NextResponse.next()
-  response.headers.set('x-locale', pathnameLocale)
-  return response
+  // Pass locale as request header so root layout can read it via headers()
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-locale', pathnameLocale)
+  return NextResponse.next({ request: { headers: requestHeaders } })
 }
 
 export const config = {
