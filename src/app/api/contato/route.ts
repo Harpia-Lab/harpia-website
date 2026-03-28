@@ -1,40 +1,64 @@
 import { Resend } from 'resend'
-import { NextRequest, NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const apiKey = process.env.RESEND_API_KEY
+if (!apiKey) {
+  throw new Error('RESEND_API_KEY is not set')
+}
+const resend = new Resend(apiKey)
 
-export async function POST(req: NextRequest) {
-  const body = await req.json()
-  const { name, email, message } = body as {
-    name: string
-    email: string
-    message: string
+function escapeHtml(str: string) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+export async function POST(req: Request) {
+  let body: { name?: unknown; email?: unknown; message?: unknown }
+  try {
+    body = await req.json()
+  } catch {
+    return Response.json({ error: 'Corpo da requisição inválido.' }, { status: 400 })
   }
 
+  const { name, email, message } = body
+
   if (!name || !email || !message) {
-    return NextResponse.json(
-      { error: 'Campos obrigatórios faltando.' },
-      { status: 400 }
-    )
+    return Response.json({ error: 'Campos obrigatórios faltando.' }, { status: 400 })
+  }
+
+  const nameStr = String(name)
+  const emailStr = String(email)
+  const messageStr = String(message)
+
+  if (!emailRegex.test(emailStr)) {
+    return Response.json({ error: 'E-mail inválido.' }, { status: 400 })
+  }
+
+  if (messageStr.length > 5000) {
+    return Response.json({ error: 'Mensagem muito longa (máx. 5000 caracteres).' }, { status: 400 })
   }
 
   const { error } = await resend.emails.send({
     from: 'Harpia Lab <onboarding@resend.dev>',
     to: 'tiago.trcz@gmail.com',
-    replyTo: email,
-    subject: `Novo contato: ${name}`,
+    replyTo: emailStr,
+    subject: `Novo contato: ${escapeHtml(nameStr)}`,
     html: `
       <h2>Novo contato via site</h2>
-      <p><strong>Nome:</strong> ${name}</p>
-      <p><strong>E-mail:</strong> ${email}</p>
+      <p><strong>Nome:</strong> ${escapeHtml(nameStr)}</p>
+      <p><strong>E-mail:</strong> ${escapeHtml(emailStr)}</p>
       <p><strong>Mensagem:</strong></p>
-      <p>${message.replace(/\n/g, '<br>')}</p>
+      <p>${escapeHtml(messageStr).replace(/\n/g, '<br>')}</p>
     `,
   })
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return Response.json({ error: error.message }, { status: 500 })
   }
 
-  return NextResponse.json({ ok: true })
+  return Response.json({ ok: true })
 }
