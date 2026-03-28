@@ -40,7 +40,7 @@ export default function HomePage() {
           alt="Harpia Lab"
           width={1280}
           height={1280}
-          className="h-16 w-auto mb-10"
+          className="h-48 w-auto mb-10"
           priority
         />
         <span className="inline-block text-xs font-bold tracking-widest uppercase text-primary bg-primary/10 px-3 py-1 rounded-full mb-8">

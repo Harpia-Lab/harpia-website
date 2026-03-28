@@ -11,9 +11,14 @@ export default function Footer() {
           height={1280}
           className="h-9 w-auto opacity-70"
         />
-        <p className="text-sm text-on-surface-variant">
-          © {new Date().getFullYear()} Harpia Lab. Todos os direitos reservados.
-        </p>
+        <div className="flex flex-col items-center md:items-end gap-1">
+          <p className="text-sm text-on-surface-variant">
+            © {new Date().getFullYear()} Harpia Lab. Todos os direitos reservados.
+          </p>
+          <p className="text-xs text-on-surface-variant/60">
+            Feito com ❤️ no Brasil 🇧🇷
+          </p>
+        </div>
       </div>
     </footer>
   )
