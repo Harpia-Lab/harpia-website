@@ -1,90 +1,91 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 import { useState } from 'react'
-
-const navLinks = [
-  { href: '/',         label: 'Início' },
-  { href: '/sobre',    label: 'Sobre Nós' },
-  { href: '/projetos', label: 'Projetos' },
-  { href: '/contato',  label: 'Contato' },
-]
+import { usePathname } from 'next/navigation'
+import { getDictionary } from '@/lib/getDictionary'
 
 export default function Navbar() {
-  const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const locale = pathname?.startsWith('/en') ? 'en' : 'pt'
+  const { nav: dict } = getDictionary(locale)
+  const otherLocale = locale === 'pt' ? 'en' : 'pt'
+  const otherLocaleLabel = locale === 'pt' ? 'EN' : 'PT'
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#111316]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,218,243,0.08)]">
-      <div className="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
-        <Link
-          href="/"
-          className="text-2xl font-black tracking-tighter text-primary font-headline"
-        >
-          Harpia Lab
-        </Link>
+    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline-variant">
+      <div className="flex justify-between items-center px-6 md:px-12 max-w-screen-xl mx-auto h-16">
+        <a href="#" aria-label="Harpia Lab">
+          <Image
+            src="/images/logo-harpialab.png"
+            alt="Harpia Lab"
+            width={1280}
+            height={1280}
+            className="h-10 w-auto"
+            priority
+          />
+        </a>
 
-        {/* Desktop nav */}
+        {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`font-headline font-bold tracking-tight transition-colors duration-300 ${
-                pathname === href
-                  ? 'text-primary border-b-2 border-primary pb-1'
-                  : 'text-slate-400 hover:text-primary'
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
+          <a href="#servicos" className="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">
+            {dict.services}
+          </a>
+          <a href="#equipe" className="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">
+            {dict.team}
+          </a>
+          <a
+            href="#contato"
+            className="bg-primary text-on-primary px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors"
+          >
+            {dict.cta}
+          </a>
+          <a
+            href={`/${otherLocale}`}
+            className="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors"
+          >
+            {otherLocaleLabel}
+          </a>
         </div>
 
-        <div className="flex items-center gap-4">
-          <Link
-            href="/contato"
-            className="hidden md:block bg-primary text-on-primary px-6 py-2 rounded font-headline font-bold hover:shadow-[0_0_15px_rgba(0,218,243,0.4)] transition-all active:scale-95"
-          >
-            Fale Conosco
-          </Link>
-          <button
-            className="md:hidden text-primary p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Abrir menu"
-          >
-            <span className="material-symbols-outlined">
-              {menuOpen ? 'close' : 'menu'}
-            </span>
-          </button>
-        </div>
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          className="md:hidden p-3 text-primary relative z-50 cursor-pointer touch-manipulation"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={menuOpen}
+        >
+          <span className="block w-6 h-0.5 bg-current mb-1.5 pointer-events-none transition-transform duration-300" />
+          <span className="block w-6 h-0.5 bg-current mb-1.5 pointer-events-none transition-opacity duration-300" />
+          <span className="block w-6 h-0.5 bg-current pointer-events-none transition-transform duration-300" />
+        </button>
       </div>
 
       {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-[#111316]/95 backdrop-blur-xl border-t border-outline-variant/20 px-8 py-6 flex flex-col gap-4">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setMenuOpen(false)}
-              className={`font-headline font-bold text-lg ${
-                pathname === href ? 'text-primary' : 'text-slate-400'
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
-          <Link
-            href="/contato"
-            onClick={() => setMenuOpen(false)}
-            className="bg-primary text-on-primary px-6 py-3 rounded font-headline font-bold text-center mt-2"
-          >
-            Fale Conosco
-          </Link>
-        </div>
-      )}
+      <div className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col bg-white border-b border-outline-variant px-6 py-5 gap-4 shadow-lg md:hidden`}>
+        <a href="#servicos" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
+          {dict.services}
+        </a>
+        <a href="#equipe" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
+          {dict.team}
+        </a>
+        <a
+          href="#contato"
+          onClick={() => setMenuOpen(false)}
+          className="bg-primary text-on-primary px-5 py-3 rounded-lg text-sm font-semibold text-center"
+        >
+          {dict.cta}
+        </a>
+        <a
+          href={`/${otherLocale}`}
+          onClick={() => setMenuOpen(false)}
+          className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors"
+        >
+          {otherLocaleLabel}
+        </a>
+      </div>
     </nav>
   )
 }
