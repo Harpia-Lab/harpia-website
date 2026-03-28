@@ -14,7 +14,7 @@ export default async function LocaleLayout({
 
   return (
     <>
-      <Navbar locale={locale} dict={dict.nav} />
+      <Navbar />
       {children}
       <Footer dict={dict.footer} />
     </>

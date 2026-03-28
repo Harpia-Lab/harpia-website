@@ -2,14 +2,14 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { getDictionary } from '@/lib/getDictionary'
 
-interface NavbarProps {
-  locale: string
-  dict: { services: string; team: string; cta: string }
-}
-
-export default function Navbar({ locale, dict }: NavbarProps) {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const locale = pathname?.startsWith('/en') ? 'en' : 'pt'
+  const { nav: dict } = getDictionary(locale)
   const otherLocale = locale === 'pt' ? 'en' : 'pt'
   const otherLocaleLabel = locale === 'pt' ? 'EN' : 'PT'
 
