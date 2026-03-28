@@ -1,10 +1,15 @@
 'use client'
 
 import { useState } from 'react'
+import type { Dictionary } from '@/lib/getDictionary'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
-export default function ContactForm() {
+interface ContactFormProps {
+  dict: Dictionary['form']
+}
+
+export default function ContactForm({ dict }: ContactFormProps) {
   const [state, setState] = useState<FormState>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -27,11 +32,11 @@ export default function ContactForm() {
         body: JSON.stringify(data),
       })
       const json = await res.json()
-      if (!res.ok) throw new Error(json.error ?? 'Erro ao enviar mensagem.')
+      if (!res.ok) throw new Error(json.error ?? dict.error)
       setState('success')
     } catch (err: unknown) {
       setState('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Erro desconhecido.')
+      setErrorMsg(err instanceof Error ? err.message : dict.error)
     }
   }
 
@@ -41,9 +46,8 @@ export default function ContactForm() {
         <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-2xl">
           ✓
         </div>
-        <h3 className="text-xl font-bold text-on-surface">Mensagem enviada!</h3>
         <p className="text-on-surface-variant max-w-sm text-sm">
-          Recebemos sua mensagem. Retornaremos em até 24h.
+          {dict.success}
         </p>
       </div>
     )
@@ -56,26 +60,26 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
         <label htmlFor="name" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
-          Nome
+          {dict.name}
         </label>
-        <input id="name" name="name" required type="text" placeholder="Seu nome" className={inputClass} />
+        <input id="name" name="name" required type="text" placeholder={dict.namePlaceholder} className={inputClass} />
       </div>
       <div>
         <label htmlFor="email" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
-          E-mail
+          {dict.email}
         </label>
-        <input id="email" name="email" required type="email" placeholder="seu@email.com" className={inputClass} />
+        <input id="email" name="email" required type="email" placeholder={dict.emailPlaceholder} className={inputClass} />
       </div>
       <div>
         <label htmlFor="message" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
-          Mensagem
+          {dict.message}
         </label>
         <textarea
           id="message"
           name="message"
           required
           rows={5}
-          placeholder="Descreva seu projeto ou dúvida..."
+          placeholder={dict.messagePlaceholder}
           className={`${inputClass} resize-none`}
         />
       </div>
@@ -89,7 +93,7 @@ export default function ContactForm() {
         disabled={state === 'loading'}
         className="w-full bg-primary text-on-primary py-3 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {state === 'loading' ? 'Enviando...' : 'Enviar mensagem'}
+        {state === 'loading' ? dict.sending : dict.submit}
       </button>
     </form>
   )

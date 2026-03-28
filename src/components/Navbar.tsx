@@ -3,8 +3,15 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-export default function Navbar() {
+interface NavbarProps {
+  locale: string
+  dict: { services: string; team: string; cta: string }
+}
+
+export default function Navbar({ locale, dict }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const otherLocale = locale === 'pt' ? 'en' : 'pt'
+  const otherLocaleLabel = locale === 'pt' ? 'EN' : 'PT'
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline-variant">
@@ -23,16 +30,22 @@ export default function Navbar() {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           <a href="#servicos" className="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">
-            Serviços
+            {dict.services}
           </a>
           <a href="#equipe" className="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">
-            Equipe
+            {dict.team}
           </a>
           <a
             href="#contato"
             className="bg-primary text-on-primary px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors"
           >
-            Fale Conosco
+            {dict.cta}
+          </a>
+          <a
+            href={`/${otherLocale}`}
+            className="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors"
+          >
+            {otherLocaleLabel}
           </a>
         </div>
 
@@ -52,17 +65,24 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-outline-variant px-6 py-5 flex flex-col gap-4">
           <a href="#servicos" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
-            Serviços
+            {dict.services}
           </a>
           <a href="#equipe" onClick={() => setMenuOpen(false)} className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors">
-            Equipe
+            {dict.team}
           </a>
           <a
             href="#contato"
             onClick={() => setMenuOpen(false)}
             className="bg-primary text-on-primary px-5 py-3 rounded-lg text-sm font-semibold text-center"
           >
-            Fale Conosco
+            {dict.cta}
+          </a>
+          <a
+            href={`/${otherLocale}`}
+            onClick={() => setMenuOpen(false)}
+            className="text-base font-medium text-on-surface-variant hover:text-primary transition-colors"
+          >
+            {otherLocaleLabel}
           </a>
         </div>
       )}
