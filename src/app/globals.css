@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Force light color scheme regardless of OS preference */
+:root {
+  color-scheme: light;
+}
+
 @theme {
   /* ── Cores — tema light ── */
   --color-primary:                  #1e3a5f;
