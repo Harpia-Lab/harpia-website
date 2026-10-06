@@ -55,7 +55,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-outline transition-colors focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 focus:outline-none'
+    'w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-outline transition-colors focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20 focus:outline-none'
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -92,7 +92,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
       <button
         type="submit"
         disabled={state === 'loading'}
-        className="group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary py-3.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-shine group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary py-3.5 text-sm font-semibold text-on-primary transition hover:shadow-lg hover:shadow-brand/30 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {state === 'loading' ? dict.sending : dict.submit}
         {state !== 'loading' && (

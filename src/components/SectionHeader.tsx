@@ -9,7 +9,7 @@ export function Eyebrow({ children, onInk = false, className = '' }: EyebrowProp
     <span
       className={`inline-flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.12em] sm:tracking-[0.18em] ${onInk ? 'text-accent' : 'text-primary'} ${className}`}
     >
-      <span aria-hidden="true" className="h-px w-6 bg-current opacity-50" />
+      <span aria-hidden="true" className="h-px w-6 bg-linear-to-r from-brand to-brand-2" />
       {children}
     </span>
   )

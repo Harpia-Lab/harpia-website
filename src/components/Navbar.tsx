@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Logo from '@/components/Logo'
 import { CloseIcon, MenuIcon } from '@/components/icons'
 import { locales, type Dictionary, type Locale } from '@/lib/getDictionary'
+
+const sectionIds = ['servicos', 'processo', 'equipe', 'contato']
 
 interface NavbarProps {
   locale: Locale
@@ -12,11 +14,31 @@ interface NavbarProps {
 
 export default function Navbar({ locale, dict }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
+
+  // Destaca no menu a seção que está cruzando o meio da tela
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const { id } = entry.target
+          if (entry.isIntersecting) setActiveSection(id)
+          else setActiveSection((current) => (current === id ? '' : current))
+        }
+      },
+      { rootMargin: '-45% 0px -55% 0px' },
+    )
+    for (const id of sectionIds) {
+      const section = document.getElementById(id)
+      if (section) observer.observe(section)
+    }
+    return () => observer.disconnect()
+  }, [])
 
   const links = [
-    { href: '#servicos', label: dict.services },
-    { href: '#processo', label: dict.process },
-    { href: '#equipe', label: dict.team },
+    { id: 'servicos', label: dict.services },
+    { id: 'processo', label: dict.process },
+    { id: 'equipe', label: dict.team },
   ]
 
   const languageSwitch = (
@@ -53,19 +75,27 @@ export default function Navbar({ locale, dict }: NavbarProps) {
 
         {/* Desktop */}
         <div className="hidden items-center gap-8 md:flex">
-          {links.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
-            >
-              {label}
-            </a>
-          ))}
+          {links.map(({ id, label }) => {
+            const active = activeSection === id
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                aria-current={active ? 'true' : undefined}
+                className={`group relative py-1 text-sm font-medium transition-colors hover:text-primary ${active ? 'text-primary' : 'text-on-surface-variant'}`}
+              >
+                {label}
+                <span
+                  aria-hidden="true"
+                  className={`absolute inset-x-0 -bottom-0.5 h-0.5 origin-left rounded-full bg-linear-to-r from-brand to-brand-2 transition-transform duration-300 group-hover:scale-x-100 ${active ? 'scale-x-100' : 'scale-x-0'}`}
+                />
+              </a>
+            )
+          })}
           {languageSwitch}
           <a
             href="#contato"
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover"
+            className="btn-shine rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition hover:shadow-lg hover:shadow-brand/30"
           >
             {dict.cta}
           </a>
@@ -83,14 +113,20 @@ export default function Navbar({ locale, dict }: NavbarProps) {
         </button>
       </div>
 
+      {/* Progresso de leitura */}
+      <div
+        aria-hidden="true"
+        className="scroll-progress absolute inset-x-0 -bottom-px h-0.5 bg-linear-to-r from-brand to-brand-2"
+      />
+
       {/* Mobile menu */}
       <div
         className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col gap-1 border-b border-outline-variant bg-white px-6 pt-3 pb-6 shadow-lg md:hidden`}
       >
-        {links.map(({ href, label }) => (
+        {links.map(({ id, label }) => (
           <a
-            key={href}
-            href={href}
+            key={id}
+            href={`#${id}`}
             onClick={() => setMenuOpen(false)}
             className="border-b border-outline-variant py-3.5 text-base font-medium text-on-surface transition-colors hover:text-primary"
           >

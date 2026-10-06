@@ -15,7 +15,8 @@ const en = {
   },
   hero: {
     badge: 'Consulting & Software Factory',
-    title: 'Custom software, built to last.',
+    title: 'Custom software,',
+    titleAccent: 'built to last.',
     subtitle:
       'We design, build, and evolve digital products for companies that need results, from MVP to production.',
     ctaPrimary: 'Request a quote',

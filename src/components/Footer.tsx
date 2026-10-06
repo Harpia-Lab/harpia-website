@@ -14,7 +14,8 @@ export default function Footer({ dict }: FooterProps) {
   ]
 
   return (
-    <footer className="on-ink border-t border-white/10 bg-ink text-on-ink-variant">
+    <footer className="on-ink bg-ink text-on-ink-variant">
+      <div aria-hidden="true" className="h-px bg-linear-to-r from-transparent via-brand/60 to-transparent" />
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <div className="flex flex-col gap-10 py-12 md:flex-row md:items-start md:justify-between">
           <div>

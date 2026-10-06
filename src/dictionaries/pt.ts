@@ -15,7 +15,8 @@ const pt = {
   },
   hero: {
     badge: 'Consultoria & Fábrica de Software',
-    title: 'Software sob medida, feito para durar.',
+    title: 'Software sob medida,',
+    titleAccent: 'feito para durar.',
     subtitle:
       'Projetamos, desenvolvemos e evoluímos produtos digitais para empresas que precisam de resultado, do MVP ao sistema em produção.',
     ctaPrimary: 'Solicitar orçamento',
