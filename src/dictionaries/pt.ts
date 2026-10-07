@@ -1,37 +1,65 @@
 const pt = {
+  meta: {
+    title: 'Harpia Lab | Consultoria & Fábrica de Software',
+    description:
+      'Projetamos, desenvolvemos e evoluímos produtos digitais para empresas que precisam de resultado, do MVP ao sistema em produção.',
+  },
   nav: {
     services: 'Serviços',
+    process: 'Processo',
     team: 'Equipe',
-    cta: 'Fale Conosco',
+    cta: 'Fale conosco',
+    openMenu: 'Abrir menu',
+    closeMenu: 'Fechar menu',
+    language: 'Idioma',
   },
   hero: {
     badge: 'Consultoria & Fábrica de Software',
-    title: 'Transformamos ideias em software de verdade.',
-    subtitle: 'Desenvolvemos produtos digitais e oferecemos consultoria técnica para empresas que precisam de resultado — do MVP ao sistema em produção.',
-    ctaPrimary: 'Solicitar Orçamento',
-    ctaSecondary: 'Conheça o time →',
+    title: 'Software sob medida,',
+    titleAccent: 'feito para durar.',
+    subtitle:
+      'Projetamos, desenvolvemos e evoluímos produtos digitais para empresas que precisam de resultado, do MVP ao sistema em produção.',
+    ctaPrimary: 'Solicitar orçamento',
+    ctaSecondary: 'Como trabalhamos',
+    highlights: ['Web, mobile e APIs', 'Do MVP à produção', 'Resposta em até 24h'],
+    terminal: {
+      live: 'no ar',
+      url: 'seuproduto.com.br',
+    },
   },
   services: {
-    label: 'O que fazemos',
-    title: 'Serviços',
-    subtitle: 'Da ideia ao deploy, com código limpo e foco em entrega.',
+    label: 'Serviços',
+    title: 'Da ideia ao deploy.',
+    subtitle: 'Atuamos em cada etapa do produto, com código limpo e foco em entrega.',
     items: [
-      { icon: '🏭', title: 'Fábrica de Software', desc: 'Desenvolvimento de produtos digitais sob demanda — web, mobile e sistemas internos.' },
-      { icon: '🎯', title: 'Consultoria Técnica', desc: 'Arquitetura de sistemas, revisão de código e escolha de stack para o seu contexto.' },
-      { icon: '💻', title: 'Desenvolvimento Web & Mobile', desc: 'Aplicações rápidas, acessíveis e bem construídas do front ao back-end.' },
-      { icon: '🔗', title: 'Integrações & APIs', desc: 'Conectamos sistemas legados a novas plataformas com integrações robustas.' },
+      { title: 'Fábrica de Software', desc: 'Desenvolvimento de produtos digitais sob demanda: web, mobile e sistemas internos.' },
+      { title: 'Consultoria Técnica', desc: 'Arquitetura de sistemas, revisão de código e escolha de stack para o seu contexto.' },
+      { title: 'Desenvolvimento Web & Mobile', desc: 'Aplicações rápidas, acessíveis e bem construídas, do front ao back-end.' },
+      { title: 'Integrações & APIs', desc: 'Conectamos sistemas legados a novas plataformas com integrações robustas.' },
+    ],
+  },
+  process: {
+    label: 'Processo',
+    title: 'Como trabalhamos',
+    subtitle: 'Um caminho claro do primeiro contato à entrega, com você acompanhando cada etapa.',
+    steps: [
+      { title: 'Descoberta', desc: 'Entendemos o problema, o contexto do negócio e o que precisa existir primeiro.' },
+      { title: 'Arquitetura', desc: 'Definimos escopo, stack e arquitetura antes de escrever a primeira linha de código.' },
+      { title: 'Desenvolvimento', desc: 'Entregas incrementais, com código revisado e visibilidade do progresso.' },
+      { title: 'Entrega e suporte', desc: 'Colocamos em produção e seguimos junto na evolução do produto.' },
     ],
   },
   team: {
-    label: 'Quem somos',
-    title: 'Nossa equipe',
-    subtitle: 'Três co-fundadores com experiência em engenharia de software, design e arquitetura de sistemas.',
+    label: 'Equipe',
+    title: 'Quem constrói com você',
+    subtitle: 'Três cofundadores com experiência em engenharia de software, design e arquitetura de sistemas.',
     role: 'Co-founder',
   },
   contact: {
     label: 'Contato',
     title: 'Vamos conversar?',
     subtitle: 'Conte o seu desafio e a gente retorna com uma proposta. Respondemos em até 24h.',
+    emailLabel: 'E-mail',
   },
   form: {
     name: 'Nome',
@@ -46,8 +74,9 @@ const pt = {
     error: 'Ocorreu um erro. Tente novamente.',
   },
   footer: {
+    tagline: 'Consultoria & Fábrica de Software',
     copyright: 'Todos os direitos reservados.',
-    madeWith: 'Feito com ❤️ no Brasil 🇧🇷',
+    madeWith: 'Feito no Brasil',
   },
 }
 

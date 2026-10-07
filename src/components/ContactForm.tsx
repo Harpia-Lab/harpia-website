@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { ArrowRightIcon, CheckIcon } from '@/components/icons'
 import type { Dictionary } from '@/lib/getDictionary'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
@@ -42,11 +43,11 @@ export default function ContactForm({ dict }: ContactFormProps) {
 
   if (state === 'success') {
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-2xl">
-          ✓
+      <div role="status" className="flex flex-col items-center justify-center gap-4 py-16 text-center">
+        <div className="flex size-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 ring-1 ring-emerald-600/15">
+          <CheckIcon className="size-6" />
         </div>
-        <p className="text-on-surface-variant max-w-sm text-sm">
+        <p className="max-w-sm text-sm text-on-surface-variant">
           {dict.success}
         </p>
       </div>
@@ -54,24 +55,24 @@ export default function ContactForm({ dict }: ContactFormProps) {
   }
 
   const inputClass =
-    'w-full border border-outline-variant rounded-lg px-4 py-3 text-sm text-on-surface bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors'
+    'w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-outline transition-colors focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20 focus:outline-none'
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div>
-        <label htmlFor="name" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
+        <label htmlFor="name" className="mb-2 block text-sm font-medium text-on-surface">
           {dict.name}
         </label>
         <input id="name" name="name" required type="text" placeholder={dict.namePlaceholder} className={inputClass} />
       </div>
       <div>
-        <label htmlFor="email" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
+        <label htmlFor="email" className="mb-2 block text-sm font-medium text-on-surface">
           {dict.email}
         </label>
         <input id="email" name="email" required type="email" placeholder={dict.emailPlaceholder} className={inputClass} />
       </div>
       <div>
-        <label htmlFor="message" className="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5">
+        <label htmlFor="message" className="mb-2 block text-sm font-medium text-on-surface">
           {dict.message}
         </label>
         <textarea
@@ -85,15 +86,18 @@ export default function ContactForm({ dict }: ContactFormProps) {
       </div>
 
       {state === 'error' && (
-        <p className="text-red-600 text-sm">{errorMsg}</p>
+        <p role="alert" className="text-sm text-error">{errorMsg}</p>
       )}
 
       <button
         type="submit"
         disabled={state === 'loading'}
-        className="w-full bg-primary text-on-primary py-3 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="btn-shine group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary py-3.5 text-sm font-semibold text-on-primary transition hover:shadow-lg hover:shadow-brand/30 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {state === 'loading' ? dict.sending : dict.submit}
+        {state !== 'loading' && (
+          <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+        )}
       </button>
     </form>
   )
