@@ -12,21 +12,54 @@ function escapeHtml(str: string) {
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export async function POST(req: Request) {
-  const apiKey = process.env.RESEND_API_KEY
-  if (!apiKey || !toEmail) {
-    return Response.json({ error: 'Serviço de e-mail não configurado.' }, { status: 500 })
-  }
-  const resend = new Resend(apiKey)
+const GENERIC_ERROR = 'Não foi possível enviar. Tente novamente mais tarde.'
 
-  let body: { name?: unknown; email?: unknown; message?: unknown }
+// ponytail: rate limit em memória, por instância serverless (cada instância/região tem o
+// seu Map e ele zera no cold start). Segura rajadas de um mesmo IP, não abuso distribuído;
+// se isso importar, Vercel Firewall (rate limit rule) ou BotID na rota.
+const WINDOW_MS = 10 * 60 * 1000
+const MAX_PER_WINDOW = 5
+const MAX_KEYS = 1000
+const hits = new Map<string, { count: number; resetAt: number }>()
+
+function rateLimited(ip: string) {
+  const now = Date.now()
+  const entry = hits.get(ip)
+  if (entry && entry.resetAt > now) {
+    entry.count++
+    return entry.count > MAX_PER_WINDOW
+  }
+  if (hits.size >= MAX_KEYS) {
+    for (const [key, e] of hits) if (e.resetAt <= now) hits.delete(key)
+    // Map mantém ordem de inserção: descarta a chave mais antiga em vez de zerar todo mundo.
+    if (hits.size >= MAX_KEYS) hits.delete(hits.keys().next().value!)
+  }
+  hits.set(ip, { count: 1, resetAt: now + WINDOW_MS })
+  return false
+}
+
+export async function POST(req: Request) {
+  // Na Vercel x-real-ip e x-forwarded-for são sobrescritos pela plataforma com o IP do cliente
+  // (um único IP). Fora da Vercel podem ser forjados.
+  const ip = req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
+  if (rateLimited(ip)) {
+    return Response.json({ error: 'Muitas tentativas. Tente novamente mais tarde.' }, { status: 429 })
+  }
+
+  let body: { name?: unknown; email?: unknown; message?: unknown; website?: unknown }
   try {
     body = await req.json()
   } catch {
     return Response.json({ error: 'Corpo da requisição inválido.' }, { status: 400 })
   }
 
-  const { name, email, message } = body
+  const { name, email, message, website } = body
+
+  // Honeypot: campo invisível para humanos; bot que preenche recebe sucesso falso.
+  if (website) {
+    console.warn('contato: honeypot preenchido, descartado')
+    return Response.json({ ok: true })
+  }
 
   if (!name || !email || !message) {
     return Response.json({ error: 'Campos obrigatórios faltando.' }, { status: 400 })
@@ -48,6 +81,13 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Mensagem muito longa (máx. 5000 caracteres).' }, { status: 400 })
   }
 
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey || !toEmail) {
+    console.error('contato: RESEND_API_KEY ou CONTACT_TO_EMAIL não configurado')
+    return Response.json({ error: GENERIC_ERROR }, { status: 500 })
+  }
+  const resend = new Resend(apiKey)
+
   const { error } = await resend.emails.send({
     from: 'Harpia Lab <onboarding@resend.dev>',
     to: toEmail,
@@ -63,7 +103,8 @@ export async function POST(req: Request) {
   })
 
   if (error) {
-    return Response.json({ error: error.message }, { status: 500 })
+    console.error('contato: falha no Resend', error)
+    return Response.json({ error: GENERIC_ERROR }, { status: 500 })
   }
 
   return Response.json({ ok: true })

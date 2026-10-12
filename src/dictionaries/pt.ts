@@ -104,6 +104,7 @@ const pt = {
     sending: 'Enviando...',
     success: 'Mensagem enviada! Retornaremos em breve.',
     error: 'Ocorreu um erro. Tente novamente.',
+    rateLimited: 'Muitas tentativas. Tente novamente mais tarde.',
   },
   footer: {
     tagline: 'Consultoria & Fábrica de Software',
