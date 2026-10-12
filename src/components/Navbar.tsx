@@ -5,7 +5,7 @@ import Logo from '@/components/Logo'
 import { CloseIcon, MenuIcon } from '@/components/icons'
 import { locales, type Dictionary, type Locale } from '@/lib/getDictionary'
 
-const sectionIds = ['servicos', 'processo', 'equipe', 'contato']
+const sectionIds = ['servicos', 'produtos', 'processo', 'equipe', 'contato']
 
 interface NavbarProps {
   locale: Locale
@@ -37,6 +37,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
 
   const links = [
     { id: 'servicos', label: dict.services },
+    { id: 'produtos', label: dict.products },
     { id: 'processo', label: dict.process },
     { id: 'equipe', label: dict.team },
   ]
@@ -67,7 +68,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
   )
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-outline-variant/70 bg-white/80 backdrop-blur-lg">
+    <nav className="fixed top-0 z-50 w-full border-b border-outline-variant/70 bg-background/80 backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
         <a href="#" aria-label="Harpia Lab">
           <Logo />
@@ -95,7 +96,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
           {languageSwitch}
           <a
             href="#contato"
-            className="btn-shine rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition hover:shadow-lg hover:shadow-brand/30"
+            className="btn-shine rounded-lg bg-cta px-4 py-2 text-sm font-semibold text-on-cta transition hover:shadow-lg hover:shadow-cta/30"
           >
             {dict.cta}
           </a>
@@ -121,7 +122,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
 
       {/* Mobile menu */}
       <div
-        className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col gap-1 border-b border-outline-variant bg-white px-6 pt-3 pb-6 shadow-lg md:hidden`}
+        className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col gap-1 border-b border-outline-variant bg-background px-6 pt-3 pb-6 shadow-lg md:hidden`}
       >
         {links.map(({ id, label }) => (
           <a
@@ -138,7 +139,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
           <a
             href="#contato"
             onClick={() => setMenuOpen(false)}
-            className="rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-on-primary"
+            className="rounded-lg bg-cta px-5 py-3 text-center text-sm font-semibold text-on-cta"
           >
             {dict.cta}
           </a>

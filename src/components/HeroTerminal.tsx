@@ -30,13 +30,13 @@ interface HeroTerminalProps {
 export default function HeroTerminal({ dict }: HeroTerminalProps) {
   return (
     <div aria-hidden="true" className="relative">
-      <div className="absolute -inset-x-8 -inset-y-12 -z-10 rounded-full bg-linear-to-tr from-brand/20 via-brand/5 to-brand-2/20 blur-3xl" />
+      <div className="absolute -inset-x-8 -inset-y-12 -z-10 rounded-full bg-linear-to-tr from-brand-2/20 via-brand/5 to-cta/15 blur-3xl" />
       <div className="glow-border shadow-2xl shadow-brand/20">
         <div className="overflow-hidden bg-ink">
-          <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-            <span className="size-2.5 rounded-full bg-white/15" />
-            <span className="size-2.5 rounded-full bg-white/15" />
-            <span className="size-2.5 rounded-full bg-white/15" />
+          <div className="flex items-center gap-2 border-b border-ink-line px-4 py-3">
+            <span className="size-2.5 rounded-full bg-on-ink/15" />
+            <span className="size-2.5 rounded-full bg-on-ink/15" />
+            <span className="size-2.5 rounded-full bg-on-ink/15" />
             <span className="ml-3 font-mono text-xs text-on-ink-variant/70">harpia — deploy</span>
           </div>
           <div className="space-y-1.5 px-5 py-6 font-mono text-[12.5px] leading-6 text-on-ink sm:px-6 sm:text-[13px]">
@@ -73,12 +73,12 @@ export default function HeroTerminal({ dict }: HeroTerminalProps) {
                         className="term-spinner col-start-1 row-start-1 size-2.5 rounded-full border border-brand-2/30 border-t-brand-2"
                         style={at(start, { '--dur': `${stepRun}s` })}
                       />
-                      <span className="term-line col-start-1 row-start-1 text-emerald-400" style={at(done)}>
+                      <span className="term-line col-start-1 row-start-1 text-ok-ink" style={at(done)}>
                         ✓
                       </span>
                     </span>
                     <span>{name}</span>
-                    <span className="mb-1 flex-1 border-b border-dotted border-white/15" />
+                    <span className="mb-1 flex-1 border-b border-dotted border-on-ink/15" />
                     <span className="term-line text-on-ink-variant" style={at(done)}>
                       {result}
                     </span>
@@ -87,8 +87,8 @@ export default function HeroTerminal({ dict }: HeroTerminalProps) {
               })}
             </div>
             <p className="term-line flex items-center gap-2.5" style={at(liveAt)}>
-              <span className="live-dot size-2 rounded-full bg-emerald-400" />
-              <span className="text-emerald-300">{dict.live}</span>
+              <span className="live-dot size-2 rounded-full bg-ok-ink" />
+              <span className="text-ok-ink">{dict.live}</span>
               <span className="text-on-ink-variant">{dict.url}</span>
             </p>
             <p className="term-line" style={at(promptAt)}>

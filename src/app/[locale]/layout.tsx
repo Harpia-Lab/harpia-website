@@ -1,20 +1,22 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono, Manrope } from 'next/font/google'
+import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { getDictionary, hasLocale, locales } from '@/lib/getDictionary'
 import '../globals.css'
 
-const inter = Inter({
+// Tipografia do Harpia Control (SPEC §7)
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-inter',
+  axes: ['opsz'],
+  variable: '--font-bricolage',
   display: 'swap',
 })
 
-const manrope = Manrope({
+const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
-  variable: '--font-manrope',
+  variable: '--font-instrument',
   display: 'swap',
 })
 
@@ -73,7 +75,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === 'pt' ? 'pt-BR' : 'en'}
-      className={`scroll-smooth ${inter.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
+      className={`scroll-smooth ${instrumentSans.variable} ${bricolage.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-background font-body text-on-surface antialiased">
         <Navbar locale={locale} dict={dict.nav} />

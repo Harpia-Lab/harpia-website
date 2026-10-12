@@ -44,7 +44,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
   if (state === 'success') {
     return (
       <div role="status" className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-        <div className="flex size-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 ring-1 ring-emerald-600/15">
+        <div className="flex size-12 items-center justify-center rounded-full bg-ok/10 text-ok ring-1 ring-ok/15">
           <CheckIcon className="size-6" />
         </div>
         <p className="max-w-sm text-sm text-on-surface-variant">
@@ -55,7 +55,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-outline transition-colors focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20 focus:outline-none'
+    'w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-outline transition-colors focus:border-brand focus:bg-surface focus:ring-2 focus:ring-brand/20 focus:outline-none'
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -92,7 +92,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
       <button
         type="submit"
         disabled={state === 'loading'}
-        className="btn-shine group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary py-3.5 text-sm font-semibold text-on-primary transition hover:shadow-lg hover:shadow-brand/30 disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-shine group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-cta py-3.5 text-sm font-semibold text-on-cta transition hover:shadow-lg hover:shadow-cta/30 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {state === 'loading' ? dict.sending : dict.submit}
         {state !== 'loading' && (

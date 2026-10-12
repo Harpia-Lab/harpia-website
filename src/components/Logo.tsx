@@ -16,7 +16,7 @@ export default function Logo({ inverted = false }: LogoProps) {
         loading="eager"
         className={`h-8 w-auto ${inverted ? 'brightness-0 invert' : ''}`}
       />
-      <span className={`font-headline text-[15px] tracking-[0.16em] ${inverted ? 'text-white' : 'text-primary'}`}>
+      <span className={`font-headline text-[15px] tracking-[0.16em] ${inverted ? 'text-on-ink' : 'text-on-surface'}`}>
         <span className="font-extrabold">HARPIA</span> <span className="font-medium">LAB</span>
       </span>
     </span>
