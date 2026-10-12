@@ -72,6 +72,7 @@ const en = {
     sending: 'Sending...',
     success: 'Message sent! We will get back to you soon.',
     error: 'An error occurred. Please try again.',
+    rateLimited: 'Too many attempts. Please try again later.',
   },
   footer: {
     tagline: 'Consulting & Software Factory',

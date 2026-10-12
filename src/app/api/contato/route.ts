@@ -31,15 +31,17 @@ function rateLimited(ip: string) {
   }
   if (hits.size >= MAX_KEYS) {
     for (const [key, e] of hits) if (e.resetAt <= now) hits.delete(key)
-    if (hits.size >= MAX_KEYS) hits.clear()
+    // Map mantém ordem de inserção: descarta a chave mais antiga em vez de zerar todo mundo.
+    if (hits.size >= MAX_KEYS) hits.delete(hits.keys().next().value!)
   }
   hits.set(ip, { count: 1, resetAt: now + WINDOW_MS })
   return false
 }
 
 export async function POST(req: Request) {
-  // Na Vercel o primeiro item do x-forwarded-for é o IP do cliente definido pela plataforma.
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
+  // Na Vercel x-real-ip e x-forwarded-for são sobrescritos pela plataforma com o IP do cliente
+  // (um único IP). Fora da Vercel podem ser forjados.
+  const ip = req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
   if (rateLimited(ip)) {
     return Response.json({ error: 'Muitas tentativas. Tente novamente mais tarde.' }, { status: 429 })
   }
@@ -55,6 +57,7 @@ export async function POST(req: Request) {
 
   // Honeypot: campo invisível para humanos; bot que preenche recebe sucesso falso.
   if (website) {
+    console.warn('contato: honeypot preenchido, descartado')
     return Response.json({ ok: true })
   }
 

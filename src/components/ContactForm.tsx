@@ -27,19 +27,24 @@ export default function ContactForm({ dict }: ContactFormProps) {
       website: (form.elements.namedItem('website') as HTMLInputElement).value,
     }
 
+    // Texto do servidor só em 4xx com JSON; 5xx, HTML da plataforma e falha de rede caem em dict.error.
+    let msg = dict.error
     try {
       const res = await fetch('/api/contato', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-      const json = await res.json()
-      if (!res.ok) throw new Error(json.error ?? dict.error)
-      setState('success')
-    } catch (err: unknown) {
-      setState('error')
-      setErrorMsg(err instanceof Error ? err.message : dict.error)
-    }
+      if (res.ok) return setState('success')
+      if (res.status === 429) {
+        msg = dict.rateLimited
+      } else if (res.status < 500) {
+        const json = await res.json().catch(() => null)
+        if (typeof json?.error === 'string') msg = json.error
+      }
+    } catch {}
+    setState('error')
+    setErrorMsg(msg)
   }
 
   if (state === 'success') {
@@ -63,7 +68,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
       {/* Honeypot: fora da tela e da ordem de tabulação; só bots preenchem. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label htmlFor="website">Website</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" data-1p-ignore data-lpignore="true" data-bwignore />
       </div>
       <div>
         <label htmlFor="name" className="mb-2 block text-sm font-medium text-on-surface">
