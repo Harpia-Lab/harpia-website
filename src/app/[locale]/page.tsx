@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import ContactForm from '@/components/ContactForm'
+import ControlMockup from '@/components/ControlMockup'
 import HeroTerminal from '@/components/HeroTerminal'
 import SectionHeader, { Eyebrow } from '@/components/SectionHeader'
 import Spotlight from '@/components/Spotlight'
@@ -33,6 +34,8 @@ const serviceCorners = [
 
 const container = 'mx-auto max-w-6xl px-6 lg:px-8'
 
+const controlUrl = 'https://control.harpialab.com'
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const dict = getDictionary(locale)
@@ -53,7 +56,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               className="hero-enter mt-6 font-headline text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-on-surface sm:text-6xl lg:text-[3.75rem]"
               style={{ '--enter-delay': '80ms' } as React.CSSProperties}
             >
-              {dict.hero.title} <span className="text-gradient">{dict.hero.titleAccent}</span>
+              {dict.hero.title} <span className="text-primary">{dict.hero.titleAccent}</span>
             </h1>
             <p
               className="hero-enter mt-6 max-w-xl text-lg leading-relaxed text-on-surface-variant"
@@ -67,7 +70,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             >
               <a
                 href="#contato"
-                className="btn-shine group inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-on-primary shadow-lg shadow-primary/20 transition hover:shadow-xl hover:shadow-brand/30"
+                className="btn-shine group inline-flex items-center gap-2 rounded-lg bg-cta px-6 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-cta/20 transition hover:shadow-xl hover:shadow-cta/30"
               >
                 {dict.hero.ctaPrimary}
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -113,7 +116,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               return (
                 <article key={title} className={`group/card relative bg-surface p-7 sm:p-8 ${serviceCorners[i]}`}>
                   <div className="flex items-center justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-lg bg-primary/[0.06] text-primary ring-1 ring-primary/10 transition duration-300 group-hover/card:-translate-y-0.5 group-hover/card:bg-brand group-hover/card:text-white group-hover/card:shadow-lg group-hover/card:ring-brand group-hover/card:shadow-brand/30">
+                    <span className="flex size-11 items-center justify-center rounded-lg bg-primary/[0.06] text-primary ring-1 ring-primary/10 transition duration-300 group-hover/card:-translate-y-0.5 group-hover/card:bg-brand group-hover/card:text-on-primary group-hover/card:shadow-lg group-hover/card:ring-brand group-hover/card:shadow-brand/30">
                       <Icon className="size-5" />
                     </span>
                     <span className="font-mono text-xs text-outline transition-colors duration-300 group-hover/card:text-brand">
@@ -126,6 +129,50 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               )
             })}
           </Spotlight>
+        </div>
+      </section>
+
+      {/* Products */}
+      <section id="produtos" className="on-ink relative isolate scroll-mt-16 overflow-hidden bg-ink py-24 md:py-32">
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
+          <div className="aurora aurora-a -right-40 -bottom-40 size-[28rem] bg-accent/10" />
+          <div className="bg-grid bg-grid-ink absolute inset-0" />
+        </div>
+        <div className={`${container} grid items-center gap-14 lg:grid-cols-2 lg:gap-20`}>
+          <div className="reveal">
+            <Eyebrow onInk>{dict.products.label}</Eyebrow>
+            <h2 className="mt-5 font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
+              {dict.products.title}
+            </h2>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-on-ink-variant">{dict.products.subtitle}</p>
+
+            <div className="mt-10 border-t border-ink-line pt-8">
+              <h3 className="font-headline text-2xl font-bold text-on-ink">{dict.products.name}</h3>
+              <p className="mt-2 font-medium text-accent">{dict.products.tagline}</p>
+              <p className="mt-3 max-w-xl leading-relaxed text-on-ink-variant">{dict.products.desc}</p>
+              <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+                {dict.products.benefits.map(({ title, desc }) => (
+                  <li key={title} className="flex gap-3">
+                    <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
+                    <span>
+                      <span className="block font-semibold text-on-ink">{title}</span>
+                      <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={controlUrl}
+                className="btn-shine group mt-10 inline-flex items-center gap-2 rounded-lg bg-cta-ink px-6 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-cta-ink/20 transition hover:shadow-xl hover:shadow-cta-ink/30"
+              >
+                {dict.products.cta}
+                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
+          </div>
+          <div className="reveal">
+            <ControlMockup locale={locale} dict={dict.products.mockup} />
+          </div>
         </div>
       </section>
 
@@ -171,7 +218,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <ul className="mt-14 grid gap-6 sm:grid-cols-3 sm:gap-8">
             {team.map(({ src, name }) => (
               <li key={name} className="reveal group flex items-center gap-5 sm:block">
-                <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-surface-container ring-1 ring-black/5 transition duration-500 group-hover:ring-brand/40 sm:aspect-[4/5] sm:size-auto sm:rounded-2xl sm:group-hover:-translate-y-1 sm:group-hover:shadow-2xl sm:group-hover:shadow-brand/20">
+                <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-surface-container ring-1 ring-on-surface/5 transition duration-500 group-hover:ring-brand/40 sm:aspect-[4/5] sm:size-auto sm:rounded-2xl sm:group-hover:-translate-y-1 sm:group-hover:shadow-2xl sm:group-hover:shadow-brand/20">
                   <Image
                     src={src}
                     alt={name}
@@ -195,25 +242,25 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Contact */}
       <section id="contato" className="on-ink relative isolate scroll-mt-16 overflow-hidden bg-ink py-24 md:py-32">
         <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <div className="aurora aurora-b -top-40 -left-32 size-[30rem] bg-brand/25" />
+          <div className="aurora aurora-b -top-40 -left-32 size-[30rem] bg-accent/15" />
           <div className="bg-grid bg-grid-ink absolute inset-0" />
         </div>
         <div className={`${container} grid items-start gap-14 lg:grid-cols-2 lg:gap-20`}>
           <div className="reveal">
             <Eyebrow onInk>{dict.contact.label}</Eyebrow>
-            <h2 className="mt-5 font-headline text-4xl font-extrabold tracking-tight text-balance text-white md:text-5xl">
+            <h2 className="mt-5 font-headline text-4xl font-extrabold tracking-tight text-balance text-on-ink md:text-5xl">
               {dict.contact.title}
             </h2>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-on-ink-variant">{dict.contact.subtitle}</p>
             <a href="mailto:contato@harpialab.com" className="group mt-10 inline-flex items-center gap-4">
-              <span className="flex size-11 items-center justify-center rounded-lg bg-white/5 text-accent ring-1 ring-white/10 transition-colors group-hover:bg-white/10 group-hover:ring-accent/40">
+              <span className="flex size-11 items-center justify-center rounded-lg bg-on-ink/5 text-accent ring-1 ring-on-ink/10 transition-colors group-hover:bg-on-ink/10 group-hover:ring-accent/40">
                 <MailIcon className="size-5" />
               </span>
               <span>
                 <span className="block font-mono text-xs tracking-wider text-on-ink-variant uppercase">
                   {dict.contact.emailLabel}
                 </span>
-                <span className="font-medium text-white underline-offset-4 group-hover:underline">
+                <span className="font-medium text-on-ink underline-offset-4 group-hover:underline">
                   contato@harpialab.com
                 </span>
               </span>
@@ -222,9 +269,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="reveal relative">
             <div
               aria-hidden="true"
-              className="aurora aurora-a -inset-6 -z-10 bg-linear-to-br from-brand/45 to-brand-2/30"
+              className="aurora aurora-a -inset-6 -z-10 bg-linear-to-br from-brand-2/40 to-cta-ink/25"
             />
-            <div className="glow-border shadow-2xl shadow-black/40">
+            <div className="glow-border shadow-2xl shadow-ink/40">
               <div className="bg-surface p-6 sm:p-8">
                 <ContactForm dict={dict.form} />
               </div>

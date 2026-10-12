@@ -10,7 +10,7 @@ Site institucional da [Harpia Lab](https://harpialab.com), uma software factory 
 | Estilo | Tailwind CSS v4 |
 | Linguagem | TypeScript |
 | Envio de e-mail | Resend |
-| Fontes | Manrope + Inter (Google Fonts via `next/font`) |
+| Fontes | Bricolage Grotesque + Instrument Sans + JetBrains Mono (Google Fonts via `next/font`) |
 | Deploy | Vercel |
 
 ## Páginas
