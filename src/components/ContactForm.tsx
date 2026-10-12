@@ -24,6 +24,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
       name:    (form.elements.namedItem('name')    as HTMLInputElement).value,
       email:   (form.elements.namedItem('email')   as HTMLInputElement).value,
       message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+      website: (form.elements.namedItem('website') as HTMLInputElement).value,
     }
 
     try {
@@ -58,7 +59,12 @@ export default function ContactForm({ dict }: ContactFormProps) {
     'w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-outline transition-colors focus:border-brand focus:bg-white focus:ring-2 focus:ring-brand/20 focus:outline-none'
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} className="relative flex flex-col gap-5">
+      {/* Honeypot: fora da tela e da ordem de tabulação; só bots preenchem. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div>
         <label htmlFor="name" className="mb-2 block text-sm font-medium text-on-surface">
           {dict.name}
