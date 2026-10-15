@@ -6,7 +6,7 @@ Site institucional da [Harpia Lab](https://harpialab.com), uma software factory 
 
 | Camada | Tecnologia |
 |--------|-----------|
-| Framework | Next.js 16 (App Router) |
+| Framework | Next.js 16.4 (App Router) |
 | Estilo | Tailwind CSS v4 |
 | Linguagem | TypeScript |
 | Envio de e-mail | Resend |
@@ -15,12 +15,15 @@ Site institucional da [Harpia Lab](https://harpialab.com), uma software factory 
 
 ## Páginas
 
+Página única por idioma, em `src/app/[locale]/page.tsx`, com as seções `#servicos`, `#produtos`, `#processo`, `#equipe` e `#contato`.
+
 | Rota | Descrição |
 |------|-----------|
-| `/` | Home — hero, serviços, projetos em destaque, logos de clientes |
-| `/sobre` | Sobre Nós — missão, valores, equipe, CTA |
-| `/projetos` | Portfólio — bento grid de projetos e grid de clientes |
-| `/contato` | Contato — formulário de orçamento e informações de contato |
+| `/` | Redireciona para `/pt` (`next.config.ts`) |
+| `/pt`, `/en` | Site em português e inglês; textos em `src/dictionaries/` |
+| `/api/contato` | `POST` do formulário de contato → e-mail via Resend (`src/app/api/contato/route.ts`) |
+
+`proxy.ts` (o antigo middleware no Next 16) adiciona o prefixo de idioma às rotas sem ele.
 
 ## Desenvolvimento local
 
@@ -35,13 +38,14 @@ npm install
 **2. Configure as variáveis de ambiente:**
 
 ```bash
-cp env.example .env.local
+cp .env.local.example .env.local
 ```
 
-Edite `.env.local` e adicione sua chave do [Resend](https://resend.com/api-keys):
+Edite `.env.local` com sua chave do [Resend](https://resend.com/api-keys) e o e-mail que recebe os contatos:
 
 ```
 RESEND_API_KEY=re_sua_chave_aqui
+CONTACT_TO_EMAIL=voce@exemplo.com
 ```
 
 **3. Rode o servidor de desenvolvimento:**
@@ -50,7 +54,7 @@ RESEND_API_KEY=re_sua_chave_aqui
 npm run dev
 ```
 
-Acesse [http://localhost:3000](http://localhost:3000).
+Acesse [http://localhost:3000/pt](http://localhost:3000/pt).
 
 ## Deploy no Vercel
 
@@ -60,13 +64,14 @@ Acesse [http://localhost:3000](http://localhost:3000).
 2. Conecte sua conta do GitHub e selecione o repositório `Harpia-Lab/harpia-website`
 3. Clique em **Deploy** — as configurações são detectadas automaticamente
 
-### 2. Configure a variável de ambiente
+### 2. Configure as variáveis de ambiente
 
 Em **Settings → Environment Variables**, adicione:
 
 | Variável | Valor |
 |----------|-------|
 | `RESEND_API_KEY` | Sua chave do Resend |
+| `CONTACT_TO_EMAIL` | E-mail que recebe os contatos do formulário |
 
 ### 3. Configure o domínio
 
@@ -83,6 +88,11 @@ O certificado SSL é emitido automaticamente.
 
 | Variável | Descrição | Obrigatória |
 |----------|-----------|-------------|
-| `RESEND_API_KEY` | Chave de API do Resend para envio de e-mails | Sim (em produção) |
+| `RESEND_API_KEY` | Chave de API do Resend para envio de e-mails | Sim |
+| `CONTACT_TO_EMAIL` | Destinatário dos contatos do formulário | Sim |
 
-> **Nota sobre o `from` do e-mail:** O plano gratuito do Resend envia de `onboarding@resend.dev`. Para enviar de `noreply@harpialab.com`, verifique o domínio em [resend.com/domains](https://resend.com/domains) e atualize o campo `from` em `src/app/api/contact/route.ts`.
+Sem qualquer uma das duas, `/api/contato` responde 500 com erro genérico.
+
+> **Nota sobre o `from` do e-mail:** O plano gratuito do Resend envia de `onboarding@resend.dev`. Para enviar de `noreply@harpialab.com`, verifique o domínio em [resend.com/domains](https://resend.com/domains) e atualize o campo `from` em `src/app/api/contato/route.ts`.
+
+> **Proteções do formulário:** honeypot e rate limit em memória por IP (5 envios a cada 10 min, por instância).
