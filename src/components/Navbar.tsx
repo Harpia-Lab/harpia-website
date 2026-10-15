@@ -36,8 +36,11 @@ export default function Navbar({ locale, dict }: NavbarProps) {
       const section = document.getElementById(id)
       if (section) observer.observe(section)
     }
-    return () => observer.disconnect()
-  }, [])
+    return () => {
+      observer.disconnect()
+      setActiveSection('')
+    }
+  }, [pathname])
 
   const links = [
     { id: 'servicos', label: dict.services },

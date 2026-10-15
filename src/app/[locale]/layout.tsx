@@ -82,7 +82,7 @@ export default async function LocaleLayout({
       <body className="bg-background font-body text-on-surface antialiased">
         <Navbar locale={locale} dict={dict.nav} />
         {children}
-        <Footer locale={locale} dict={dict} />
+        <Footer locale={locale} dict={{ nav: dict.nav, footer: dict.footer }} />
         <ConsentBanner locale={locale} dict={dict.consent} />
         <PageTracker />
       </body>

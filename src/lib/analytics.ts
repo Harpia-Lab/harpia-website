@@ -80,7 +80,9 @@ function apply() {
   if (!allowed && active) {
     gtag?.('consent', 'update', { analytics_storage: 'denied' })
     for (const name of document.cookie.split('; ').map((c) => c.split('=')[0]).filter((n) => n.startsWith('_ga'))) {
+      // o GA grava no domínio mais alto possível: .harpialab.com, .<host> (*.vercel.app) ou sem domínio (localhost)
       document.cookie = `${name}=; Max-Age=0; Path=/${cookieDomain()}`
+      document.cookie = `${name}=; Max-Age=0; Path=/; Domain=${location.hostname}`
       document.cookie = `${name}=; Max-Age=0; Path=/`
     }
   }
@@ -99,23 +101,26 @@ export function utmQuery(search: string) {
   return q ? `?${q}` : ''
 }
 
+// sempre só uma origem: sem page_referrer o gtag.js manda o document.referrer inteiro (com query, também o interno).
+// Primeira página: origem do referrer; depois: o próprio site (o `set` acumularia o externo em toda navegação).
 let firstPage = true
 /** Chamar a cada navegação. No site o template é o próprio pathname (não há ids na URL). */
 export function pageview(template: string, nextSurface: Surface) {
   surface = nextSurface
   apply()
   page = { page_location: location.origin + template + utmQuery(location.search), page_title: template }
-  // só referrer externo: navegar entre as páginas do próprio site não é origem de visita
-  const ref = firstPage && document.referrer ? new URL(document.referrer).origin : ''
-  if (ref && ref !== location.origin) page.page_referrer = ref
+  const ref = firstPage ? (document.referrer ? new URL(document.referrer).origin : '') : location.origin
+  if (ref) page.page_referrer = ref
   firstPage = false
   if (!active) return
   gtag!('set', page) // vale também para o que o gtag.js mandar sozinho
   gtag!('event', 'page_view', page)
 }
 
+/** Devolve se o evento foi enviado (false sem consentimento ou sem ID). */
 export function track<E extends keyof Events>(name: E, ...params: Events[E] extends undefined ? [] : [Events[E]]) {
   if (active) gtag!('event', name, { ...page, ...params[0] })
+  return active
 }
 
 // assinatura para React (banner): useSyncExternalStore(subscribeConsent, bannerVisible)

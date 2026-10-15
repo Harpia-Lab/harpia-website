@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Logo from '@/components/Logo'
-import { analyticsEnabled, clearConsent, track } from '@/lib/analytics'
+import { reopenConsentBanner } from '@/components/ConsentBanner'
+import { analyticsEnabled, track } from '@/lib/analytics'
 import type { Dictionary, Locale } from '@/lib/getDictionary'
 
 interface FooterProps {
@@ -63,7 +64,7 @@ export default function Footer({ locale, dict }: FooterProps) {
               {dict.footer.privacy}
             </Link>
             {analyticsEnabled && (
-              <button type="button" onClick={clearConsent} className={`cursor-pointer ${linkClass}`}>
+              <button type="button" onClick={(e) => reopenConsentBanner(e.currentTarget)} className={`cursor-pointer ${linkClass}`}>
                 {dict.footer.cookiePreferences}
               </button>
             )}
