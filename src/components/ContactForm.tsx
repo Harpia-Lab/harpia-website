@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ArrowRightIcon, CheckIcon } from '@/components/icons'
+import { track } from '@/lib/analytics'
 import type { Dictionary } from '@/lib/getDictionary'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
@@ -35,7 +36,10 @@ export default function ContactForm({ dict }: ContactFormProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-      if (res.ok) return setState('success')
+      if (res.ok) {
+        track('generate_lead') // nenhum campo do formulário vai para o GA
+        return setState('success')
+      }
       if (res.status === 429) {
         msg = dict.rateLimited
       } else if (res.status < 500) {

@@ -110,6 +110,20 @@ const en = {
     tagline: 'Consulting & Software Factory',
     copyright: 'All rights reserved.',
     madeWith: 'Made in Brazil',
+    privacy: 'Privacy',
+    cookiePreferences: 'Cookie preferences',
+  },
+  consent: {
+    label: 'Cookie notice',
+    text: 'Can we use Google Analytics cookies to understand how this site is used? Nothing you type is sent.',
+    policy: 'Privacy Policy',
+    decline: 'Decline',
+    accept: 'Accept',
+  },
+  privacy: {
+    title: 'Privacy Policy',
+    description:
+      'Which personal data Harpia Lab processes on its websites and in Harpia Control, why, for how long, and how to exercise your rights under the LGPD.',
   },
 }
 

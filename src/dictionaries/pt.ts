@@ -110,6 +110,20 @@ const pt = {
     tagline: 'Consultoria & Fábrica de Software',
     copyright: 'Todos os direitos reservados.',
     madeWith: 'Feito no Brasil',
+    privacy: 'Privacidade',
+    cookiePreferences: 'Preferências de cookies',
+  },
+  consent: {
+    label: 'Aviso de cookies',
+    text: 'Podemos usar cookies do Google Analytics para entender como este site é usado? Nada do que você digita é enviado.',
+    policy: 'Política de Privacidade',
+    decline: 'Recusar',
+    accept: 'Aceitar',
+  },
+  privacy: {
+    title: 'Política de Privacidade',
+    description:
+      'Quais dados pessoais a Harpia Lab trata nos sites e no Harpia Control, para quê, por quanto tempo e como exercer seus direitos pela LGPD.',
   },
 }
 

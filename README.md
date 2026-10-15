@@ -84,5 +84,7 @@ O certificado SSL é emitido automaticamente.
 | Variável | Descrição | Obrigatória |
 |----------|-----------|-------------|
 | `RESEND_API_KEY` | Chave de API do Resend para envio de e-mails | Sim (em produção) |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | ID do GA4 (`G-…`). Vazio = sem analytics e sem banner. Na Vercel só em Production | Não |
+| `NEXT_PUBLIC_GA_DEBUG` | `1` liga o `debug_mode` do GA4 | Não |
 
 > **Nota sobre o `from` do e-mail:** O plano gratuito do Resend envia de `onboarding@resend.dev`. Para enviar de `noreply@harpialab.com`, verifique o domínio em [resend.com/domains](https://resend.com/domains) e atualize o campo `from` em `src/app/api/contact/route.ts`.

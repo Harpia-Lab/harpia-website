@@ -82,6 +82,68 @@
   }
 }
 
+/* ── Política de Privacidade (texto longo) ── */
+.policy {
+  @apply text-base leading-relaxed text-on-surface-variant;
+}
+
+.policy h1 {
+  @apply font-headline text-4xl font-extrabold tracking-tight text-balance text-on-surface md:text-5xl;
+}
+
+.policy h2 {
+  @apply mt-14 scroll-mt-24 border-t border-outline-variant pt-8 font-headline text-2xl font-bold tracking-tight text-on-surface;
+}
+
+.policy h3 {
+  @apply mt-8 font-headline text-lg font-bold text-on-surface;
+}
+
+.policy p,
+.policy ul {
+  @apply mt-4;
+}
+
+.policy ul {
+  @apply list-disc space-y-2 pl-6 marker:text-brand;
+}
+
+.policy strong {
+  @apply font-semibold text-on-surface;
+}
+
+.policy a {
+  @apply font-medium text-primary underline underline-offset-4;
+}
+
+.policy code {
+  @apply rounded bg-surface-container-low px-1.5 py-0.5 font-mono text-[0.85em] text-on-surface;
+}
+
+.policy .policy-updated {
+  @apply mt-3 font-mono text-xs tracking-wider uppercase;
+}
+
+.policy .policy-note {
+  @apply mt-0 mb-8 rounded-lg border border-outline-variant bg-surface-container-low px-4 py-3 text-sm;
+}
+
+.policy .policy-table {
+  @apply mt-6 overflow-x-auto rounded-lg border border-outline-variant;
+}
+
+.policy table {
+  @apply w-full min-w-[36rem] border-collapse text-left text-sm;
+}
+
+.policy th {
+  @apply bg-surface-container-low px-4 py-3 font-semibold text-on-surface;
+}
+
+.policy td {
+  @apply border-t border-outline-variant px-4 py-3 align-top;
+}
+
 /* ── Grid decorativo de fundo ── */
 .bg-grid {
   --grid-line: color-mix(in srgb, var(--color-on-surface) 6%, transparent);
