@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Logo from '@/components/Logo'
 import { CloseIcon, MenuIcon } from '@/components/icons'
+import { sectionIds, track } from '@/lib/analytics'
 import { locales, type Dictionary, type Locale } from '@/lib/getDictionary'
-
-const sectionIds = ['servicos', 'produtos', 'processo', 'equipe', 'contato']
 
 interface NavbarProps {
   locale: Locale
@@ -15,6 +15,10 @@ interface NavbarProps {
 export default function Navbar({ locale, dict }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const pathname = usePathname()
+  // Fora da home (ex.: /pt/privacidade) as âncoras apontam para /<locale>#secao
+  const home = pathname === `/${locale}` ? '' : `/${locale}`
+  const trackContact = () => track('cta_clicked', { cta_id: 'contact', location: 'navbar' })
 
   // Destaca no menu a seção que está cruzando o meio da tela
   useEffect(() => {
@@ -56,8 +60,9 @@ export default function Navbar({ locale, dict }: NavbarProps) {
         ) : (
           <a
             key={l}
-            href={`/${l}`}
+            href={`/${l}${pathname.slice(locale.length + 1)}`}
             hrefLang={l}
+            onClick={() => track('language_switched', { to: l })}
             className="rounded px-2 py-1 text-on-surface-variant transition-colors hover:text-primary"
           >
             {l.toUpperCase()}
@@ -70,7 +75,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-outline-variant/70 bg-background/80 backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
-        <a href="#" aria-label="Harpia Lab">
+        <a href={home || '#'} aria-label="Harpia Lab">
           <Logo />
         </a>
 
@@ -81,7 +86,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
             return (
               <a
                 key={id}
-                href={`#${id}`}
+                href={`${home}#${id}`}
                 aria-current={active ? 'true' : undefined}
                 className={`group relative py-1 text-sm font-medium transition-colors hover:text-primary ${active ? 'text-primary' : 'text-on-surface-variant'}`}
               >
@@ -95,7 +100,8 @@ export default function Navbar({ locale, dict }: NavbarProps) {
           })}
           {languageSwitch}
           <a
-            href="#contato"
+            href={`${home}#contato`}
+            onClick={trackContact}
             className="btn-shine rounded-lg bg-cta px-4 py-2 text-sm font-semibold text-on-cta transition hover:shadow-lg hover:shadow-cta/30"
           >
             {dict.cta}
@@ -127,7 +133,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
         {links.map(({ id, label }) => (
           <a
             key={id}
-            href={`#${id}`}
+            href={`${home}#${id}`}
             onClick={() => setMenuOpen(false)}
             className="border-b border-outline-variant py-3.5 text-base font-medium text-on-surface transition-colors hover:text-primary"
           >
@@ -137,8 +143,11 @@ export default function Navbar({ locale, dict }: NavbarProps) {
         <div className="mt-4 flex items-center justify-between gap-4">
           {languageSwitch}
           <a
-            href="#contato"
-            onClick={() => setMenuOpen(false)}
+            href={`${home}#contato`}
+            onClick={() => {
+              trackContact()
+              setMenuOpen(false)
+            }}
             className="rounded-lg bg-cta px-5 py-3 text-center text-sm font-semibold text-on-cta"
           >
             {dict.cta}

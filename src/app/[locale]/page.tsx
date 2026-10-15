@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { TrackedLink } from '@/components/Analytics'
 import ContactForm from '@/components/ContactForm'
 import ControlMockup from '@/components/ControlMockup'
 import HeroTerminal from '@/components/HeroTerminal'
@@ -68,20 +69,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               className="hero-enter mt-10 flex flex-wrap items-center gap-x-7 gap-y-4"
               style={{ '--enter-delay': '240ms' } as React.CSSProperties}
             >
-              <a
+              <TrackedLink
+                cta="contact"
+                location="hero"
                 href="#contato"
                 className="btn-shine group inline-flex items-center gap-2 rounded-lg bg-cta px-6 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-cta/20 transition hover:shadow-xl hover:shadow-cta/30"
               >
                 {dict.hero.ctaPrimary}
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
+                cta="how_we_work"
+                location="hero"
                 href="#processo"
                 className="group inline-flex items-center gap-2 text-sm font-semibold text-primary"
               >
                 <span className="underline-offset-4 group-hover:underline">{dict.hero.ctaSecondary}</span>
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
+              </TrackedLink>
             </div>
             <ul
               className="hero-enter mt-12 flex flex-wrap gap-x-6 gap-y-3 border-t border-outline-variant pt-6 text-sm text-on-surface-variant"
@@ -161,13 +166,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   </li>
                 ))}
               </ul>
-              <a
+              <TrackedLink
+                cta="control"
+                location="products"
                 href={controlUrl}
                 className="btn-shine group mt-10 inline-flex items-center gap-2 rounded-lg bg-cta-ink px-6 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-cta-ink/20 transition hover:shadow-xl hover:shadow-cta-ink/30"
               >
                 {dict.products.cta}
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
+              </TrackedLink>
             </div>
           </div>
           <div className="reveal">
@@ -252,7 +259,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {dict.contact.title}
             </h2>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-on-ink-variant">{dict.contact.subtitle}</p>
-            <a href="mailto:contato@harpialab.com" className="group mt-10 inline-flex items-center gap-4">
+            <TrackedLink
+              cta="email"
+              location="contact"
+              href="mailto:contato@harpialab.com"
+              className="group mt-10 inline-flex items-center gap-4"
+            >
               <span className="flex size-11 items-center justify-center rounded-lg bg-on-ink/5 text-accent ring-1 ring-on-ink/10 transition-colors group-hover:bg-on-ink/10 group-hover:ring-accent/40">
                 <MailIcon className="size-5" />
               </span>
@@ -264,7 +276,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   contato@harpialab.com
                 </span>
               </span>
-            </a>
+            </TrackedLink>
           </div>
           <div className="reveal relative">
             <div
