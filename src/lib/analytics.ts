@@ -73,6 +73,8 @@ function load() {
 function apply() {
   const c = readConsent()
   const allowed = !!ID && (surface === 'app' ? c !== 'denied' : surface === 'consent' && c === 'granted')
+  // com o gtag.js já carregado, só `consent update denied` não basta: ele segue mandando pings sem cookie
+  if (ID) (window as unknown as Record<string, boolean>)[`ga-disable-${ID}`] = !allowed
   if (allowed && !active) {
     load()
     gtag!('consent', 'update', { analytics_storage: 'granted' })
