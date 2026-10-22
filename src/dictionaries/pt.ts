@@ -15,7 +15,6 @@ const pt = {
     language: 'Idioma',
   },
   hero: {
-    badge: 'Consultoria & Fábrica de Software',
     title: 'Software sob medida,',
     titleAccent: 'feito para durar.',
     subtitle:
@@ -29,18 +28,15 @@ const pt = {
     },
   },
   services: {
-    label: 'Serviços',
     title: 'Da ideia ao deploy.',
     subtitle: 'Atuamos em cada etapa do produto, com código limpo e foco em entrega.',
     items: [
-      { title: 'Fábrica de Software', desc: 'Desenvolvimento de produtos digitais sob demanda: web, mobile e sistemas internos.' },
-      { title: 'Consultoria Técnica', desc: 'Arquitetura de sistemas, revisão de código e escolha de stack para o seu contexto.' },
-      { title: 'Desenvolvimento Web & Mobile', desc: 'Aplicações rápidas, acessíveis e bem construídas, do front ao back-end.' },
-      { title: 'Integrações & APIs', desc: 'Conectamos sistemas legados a novas plataformas com integrações robustas.' },
+      { title: 'Projeto sob medida', desc: 'Você traz o problema ou a ideia e nós entregamos o sistema funcionando: site, aplicativo, sistema interno ou integração, com escopo e prazo combinados antes de começar.' },
+      { title: 'Time dedicado', desc: 'Pessoas do nosso time trabalhando no seu produto, junto com a sua equipe, pelo tempo que fizer sentido.' },
+      { title: 'Consultoria técnica', desc: 'Uma segunda opinião antes de investir: arquitetura, revisão do sistema que você já tem e escolha de tecnologia.' },
     ],
   },
   products: {
-    label: 'Produtos',
     title: 'Também criamos produtos próprios.',
     subtitle: 'Além do software sob medida, transformamos problemas que vemos se repetir em produtos prontos para usar.',
     name: 'Harpia Control',
@@ -52,10 +48,11 @@ const pt = {
       { title: 'Portal do cliente', desc: 'O cliente vê orçamentos e parcelas em um acesso só dele.' },
       { title: 'Equipe com permissões', desc: 'Cada pessoa da equipe acessa apenas o que precisa.' },
     ],
-    cta: 'Acessar o Harpia Control',
+    ctaContact: 'Quero um sistema assim',
+    ctaLogin: 'Já usa o Control? Entrar',
     mockup: {
       label: 'Exemplo de tela do Harpia Control: orçamento aceito com quatro parcelas, duas pagas',
-      quote: 'Orçamento 0142',
+        quote: 'Orçamento 0142',
       client: 'Cliente Exemplo · Reforma do site',
       version: 'v3',
       accepted: 'Aceito online',
@@ -71,7 +68,6 @@ const pt = {
     },
   },
   process: {
-    label: 'Processo',
     title: 'Como trabalhamos',
     subtitle: 'Um caminho claro do primeiro contato à entrega, com você acompanhando cada etapa.',
     steps: [
@@ -82,13 +78,11 @@ const pt = {
     ],
   },
   team: {
-    label: 'Equipe',
     title: 'Quem constrói com você',
     subtitle: 'Três cofundadores com experiência em engenharia de software, design e arquitetura de sistemas.',
     role: 'Co-founder',
   },
   contact: {
-    label: 'Contato',
     title: 'Vamos conversar?',
     subtitle: 'Conte o seu desafio e a gente retorna com uma proposta. Respondemos em até 24h.',
     emailLabel: 'E-mail',

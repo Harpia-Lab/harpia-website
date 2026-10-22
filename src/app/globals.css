@@ -183,24 +183,6 @@
   border-radius: calc(var(--radius-2xl) - 1px);
 }
 
-/* ── Foco de luz que segue o cursor (cards de serviço) ── */
-.spotlight-glow {
-  background: radial-gradient(
-    340px circle at var(--mx, 50%) var(--my, 50%),
-    var(--color-brand),
-    var(--color-brand-2) 35%,
-    transparent 70%
-  );
-}
-
-.spotlight-sheen {
-  background: radial-gradient(
-    440px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--color-brand) 7%, transparent),
-    transparent 65%
-  );
-}
-
 /* ── Brilho que atravessa o botão no hover ── */
 .btn-shine {
   position: relative;

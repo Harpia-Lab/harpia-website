@@ -3,14 +3,12 @@ import { TrackedLink } from '@/components/Analytics'
 import ContactForm from '@/components/ContactForm'
 import ControlMockup from '@/components/ControlMockup'
 import HeroTerminal from '@/components/HeroTerminal'
-import SectionHeader, { Eyebrow } from '@/components/SectionHeader'
-import Spotlight from '@/components/Spotlight'
+import SectionHeader from '@/components/SectionHeader'
 import {
   ArrowRightIcon,
   ChatIcon,
   CheckIcon,
   CompassIcon,
-  DevicesIcon,
   LayersIcon,
   MailIcon,
   NodesIcon,
@@ -25,15 +23,7 @@ const team = [
 ]
 
 // Mesma ordem de dict.services.items
-const serviceIcons = [LayersIcon, CompassIcon, DevicesIcon, NodesIcon]
-
-// Cantos externos da grade de serviços (1 coluna no mobile, 2×2 a partir de sm)
-const serviceCorners = [
-  'rounded-t-[19px] sm:rounded-tr-none',
-  'sm:rounded-tr-[19px]',
-  'sm:rounded-bl-[19px]',
-  'rounded-b-[19px] sm:rounded-bl-none',
-]
+const serviceIcons = [LayersIcon, NodesIcon, CompassIcon]
 
 const container = 'mx-auto max-w-6xl px-6 lg:px-8'
 
@@ -65,9 +55,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className={`${container} grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14`}>
           <div>
-            <Eyebrow className="hero-enter">{dict.hero.badge}</Eyebrow>
             <h1
-              className="hero-enter mt-6 font-headline text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-on-surface sm:text-6xl lg:text-[3.75rem]"
+              className="hero-enter font-headline text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-on-surface sm:text-6xl lg:text-[3.75rem]"
               style={{ '--enter-delay': '80ms' } as React.CSSProperties}
             >
               {dict.hero.title} <span className="text-primary">{dict.hero.titleAccent}</span>
@@ -123,30 +112,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section id="servicos" className="scroll-mt-16 border-t border-outline-variant py-24 md:py-32">
         <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16`}>
           <SectionHeader
-            label={dict.services.label}
             title={dict.services.title}
             subtitle={dict.services.subtitle}
             className="reveal"
           />
-          <Spotlight className="reveal grid gap-px overflow-hidden rounded-2xl bg-outline-variant p-px sm:grid-cols-2">
+          <ul className="reveal divide-y divide-outline-variant border-y border-outline-variant">
             {dict.services.items.map(({ title, desc }, i) => {
               const Icon = serviceIcons[i]
               return (
-                <article key={title} className={`group/card relative bg-surface p-7 sm:p-8 ${serviceCorners[i]}`}>
-                  <div className="flex items-center justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-lg bg-primary/[0.06] text-primary ring-1 ring-primary/10 transition duration-300 group-hover/card:-translate-y-0.5 group-hover/card:bg-brand group-hover/card:text-on-primary group-hover/card:shadow-lg group-hover/card:ring-brand group-hover/card:shadow-brand/30">
-                      <Icon className="size-5" />
-                    </span>
-                    <span className="font-mono text-xs text-outline transition-colors duration-300 group-hover/card:text-brand">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
+                <li key={title} className="flex gap-5 py-7 sm:gap-6 sm:py-8">
+                  <Icon className="mt-0.5 size-6 shrink-0 text-primary" />
+                  <div>
+                    <h3 className="font-headline text-xl font-bold text-on-surface">{title}</h3>
+                    <p className="mt-2 max-w-prose leading-relaxed text-on-surface-variant">{desc}</p>
                   </div>
-                  <h3 className="mt-6 font-headline text-lg font-bold text-on-surface">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{desc}</p>
-                </article>
+                </li>
               )
             })}
-          </Spotlight>
+          </ul>
         </div>
       </section>
 
@@ -158,8 +141,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className={`${container} grid items-center gap-14 lg:grid-cols-2 lg:gap-20`}>
           <div className="reveal">
-            <Eyebrow onInk>{dict.products.label}</Eyebrow>
-            <h2 className="mt-5 font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
+            <h2 className="font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
               {dict.products.title}
             </h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-on-ink-variant">{dict.products.subtitle}</p>
@@ -179,15 +161,25 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   </li>
                 ))}
               </ul>
-              <TrackedLink
-                cta="control"
-                location="products"
-                href={controlUrl}
-                className="btn-shine group mt-10 inline-flex items-center gap-2 rounded-lg bg-cta-ink px-6 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-cta-ink/20 transition hover:shadow-xl hover:shadow-cta-ink/30"
-              >
-                {dict.products.cta}
-                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </TrackedLink>
+              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+                <TrackedLink
+                  cta="contact"
+                  location="products"
+                  href="#contato"
+                  className="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
+                >
+                  <span className="underline-offset-4 group-hover:underline">{dict.products.ctaContact}</span>
+                  <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+                </TrackedLink>
+                <TrackedLink
+                  cta="control"
+                  location="products"
+                  href={controlUrl}
+                  className="text-sm text-on-ink-variant underline underline-offset-4 transition-colors hover:text-on-ink"
+                >
+                  {dict.products.ctaLogin}
+                </TrackedLink>
+              </div>
             </div>
           </div>
           <div className="reveal">
@@ -203,7 +195,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       >
         <div className={container}>
           <SectionHeader
-            label={dict.process.label}
             title={dict.process.title}
             subtitle={dict.process.subtitle}
             className="reveal"
@@ -230,7 +221,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section id="equipe" className="scroll-mt-16 py-24 md:py-32">
         <div className={container}>
           <SectionHeader
-            label={dict.team.label}
             title={dict.team.title}
             subtitle={dict.team.subtitle}
             className="reveal"
@@ -267,8 +257,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className={`${container} grid items-start gap-14 lg:grid-cols-2 lg:gap-20`}>
           <div className="reveal">
-            <Eyebrow onInk>{dict.contact.label}</Eyebrow>
-            <h2 className="mt-5 font-headline text-4xl font-extrabold tracking-tight text-balance text-on-ink md:text-5xl">
+            <h2 className="font-headline text-4xl font-extrabold tracking-tight text-balance text-on-ink md:text-5xl">
               {dict.contact.title}
             </h2>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-on-ink-variant">{dict.contact.subtitle}</p>

@@ -38,16 +38,6 @@ export function CompassIcon(props: IconProps) {
   )
 }
 
-export function DevicesIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <rect x="2" y="4" width="14" height="10" rx="1.5" />
-      <path d="M6 18h6M9 14v4" />
-      <rect x="17.5" y="9" width="4.5" height="11" rx="1.2" />
-    </Icon>
-  )
-}
-
 export function NodesIcon(props: IconProps) {
   return (
     <Icon {...props}>

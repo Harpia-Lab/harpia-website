@@ -15,7 +15,6 @@ const en = {
     language: 'Language',
   },
   hero: {
-    badge: 'Consulting & Software Factory',
     title: 'Custom software,',
     titleAccent: 'built to last.',
     subtitle:
@@ -29,18 +28,15 @@ const en = {
     },
   },
   services: {
-    label: 'Services',
     title: 'From idea to deploy.',
     subtitle: 'We work on every stage of the product, with clean code and a focus on delivery.',
     items: [
-      { title: 'Software Factory', desc: 'On-demand digital product development: web, mobile, and internal systems.' },
-      { title: 'Technical Consulting', desc: 'Systems architecture, code review, and stack selection for your context.' },
-      { title: 'Web & Mobile Development', desc: 'Fast, accessible, and well-built applications, from front to back end.' },
-      { title: 'Integrations & APIs', desc: 'We connect legacy systems to new platforms with robust integrations.' },
+      { title: 'Custom project', desc: 'You bring the problem or the idea and we deliver working software: a website, an app, an internal system or an integration, with scope and timeline agreed before we start.' },
+      { title: 'Dedicated team', desc: 'People from our team working on your product, alongside your own team, for as long as it makes sense.' },
+      { title: 'Technical consulting', desc: 'A second opinion before you invest: architecture, a review of the system you already have, and technology choices.' },
     ],
   },
   products: {
-    label: 'Products',
     title: 'We also build our own products.',
     subtitle: 'Beyond custom software, we turn problems we keep running into into ready-to-use products.',
     name: 'Harpia Control',
@@ -52,10 +48,11 @@ const en = {
       { title: 'Client portal', desc: 'Clients see their quotes and installments in their own space.' },
       { title: 'Team permissions', desc: 'Each team member only sees what they need.' },
     ],
-    cta: 'Open Harpia Control',
+    ctaContact: 'I want something like this',
+    ctaLogin: 'Already use Control? Sign in',
     mockup: {
       label: 'Example Harpia Control screen: accepted quote with four installments, two paid',
-      quote: 'Quote 0142',
+        quote: 'Quote 0142',
       client: 'Example Client · Website redesign',
       version: 'v3',
       accepted: 'Accepted online',
@@ -71,7 +68,6 @@ const en = {
     },
   },
   process: {
-    label: 'Process',
     title: 'How we work',
     subtitle: 'A clear path from first contact to delivery, with you following every step.',
     steps: [
@@ -82,13 +78,11 @@ const en = {
     ],
   },
   team: {
-    label: 'Team',
     title: 'Who builds with you',
     subtitle: 'Three co-founders with experience in software engineering, design, and systems architecture.',
     role: 'Co-founder',
   },
   contact: {
-    label: 'Contact',
     title: "Let's talk.",
     subtitle: 'Tell us your challenge and we will get back to you with a proposal. We respond within 24h.',
     emailLabel: 'Email',
