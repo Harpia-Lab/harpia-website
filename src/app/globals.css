@@ -77,6 +77,11 @@
     outline-color: var(--color-accent);
   }
 
+  /* Sem palavra sozinha na última linha de parágrafos */
+  p {
+    text-wrap: pretty;
+  }
+
   ::selection {
     background: color-mix(in srgb, var(--color-brand) 22%, transparent);
   }

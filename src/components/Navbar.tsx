@@ -97,7 +97,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
   )
 
   return (
-    <nav ref={navRef} aria-label={dict.label} className="fixed top-0 z-50 w-full border-b border-outline-variant/70 bg-background/80 backdrop-blur-lg">
+    <nav ref={navRef} aria-label={dict.label} className="fixed top-0 z-50 w-full border-b border-outline-variant/70 bg-background/95 backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
         <a href={home || '#'} aria-label="Harpia Lab">
           <Logo />
