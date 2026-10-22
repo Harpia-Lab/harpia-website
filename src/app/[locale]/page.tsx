@@ -7,6 +7,7 @@ import SectionHeader, { Eyebrow } from '@/components/SectionHeader'
 import Spotlight from '@/components/Spotlight'
 import {
   ArrowRightIcon,
+  ChatIcon,
   CheckIcon,
   CompassIcon,
   DevicesIcon,
@@ -14,6 +15,7 @@ import {
   MailIcon,
   NodesIcon,
 } from '@/components/icons'
+import type { CtaId } from '@/lib/analytics'
 import { getDictionary } from '@/lib/getDictionary'
 
 const team = [
@@ -37,9 +39,20 @@ const container = 'mx-auto max-w-6xl px-6 lg:px-8'
 
 const controlUrl = 'https://control.harpialab.com'
 
+// Só dígitos, com DDI (ex.: 5541999999999). Vazio = sem WhatsApp no contato.
+const whatsapp = process.env.WHATSAPP_NUMBER?.replace(/\D/g, '')
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const dict = getDictionary(locale)
+
+  const channels: { cta: CtaId; href: string; label: string; value: string; Icon: typeof MailIcon }[] = [
+    { cta: 'email', href: 'mailto:contato@harpialab.com', label: dict.contact.emailLabel, value: 'contato@harpialab.com', Icon: MailIcon },
+  ]
+  if (whatsapp) {
+    const text = encodeURIComponent(dict.contact.whatsappText)
+    channels.push({ cta: 'whatsapp', href: `https://wa.me/${whatsapp}?text=${text}`, label: 'WhatsApp', value: dict.contact.whatsappAction, Icon: ChatIcon })
+  }
 
   return (
     <main>
@@ -259,24 +272,28 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {dict.contact.title}
             </h2>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-on-ink-variant">{dict.contact.subtitle}</p>
-            <TrackedLink
-              cta="email"
-              location="contact"
-              href="mailto:contato@harpialab.com"
-              className="group mt-10 inline-flex items-center gap-4"
-            >
-              <span className="flex size-11 items-center justify-center rounded-lg bg-on-ink/5 text-accent ring-1 ring-on-ink/10 transition-colors group-hover:bg-on-ink/10 group-hover:ring-accent/40">
-                <MailIcon className="size-5" />
-              </span>
-              <span>
-                <span className="block font-mono text-xs tracking-wider text-on-ink-variant uppercase">
-                  {dict.contact.emailLabel}
-                </span>
-                <span className="font-medium text-on-ink underline-offset-4 group-hover:underline">
-                  contato@harpialab.com
-                </span>
-              </span>
-            </TrackedLink>
+            <ul className="mt-10 flex flex-col gap-5">
+              {channels.map(({ cta, href, label, value, Icon }) => (
+                <li key={cta}>
+                  <TrackedLink
+                    cta={cta}
+                    location="contact"
+                    href={href}
+                    {...(cta === 'whatsapp' && { target: '_blank', rel: 'noopener noreferrer' })}
+                    className="group inline-flex items-center gap-4"
+                  >
+                    <span className="flex size-11 items-center justify-center rounded-lg bg-on-ink/5 text-accent ring-1 ring-on-ink/10 transition-colors group-hover:bg-on-ink/10 group-hover:ring-accent/40">
+                      <Icon className="size-5" />
+                    </span>
+                    <span>
+                      <span className="block font-mono text-xs tracking-wider text-on-ink-variant uppercase">{label}</span>
+                      <span className="font-medium text-on-ink underline-offset-4 group-hover:underline">{value}</span>
+                    </span>
+                  </TrackedLink>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 text-sm text-on-ink-variant">{dict.contact.location}</p>
           </div>
           <div className="reveal relative">
             <div

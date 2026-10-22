@@ -114,6 +114,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
           <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
         )}
       </button>
+      <p className="-mt-1 text-center text-sm text-on-surface-variant">{dict.nextStep}</p>
     </form>
   )
 }

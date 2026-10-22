@@ -84,6 +84,15 @@ export function MailIcon(props: IconProps) {
   )
 }
 
+export function ChatIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M4 12a8 8 0 1 1 4.2 7l-4.2 1 1.1-3.9A8 8 0 0 1 4 12Z" />
+      <path d="M9 10.5h6M9 13.5h4" />
+    </Icon>
+  )
+}
+
 export function MenuIcon(props: IconProps) {
   return (
     <Icon {...props}>
