@@ -1,13 +1,18 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
-import { getDictionary } from '@/lib/getDictionary'
+import { getDictionary, locales } from '@/lib/getDictionary'
 
 // Card de compartilhamento (WhatsApp, LinkedIn): cores da paleta Altitude, mesma frase do hero.
 // next/og não lê woff2 nem o next/font: a Bricolage vai como .ttf em src/assets/fonts (OFL).
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 export const alt = 'Harpia Lab'
+
+// Gera no build, um por idioma (sem isso a rota fica dinâmica)
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
 
 const logo = `data:image/png;base64,${await readFile(join(process.cwd(), 'public/images/logo-mark.png'), 'base64')}`
 const fonts = [
