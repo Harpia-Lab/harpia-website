@@ -2,7 +2,7 @@ const pt = {
   meta: {
     title: 'Harpia Lab | Consultoria & Fábrica de Software',
     description:
-      'Projetamos, desenvolvemos e evoluímos produtos digitais para empresas que precisam de resultado, do MVP ao sistema em produção.',
+      'Sistemas, aplicativos e integrações sob medida para a sua empresa, do entendimento do problema ao suporte depois da entrega.',
   },
   nav: {
     products: 'Produtos',
@@ -18,18 +18,18 @@ const pt = {
     title: 'Software sob medida,',
     titleAccent: 'feito para durar.',
     subtitle:
-      'Projetamos, desenvolvemos e evoluímos produtos digitais para empresas que precisam de resultado, do MVP ao sistema em produção.',
+      'Sistemas, aplicativos e integrações para a sua empresa. Entendemos o problema, construímos a solução e seguimos junto depois da entrega.',
     ctaPrimary: 'Solicitar orçamento',
     ctaSecondary: 'Como trabalhamos',
-    highlights: ['Web, mobile e APIs', 'Do MVP à produção', 'Resposta em até 24h'],
+    highlights: ['Sistemas web e aplicativos', 'Suporte depois da entrega', 'Resposta em até 24h'],
     terminal: {
       live: 'no ar',
       url: 'seuproduto.com.br',
     },
   },
   services: {
-    title: 'Da ideia ao deploy.',
-    subtitle: 'Atuamos em cada etapa do produto, com código limpo e foco em entrega.',
+    title: 'Três jeitos de trabalhar com a gente.',
+    subtitle: 'Escolha o formato pelo momento da sua empresa.',
     items: [
       { title: 'Projeto sob medida', desc: 'Você traz o problema ou a ideia e nós entregamos o sistema funcionando: site, aplicativo, sistema interno ou integração, com escopo e prazo combinados antes de começar.' },
       { title: 'Time dedicado', desc: 'Pessoas do nosso time trabalhando no seu produto, junto com a sua equipe, pelo tempo que fizer sentido.' },
@@ -37,8 +37,8 @@ const pt = {
     ],
   },
   products: {
-    title: 'Também criamos produtos próprios.',
-    subtitle: 'Além do software sob medida, transformamos problemas que vemos se repetir em produtos prontos para usar.',
+    title: 'Software nosso, em produção.',
+    subtitle: 'Um problema que víamos se repetir virou produto. O mesmo time e o mesmo processo cuidam do seu projeto.',
     name: 'Harpia Control',
     tagline: 'Controle de orçamentos e pagamentos, com portal para o seu cliente.',
     desc: 'Monte o orçamento, envie para aprovação e acompanhe cada parcela até cair na conta, sem planilha e sem cobrar ninguém por mensagem.',
@@ -72,19 +72,19 @@ const pt = {
     subtitle: 'Um caminho claro do primeiro contato à entrega, com você acompanhando cada etapa.',
     steps: [
       { title: 'Descoberta', desc: 'Entendemos o problema, o contexto do negócio e o que precisa existir primeiro.' },
-      { title: 'Arquitetura', desc: 'Definimos escopo, stack e arquitetura antes de escrever a primeira linha de código.' },
-      { title: 'Desenvolvimento', desc: 'Entregas incrementais, com código revisado e visibilidade do progresso.' },
+      { title: 'Planejamento', desc: 'Combinamos escopo, prazo e tecnologia antes de começar a construir.' },
+      { title: 'Desenvolvimento', desc: 'Entregas frequentes, que você vê funcionando, com código revisado.' },
       { title: 'Entrega e suporte', desc: 'Colocamos em produção e seguimos junto na evolução do produto.' },
     ],
   },
   team: {
     title: 'Quem constrói com você',
     subtitle: 'Três cofundadores com experiência em engenharia de software, design e arquitetura de sistemas.',
-    role: 'Co-founder',
+    role: 'Cofundador',
   },
   contact: {
     title: 'Vamos conversar?',
-    subtitle: 'Conte o seu desafio e a gente retorna com uma proposta. Respondemos em até 24h.',
+    subtitle: 'Conte o que você precisa. Respondemos com as primeiras perguntas ou com uma proposta.',
     emailLabel: 'E-mail',
     whatsappAction: 'Conversar pelo WhatsApp',
     whatsappText: 'Olá! Vim pelo site da Harpia Lab.',
@@ -96,12 +96,12 @@ const pt = {
     email: 'E-mail',
     emailPlaceholder: 'seu@email.com',
     message: 'Mensagem',
-    messagePlaceholder: 'Descreva o seu projeto ou dúvida...',
+    messagePlaceholder: 'O que você quer construir ou resolver?',
     submit: 'Enviar mensagem',
-    sending: 'Enviando...',
+    sending: 'Enviando…',
     nextStep: 'Respondemos em até 24h, no e-mail que você informar.',
     success: 'Mensagem enviada. Respondemos em até 24h, no e-mail que você informou.',
-    error: 'Ocorreu um erro. Tente novamente.',
+    error: 'Não foi possível enviar. Tente de novo ou escreva para contato@harpialab.com.',
     rateLimited: 'Muitas tentativas. Tente novamente mais tarde.',
   },
   footer: {

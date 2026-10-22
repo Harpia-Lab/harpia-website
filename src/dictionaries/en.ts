@@ -2,7 +2,7 @@ const en = {
   meta: {
     title: 'Harpia Lab | Consulting & Software Factory',
     description:
-      'We design, build, and evolve digital products for companies that need results, from MVP to production.',
+      'Custom systems, apps and integrations for your business, from understanding the problem to support after launch.',
   },
   nav: {
     products: 'Products',
@@ -18,18 +18,18 @@ const en = {
     title: 'Custom software,',
     titleAccent: 'built to last.',
     subtitle:
-      'We design, build, and evolve digital products for companies that need results, from MVP to production.',
+      'Systems, apps and integrations for your business. We understand the problem, build the solution and stay with you after launch.',
     ctaPrimary: 'Request a quote',
     ctaSecondary: 'How we work',
-    highlights: ['Web, mobile & APIs', 'From MVP to production', 'Reply within 24h'],
+    highlights: ['Web systems and apps', 'Support after launch', 'Reply within 24h'],
     terminal: {
       live: 'live',
       url: 'yourproduct.com',
     },
   },
   services: {
-    title: 'From idea to deploy.',
-    subtitle: 'We work on every stage of the product, with clean code and a focus on delivery.',
+    title: 'Three ways to work with us.',
+    subtitle: 'Pick the format that fits where your business is right now.',
     items: [
       { title: 'Custom project', desc: 'You bring the problem or the idea and we deliver working software: a website, an app, an internal system or an integration, with scope and timeline agreed before we start.' },
       { title: 'Dedicated team', desc: 'People from our team working on your product, alongside your own team, for as long as it makes sense.' },
@@ -37,8 +37,8 @@ const en = {
     ],
   },
   products: {
-    title: 'We also build our own products.',
-    subtitle: 'Beyond custom software, we turn problems we keep running into into ready-to-use products.',
+    title: 'Our own software, in production.',
+    subtitle: 'A problem we kept running into became a product. The same team and the same process take care of your project.',
     name: 'Harpia Control',
     tagline: 'Quotes and payments in one place, with a portal for your clients.',
     desc: 'Build the quote, send it for approval and follow every installment until it is paid, without spreadsheets or chasing anyone over chat.',
@@ -72,8 +72,8 @@ const en = {
     subtitle: 'A clear path from first contact to delivery, with you following every step.',
     steps: [
       { title: 'Discovery', desc: 'We understand the problem, the business context, and what needs to exist first.' },
-      { title: 'Architecture', desc: 'We define scope, stack, and architecture before writing the first line of code.' },
-      { title: 'Development', desc: 'Incremental deliveries, with reviewed code and visibility into progress.' },
+      { title: 'Planning', desc: 'We agree on scope, timeline and technology before we start building.' },
+      { title: 'Development', desc: 'Frequent deliveries you can see working, with reviewed code.' },
       { title: 'Delivery & support', desc: 'We ship to production and stay with you as the product evolves.' },
     ],
   },
@@ -84,7 +84,7 @@ const en = {
   },
   contact: {
     title: "Let's talk.",
-    subtitle: 'Tell us your challenge and we will get back to you with a proposal. We respond within 24h.',
+    subtitle: 'Tell us what you need. We reply with our first questions or with a proposal.',
     emailLabel: 'Email',
     whatsappAction: 'Chat on WhatsApp',
     whatsappText: 'Hi! I found you through the Harpia Lab website.',
@@ -96,12 +96,12 @@ const en = {
     email: 'Email',
     emailPlaceholder: 'you@email.com',
     message: 'Message',
-    messagePlaceholder: 'Describe your project or question...',
+    messagePlaceholder: 'What do you want to build or solve?',
     submit: 'Send message',
-    sending: 'Sending...',
+    sending: 'Sending…',
     nextStep: 'We reply within 24h, to the email you provide.',
     success: 'Message sent. We will reply within 24h, to the email you provided.',
-    error: 'An error occurred. Please try again.',
+    error: 'We could not send it. Try again or write to contato@harpialab.com.',
     rateLimited: 'Too many attempts. Please try again later.',
   },
   footer: {
