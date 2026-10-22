@@ -12,7 +12,9 @@ function escapeHtml(str: string) {
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-const GENERIC_ERROR = 'Não foi possível enviar. Tente novamente mais tarde.'
+// O front traduz o código pelo dicionário do idioma da página
+type ErrorCode = 'invalid_body' | 'missing_fields' | 'name_too_long' | 'invalid_email' | 'message_too_long' | 'rate_limited' | 'server'
+const fail = (error: ErrorCode, status = 400) => Response.json({ error }, { status })
 
 // ponytail: rate limit em memória, por instância serverless (cada instância/região tem o
 // seu Map e ele zera no cold start). Segura rajadas de um mesmo IP, não abuso distribuído;
@@ -42,15 +44,15 @@ export async function POST(req: Request) {
   // Na Vercel x-real-ip e x-forwarded-for são sobrescritos pela plataforma com o IP do cliente
   // (um único IP). Fora da Vercel podem ser forjados.
   const ip = req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
-  if (rateLimited(ip)) {
-    return Response.json({ error: 'Muitas tentativas. Tente novamente mais tarde.' }, { status: 429 })
-  }
 
   let body: { name?: unknown; email?: unknown; message?: unknown; website?: unknown }
   try {
-    body = await req.json()
+    // ponytail: form-urlencoded é o envio nativo do <form method="post"> (sem JS); a resposta continua JSON
+    body = req.headers.get('content-type')?.includes('application/x-www-form-urlencoded')
+      ? Object.fromEntries(await req.formData())
+      : await req.json()
   } catch {
-    return Response.json({ error: 'Corpo da requisição inválido.' }, { status: 400 })
+    return fail('invalid_body')
   }
 
   const { name, email, message, website } = body
@@ -61,35 +63,28 @@ export async function POST(req: Request) {
     return Response.json({ ok: true })
   }
 
-  if (!name || !email || !message) {
-    return Response.json({ error: 'Campos obrigatórios faltando.' }, { status: 400 })
-  }
+  const nameStr = String(name ?? '').trim()
+  const emailStr = String(email ?? '').trim()
+  const messageStr = String(message ?? '').trim()
 
-  const nameStr = String(name)
-  const emailStr = String(email)
-  const messageStr = String(message)
+  if (!nameStr || !emailStr || !messageStr) return fail('missing_fields')
+  if (nameStr.length > 200) return fail('name_too_long')
+  if (!emailRegex.test(emailStr) || emailStr.length > 254) return fail('invalid_email')
+  if (messageStr.length > 5000) return fail('message_too_long')
 
-  if (nameStr.length > 200) {
-    return Response.json({ error: 'Nome muito longo (máx. 200 caracteres).' }, { status: 400 })
-  }
-
-  if (!emailRegex.test(emailStr) || emailStr.length > 254) {
-    return Response.json({ error: 'E-mail inválido.' }, { status: 400 })
-  }
-
-  if (messageStr.length > 5000) {
-    return Response.json({ error: 'Mensagem muito longa (máx. 5000 caracteres).' }, { status: 400 })
-  }
+  // Depois da validação: corrigir um campo não gasta tentativa; só envio válido conta
+  if (rateLimited(ip)) return fail('rate_limited', 429)
 
   const apiKey = process.env.RESEND_API_KEY
   if (!apiKey || !toEmail) {
     console.error('contato: RESEND_API_KEY ou CONTACT_TO_EMAIL não configurado')
-    return Response.json({ error: GENERIC_ERROR }, { status: 500 })
+    return fail('server', 500)
   }
   const resend = new Resend(apiKey)
 
   const { error } = await resend.emails.send({
-    from: 'Harpia Lab <onboarding@resend.dev>',
+    // Remetente de teste do Resend até o domínio ser verificado (CONTACT_FROM_EMAIL)
+    from: process.env.CONTACT_FROM_EMAIL || 'Harpia Lab <onboarding@resend.dev>',
     to: toEmail,
     replyTo: emailStr,
     subject: `Novo contato: ${escapeHtml(nameStr)}`,
@@ -104,7 +99,7 @@ export async function POST(req: Request) {
 
   if (error) {
     console.error('contato: falha no Resend', error)
-    return Response.json({ error: GENERIC_ERROR }, { status: 500 })
+    return fail('server', 500)
   }
 
   return Response.json({ ok: true })

@@ -77,9 +77,15 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === 'pt' ? 'pt-BR' : 'en'}
-      className={`scroll-smooth ${instrumentSans.variable} ${bricolage.variable} ${jetbrainsMono.variable}`}
+      className={`${instrumentSans.variable} ${bricolage.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-background font-body text-on-surface antialiased">
+        <a
+          href="#conteudo"
+          className="sr-only rounded-lg bg-surface px-4 py-2 text-sm font-semibold text-primary shadow-lg focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]"
+        >
+          {dict.nav.skip}
+        </a>
         <Navbar locale={locale} dict={dict.nav} />
         {children}
         <Footer locale={locale} dict={{ nav: dict.nav, footer: dict.footer }} />

@@ -139,14 +139,14 @@ export function subscribeConsent(l: () => void) {
 export const bannerVisible = () => !!ID && surface === 'consent' && readConsent() === null
 
 // Âncoras da home (Navbar, Footer e section_viewed)
-export const sectionIds = ['servicos', 'produtos', 'processo', 'equipe', 'contato'] as const
+export const sectionIds = ['produtos', 'servicos', 'processo', 'equipe', 'contato'] as const
 export type SectionId = (typeof sectionIds)[number]
 
-export type CtaId = 'contact' | 'how_we_work' | 'control' | 'email'
+export type CtaId = 'contact' | 'how_we_work' | 'control' | 'email' | 'whatsapp'
 export type CtaLocation = 'navbar' | 'hero' | 'products' | 'contact' | 'footer'
 
 export type Events = {
-  // Qual chamada (e de qual lugar da página) leva ao contato, ao Control ou ao e-mail?
+  // Qual chamada (e de qual lugar da página) leva ao contato, ao Control, ao e-mail ou ao WhatsApp?
   cta_clicked: { cta_id: CtaId; location: CtaLocation }
   // Até onde as pessoas descem na home: quais seções chegam a ser vistas?
   section_viewed: { section_id: SectionId }

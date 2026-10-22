@@ -30,7 +30,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
   const { locale } = await params
 
   return (
-    <main className="pt-32 pb-24 md:pt-40 md:pb-32">
+    <main id="conteudo" className="pt-32 pb-24 md:pt-40 md:pb-32">
       <article className="policy mx-auto max-w-3xl px-6 lg:px-8">
         {privacyPolicy[hasLocale(locale) ? locale : 'pt']}
       </article>
