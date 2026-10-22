@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { TrackedLink } from '@/components/Analytics'
 import ContactForm from '@/components/ContactForm'
 import ControlMockup from '@/components/ControlMockup'
-import HeroTerminal from '@/components/HeroTerminal'
 import SectionHeader from '@/components/SectionHeader'
 import {
   ArrowRightIcon,
@@ -47,13 +46,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <main>
       {/* Hero */}
-      <section className="relative isolate overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
+      <section className="relative isolate overflow-hidden pt-28 pb-20 md:pt-40 md:pb-24">
         <div aria-hidden="true" className="absolute inset-0 -z-10">
           <div className="aurora aurora-a -top-24 -right-24 size-[18rem] bg-brand/10 lg:-top-32 lg:size-[34rem] lg:bg-brand/14" />
           <div className="aurora aurora-b top-1/3 right-1/4 hidden size-[24rem] bg-brand-2/14 lg:block" />
           <div className="bg-grid absolute inset-0" />
         </div>
-        <div className={`${container} grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14`}>
+        <div className={`${container} grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16`}>
           <div>
             <h1
               className="hero-enter font-headline text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-on-surface sm:text-6xl lg:text-[3.75rem]"
@@ -102,14 +101,72 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               ))}
             </ul>
           </div>
-          <div className="hero-enter" style={{ '--enter-delay': '200ms' } as React.CSSProperties}>
-            <HeroTerminal dict={dict.hero.terminal} />
+          {/* Prova: tela de um sistema nosso em produção, com o case logo abaixo */}
+          <figure className="hero-enter" style={{ '--enter-delay': '200ms' } as React.CSSProperties}>
+            <ControlMockup locale={locale} dict={dict.products.mockup} />
+            <figcaption className="mt-4 text-sm text-on-surface-variant">
+              {dict.hero.proof}{' '}
+              <a href="#produtos" className="font-semibold whitespace-nowrap text-primary underline-offset-4 hover:underline">
+                {dict.hero.proofLink}
+              </a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* Products */}
+      <section id="produtos" className="on-ink relative isolate scroll-mt-16 overflow-hidden bg-ink py-24 md:py-32">
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
+          <div className="aurora aurora-a -right-40 -bottom-40 size-[28rem] bg-accent/10" />
+          <div className="bg-grid bg-grid-ink absolute inset-0" />
+        </div>
+        <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16`}>
+          <div className="reveal">
+            <h2 className="font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
+              {dict.products.title}
+            </h2>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-on-ink-variant">{dict.products.subtitle}</p>
+          </div>
+          <div className="reveal">
+            <h3 className="font-headline text-2xl font-bold text-on-ink">{dict.products.name}</h3>
+            <p className="mt-2 font-medium text-accent">{dict.products.tagline}</p>
+            <p className="mt-3 max-w-xl leading-relaxed text-on-ink-variant">{dict.products.desc}</p>
+            <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+              {dict.products.benefits.map(({ title, desc }) => (
+                <li key={title} className="flex gap-3">
+                  <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
+                  <span>
+                    <span className="block font-semibold text-on-ink">{title}</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <TrackedLink
+                cta="contact"
+                location="products"
+                href="#contato"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
+              >
+                <span className="underline-offset-4 group-hover:underline">{dict.products.ctaContact}</span>
+                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </TrackedLink>
+              <TrackedLink
+                cta="control"
+                location="products"
+                href={controlUrl}
+                className="text-sm text-on-ink-variant underline underline-offset-4 transition-colors hover:text-on-ink"
+              >
+                {dict.products.ctaLogin}
+              </TrackedLink>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Services */}
-      <section id="servicos" className="scroll-mt-16 border-t border-outline-variant py-24 md:py-32">
+      <section id="servicos" className="scroll-mt-16 py-24 md:py-32">
         <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16`}>
           <SectionHeader
             title={dict.services.title}
@@ -130,61 +187,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               )
             })}
           </ul>
-        </div>
-      </section>
-
-      {/* Products */}
-      <section id="produtos" className="on-ink relative isolate scroll-mt-16 overflow-hidden bg-ink py-24 md:py-32">
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <div className="aurora aurora-a -right-40 -bottom-40 size-[28rem] bg-accent/10" />
-          <div className="bg-grid bg-grid-ink absolute inset-0" />
-        </div>
-        <div className={`${container} grid items-center gap-14 lg:grid-cols-2 lg:gap-20`}>
-          <div className="reveal">
-            <h2 className="font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
-              {dict.products.title}
-            </h2>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-on-ink-variant">{dict.products.subtitle}</p>
-
-            <div className="mt-10 border-t border-ink-line pt-8">
-              <h3 className="font-headline text-2xl font-bold text-on-ink">{dict.products.name}</h3>
-              <p className="mt-2 font-medium text-accent">{dict.products.tagline}</p>
-              <p className="mt-3 max-w-xl leading-relaxed text-on-ink-variant">{dict.products.desc}</p>
-              <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
-                {dict.products.benefits.map(({ title, desc }) => (
-                  <li key={title} className="flex gap-3">
-                    <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
-                    <span>
-                      <span className="block font-semibold text-on-ink">{title}</span>
-                      <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <TrackedLink
-                  cta="contact"
-                  location="products"
-                  href="#contato"
-                  className="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
-                >
-                  <span className="underline-offset-4 group-hover:underline">{dict.products.ctaContact}</span>
-                  <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-                </TrackedLink>
-                <TrackedLink
-                  cta="control"
-                  location="products"
-                  href={controlUrl}
-                  className="text-sm text-on-ink-variant underline underline-offset-4 transition-colors hover:text-on-ink"
-                >
-                  {dict.products.ctaLogin}
-                </TrackedLink>
-              </div>
-            </div>
-          </div>
-          <div className="reveal">
-            <ControlMockup locale={locale} dict={dict.products.mockup} />
-          </div>
         </div>
       </section>
 

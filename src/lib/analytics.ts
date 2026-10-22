@@ -139,7 +139,7 @@ export function subscribeConsent(l: () => void) {
 export const bannerVisible = () => !!ID && surface === 'consent' && readConsent() === null
 
 // Âncoras da home (Navbar, Footer e section_viewed)
-export const sectionIds = ['servicos', 'produtos', 'processo', 'equipe', 'contato'] as const
+export const sectionIds = ['produtos', 'servicos', 'processo', 'equipe', 'contato'] as const
 export type SectionId = (typeof sectionIds)[number]
 
 export type CtaId = 'contact' | 'how_we_work' | 'control' | 'email' | 'whatsapp'

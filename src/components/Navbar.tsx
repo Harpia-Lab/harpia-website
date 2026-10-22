@@ -43,8 +43,8 @@ export default function Navbar({ locale, dict }: NavbarProps) {
   }, [pathname])
 
   const links = [
-    { id: 'servicos', label: dict.services },
     { id: 'produtos', label: dict.products },
+    { id: 'servicos', label: dict.services },
     { id: 'processo', label: dict.process },
     { id: 'equipe', label: dict.team },
   ]

@@ -22,10 +22,8 @@ const pt = {
     ctaPrimary: 'Solicitar orçamento',
     ctaSecondary: 'Como trabalhamos',
     highlights: ['Sistemas web e aplicativos', 'Suporte depois da entrega', 'Resposta em até 24h'],
-    terminal: {
-      live: 'no ar',
-      url: 'seuproduto.com.br',
-    },
+    proof: 'Tela do Harpia Control, sistema que construímos e mantemos no ar.',
+    proofLink: 'Ver o case',
   },
   services: {
     title: 'Três jeitos de trabalhar com a gente.',

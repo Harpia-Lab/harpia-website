@@ -22,10 +22,8 @@ const en = {
     ctaPrimary: 'Request a quote',
     ctaSecondary: 'How we work',
     highlights: ['Web systems and apps', 'Support after launch', 'Reply within 24h'],
-    terminal: {
-      live: 'live',
-      url: 'yourproduct.com',
-    },
+    proof: 'A Harpia Control screen, a system we built and keep running.',
+    proofLink: 'See the case study',
   },
   services: {
     title: 'Three ways to work with us.',

@@ -16,8 +16,8 @@ export default function Footer({ locale, dict }: FooterProps) {
   // Fora da home (ex.: /pt/privacidade) as âncoras apontam para /<locale>#secao
   const home = usePathname() === `/${locale}` ? '' : `/${locale}`
   const links = [
-    { href: `${home}#servicos`, label: dict.nav.services },
     { href: `${home}#produtos`, label: dict.nav.products },
+    { href: `${home}#servicos`, label: dict.nav.services },
     { href: `${home}#processo`, label: dict.nav.process },
     { href: `${home}#equipe`, label: dict.nav.team },
   ]
