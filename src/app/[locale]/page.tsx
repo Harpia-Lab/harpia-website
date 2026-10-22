@@ -44,7 +44,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   }
 
   return (
-    <main>
+    <main id="conteudo">
       {/* Hero */}
       <section className="relative isolate overflow-hidden pt-28 pb-20 md:pt-40 md:pb-24">
         <div aria-hidden="true" className="absolute inset-0 -z-10">

@@ -244,6 +244,10 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
   .hero-enter {
     animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
     animation-delay: var(--enter-delay, 0ms);

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Logo from '@/components/Logo'
 import { CloseIcon, MenuIcon } from '@/components/icons'
@@ -16,6 +16,8 @@ export default function Navbar({ locale, dict }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const pathname = usePathname()
+  const navRef = useRef<HTMLElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
   // Fora da home (ex.: /pt/privacidade) as âncoras apontam para /<locale>#secao
   const home = pathname === `/${locale}` ? '' : `/${locale}`
   const trackContact = () => track('cta_clicked', { cta_id: 'contact', location: 'navbar' })
@@ -42,6 +44,25 @@ export default function Navbar({ locale, dict }: NavbarProps) {
     }
   }, [pathname])
 
+  // Menu mobile: fecha com Esc (foco volta ao botão) ou com toque fora da barra
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setMenuOpen(false)
+      toggleRef.current?.focus()
+    }
+    const onPointer = (e: PointerEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) setMenuOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('pointerdown', onPointer)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('pointerdown', onPointer)
+    }
+  }, [menuOpen])
+
   const links = [
     { id: 'produtos', label: dict.products },
     { id: 'servicos', label: dict.services },
@@ -53,7 +74,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
     <div
       role="group"
       aria-label={dict.language}
-      className="flex items-center rounded-md border border-outline-variant p-0.5 font-mono text-xs"
+      className="inline-flex items-center rounded-md border border-outline-variant p-0.5 font-mono text-xs"
     >
       {locales.map((l) =>
         l === locale ? (
@@ -76,51 +97,59 @@ export default function Navbar({ locale, dict }: NavbarProps) {
   )
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-outline-variant/70 bg-background/80 backdrop-blur-lg">
+    <nav ref={navRef} aria-label={dict.label} className="fixed top-0 z-50 w-full border-b border-outline-variant/70 bg-background/80 backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
         <a href={home || '#'} aria-label="Harpia Lab">
           <Logo />
         </a>
 
-        {/* Desktop */}
-        <div className="hidden items-center gap-8 md:flex">
-          {links.map(({ id, label }) => {
-            const active = activeSection === id
-            return (
-              <a
-                key={id}
-                href={`${home}#${id}`}
-                aria-current={active ? 'true' : undefined}
-                className={`group relative py-1 text-sm font-medium transition-colors hover:text-primary ${active ? 'text-primary' : 'text-on-surface-variant'}`}
-              >
-                {label}
-                <span
-                  aria-hidden="true"
-                  className={`absolute inset-x-0 -bottom-0.5 h-0.5 origin-left rounded-full bg-linear-to-r from-brand to-brand-2 transition-transform duration-300 group-hover:scale-x-100 ${active ? 'scale-x-100' : 'scale-x-0'}`}
-                />
-              </a>
-            )
-          })}
-          {languageSwitch}
+        <div className="flex items-center gap-3 md:gap-8">
+          {/* Desktop */}
+          <div className="hidden items-center gap-8 md:flex">
+            {links.map(({ id, label }) => {
+              const active = activeSection === id
+              return (
+                <a
+                  key={id}
+                  href={`${home}#${id}`}
+                  aria-current={active ? 'true' : undefined}
+                  className={`group relative py-1 text-sm font-medium transition-colors hover:text-primary ${active ? 'text-primary' : 'text-on-surface-variant'}`}
+                >
+                  {label}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-x-0 -bottom-0.5 h-0.5 origin-left rounded-full bg-linear-to-r from-brand to-brand-2 transition-transform duration-300 group-hover:scale-x-100 ${active ? 'scale-x-100' : 'scale-x-0'}`}
+                  />
+                </a>
+              )
+            })}
+            {languageSwitch}
+          </div>
+          {/* CTA sempre visível, inclusive no mobile */}
           <a
             href={`${home}#contato`}
-            onClick={trackContact}
-            className="btn-shine rounded-lg bg-cta px-4 py-2 text-sm font-semibold text-on-cta transition hover:shadow-lg hover:shadow-cta/30"
+            onClick={() => {
+              trackContact()
+              setMenuOpen(false)
+            }}
+            className="btn-shine rounded-lg bg-cta px-3.5 py-2 text-sm font-semibold whitespace-nowrap text-on-cta transition hover:shadow-lg hover:shadow-cta/30 md:px-4"
           >
             {dict.cta}
           </a>
-        </div>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          className="-mr-2 cursor-pointer touch-manipulation p-2 text-primary md:hidden"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label={menuOpen ? dict.closeMenu : dict.openMenu}
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? <CloseIcon className="size-6" /> : <MenuIcon className="size-6" />}
-        </button>
+          {/* Mobile toggle */}
+          <button
+            ref={toggleRef}
+            type="button"
+            className="-mr-2 cursor-pointer touch-manipulation p-2 text-primary md:hidden"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label={menuOpen ? dict.closeMenu : dict.openMenu}
+            aria-expanded={menuOpen}
+            aria-controls="menu-mobile"
+          >
+            {menuOpen ? <CloseIcon className="size-6" /> : <MenuIcon className="size-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Progresso de leitura */}
@@ -131,6 +160,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
 
       {/* Mobile menu */}
       <div
+        id="menu-mobile"
         className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col gap-1 border-b border-outline-variant bg-background px-6 pt-3 pb-6 shadow-lg md:hidden`}
       >
         {links.map(({ id, label }) => (
@@ -143,19 +173,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
             {label}
           </a>
         ))}
-        <div className="mt-4 flex items-center justify-between gap-4">
-          {languageSwitch}
-          <a
-            href={`${home}#contato`}
-            onClick={() => {
-              trackContact()
-              setMenuOpen(false)
-            }}
-            className="rounded-lg bg-cta px-5 py-3 text-center text-sm font-semibold text-on-cta"
-          >
-            {dict.cta}
-          </a>
-        </div>
+        <div className="mt-4">{languageSwitch}</div>
       </div>
     </nav>
   )
