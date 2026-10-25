@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
+import { Archivo, Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -26,6 +26,15 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains-mono',
   display: 'swap',
+})
+
+// Tipografia do Fellows (fellows-website/DESIGN.md), só no painel dele: abaixo da dobra, sem preload
+const archivo = Archivo({
+  subsets: ['latin'],
+  axes: ['wdth'],
+  variable: '--font-archivo',
+  display: 'swap',
+  preload: false,
 })
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://harpialab.com'
@@ -77,7 +86,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === 'pt' ? 'pt-BR' : 'en'}
-      className={`${instrumentSans.variable} ${bricolage.variable} ${jetbrainsMono.variable}`}
+      className={`${instrumentSans.variable} ${bricolage.variable} ${jetbrainsMono.variable} ${archivo.variable}`}
     >
       <body className="bg-background font-body text-on-surface antialiased">
         <a
