@@ -1,18 +1,18 @@
 import Image from 'next/image'
+import { TrackedLink } from '@/components/Analytics'
 import ContactForm from '@/components/ContactForm'
 import ControlMockup from '@/components/ControlMockup'
-import HeroTerminal from '@/components/HeroTerminal'
-import SectionHeader, { Eyebrow } from '@/components/SectionHeader'
-import Spotlight from '@/components/Spotlight'
+import SectionHeader from '@/components/SectionHeader'
 import {
   ArrowRightIcon,
+  ChatIcon,
   CheckIcon,
   CompassIcon,
-  DevicesIcon,
   LayersIcon,
   MailIcon,
   NodesIcon,
 } from '@/components/icons'
+import type { CtaId } from '@/lib/analytics'
 import { getDictionary } from '@/lib/getDictionary'
 
 const team = [
@@ -22,38 +22,40 @@ const team = [
 ]
 
 // Mesma ordem de dict.services.items
-const serviceIcons = [LayersIcon, CompassIcon, DevicesIcon, NodesIcon]
-
-// Cantos externos da grade de serviços (1 coluna no mobile, 2×2 a partir de sm)
-const serviceCorners = [
-  'rounded-t-[19px] sm:rounded-tr-none',
-  'sm:rounded-tr-[19px]',
-  'sm:rounded-bl-[19px]',
-  'rounded-b-[19px] sm:rounded-bl-none',
-]
+const serviceIcons = [LayersIcon, NodesIcon, CompassIcon]
 
 const container = 'mx-auto max-w-6xl px-6 lg:px-8'
 
 const controlUrl = 'https://control.harpialab.com'
 
+// Só dígitos, com DDI (ex.: 5541999999999). Vazio = sem WhatsApp no contato.
+const whatsapp = process.env.WHATSAPP_NUMBER?.replace(/\D/g, '')
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const dict = getDictionary(locale)
 
+  const channels: { cta: CtaId; href: string; label: string; value: string; Icon: typeof MailIcon }[] = [
+    { cta: 'email', href: 'mailto:contato@harpialab.com', label: dict.contact.emailLabel, value: 'contato@harpialab.com', Icon: MailIcon },
+  ]
+  if (whatsapp) {
+    const text = encodeURIComponent(dict.contact.whatsappText)
+    channels.push({ cta: 'whatsapp', href: `https://wa.me/${whatsapp}?text=${text}`, label: 'WhatsApp', value: dict.contact.whatsappAction, Icon: ChatIcon })
+  }
+
   return (
-    <main>
+    <main id="conteudo">
       {/* Hero */}
-      <section className="relative isolate overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
+      <section className="relative isolate overflow-hidden pt-28 pb-20 md:pt-40 md:pb-24">
         <div aria-hidden="true" className="absolute inset-0 -z-10">
           <div className="aurora aurora-a -top-24 -right-24 size-[18rem] bg-brand/10 lg:-top-32 lg:size-[34rem] lg:bg-brand/14" />
           <div className="aurora aurora-b top-1/3 right-1/4 hidden size-[24rem] bg-brand-2/14 lg:block" />
           <div className="bg-grid absolute inset-0" />
         </div>
-        <div className={`${container} grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14`}>
+        <div className={`${container} grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16`}>
           <div>
-            <Eyebrow className="hero-enter">{dict.hero.badge}</Eyebrow>
             <h1
-              className="hero-enter mt-6 font-headline text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-on-surface sm:text-6xl lg:text-[3.75rem]"
+              className="hero-enter font-headline text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-on-surface sm:text-6xl lg:text-[3.75rem]"
               style={{ '--enter-delay': '80ms' } as React.CSSProperties}
             >
               {dict.hero.title} <span className="text-primary">{dict.hero.titleAccent}</span>
@@ -68,20 +70,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               className="hero-enter mt-10 flex flex-wrap items-center gap-x-7 gap-y-4"
               style={{ '--enter-delay': '240ms' } as React.CSSProperties}
             >
-              <a
+              <TrackedLink
+                cta="contact"
+                location="hero"
                 href="#contato"
                 className="btn-shine group inline-flex items-center gap-2 rounded-lg bg-cta px-6 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-cta/20 transition hover:shadow-xl hover:shadow-cta/30"
               >
                 {dict.hero.ctaPrimary}
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
+                cta="how_we_work"
+                location="hero"
                 href="#processo"
                 className="group inline-flex items-center gap-2 text-sm font-semibold text-primary"
               >
                 <span className="underline-offset-4 group-hover:underline">{dict.hero.ctaSecondary}</span>
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
+              </TrackedLink>
             </div>
             <ul
               className="hero-enter mt-12 flex flex-wrap gap-x-6 gap-y-3 border-t border-outline-variant pt-6 text-sm text-on-surface-variant"
@@ -95,40 +101,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               ))}
             </ul>
           </div>
-          <div className="hero-enter" style={{ '--enter-delay': '200ms' } as React.CSSProperties}>
-            <HeroTerminal dict={dict.hero.terminal} />
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section id="servicos" className="scroll-mt-16 border-t border-outline-variant py-24 md:py-32">
-        <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16`}>
-          <SectionHeader
-            label={dict.services.label}
-            title={dict.services.title}
-            subtitle={dict.services.subtitle}
-            className="reveal"
-          />
-          <Spotlight className="reveal grid gap-px overflow-hidden rounded-2xl bg-outline-variant p-px sm:grid-cols-2">
-            {dict.services.items.map(({ title, desc }, i) => {
-              const Icon = serviceIcons[i]
-              return (
-                <article key={title} className={`group/card relative bg-surface p-7 sm:p-8 ${serviceCorners[i]}`}>
-                  <div className="flex items-center justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-lg bg-primary/[0.06] text-primary ring-1 ring-primary/10 transition duration-300 group-hover/card:-translate-y-0.5 group-hover/card:bg-brand group-hover/card:text-on-primary group-hover/card:shadow-lg group-hover/card:ring-brand group-hover/card:shadow-brand/30">
-                      <Icon className="size-5" />
-                    </span>
-                    <span className="font-mono text-xs text-outline transition-colors duration-300 group-hover/card:text-brand">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-                  <h3 className="mt-6 font-headline text-lg font-bold text-on-surface">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{desc}</p>
-                </article>
-              )
-            })}
-          </Spotlight>
+          {/* Prova: tela de um sistema nosso em produção, com o case logo abaixo */}
+          <figure className="hero-enter" style={{ '--enter-delay': '200ms' } as React.CSSProperties}>
+            <ControlMockup locale={locale} dict={dict.products.mockup} />
+            <figcaption className="mt-4 text-sm text-on-surface-variant">
+              {dict.hero.proof}{' '}
+              <a href="#produtos" className="font-semibold whitespace-nowrap text-primary underline-offset-4 hover:underline">
+                {dict.hero.proofLink}
+              </a>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -138,41 +120,73 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="aurora aurora-a -right-40 -bottom-40 size-[28rem] bg-accent/10" />
           <div className="bg-grid bg-grid-ink absolute inset-0" />
         </div>
-        <div className={`${container} grid items-center gap-14 lg:grid-cols-2 lg:gap-20`}>
+        <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16`}>
           <div className="reveal">
-            <Eyebrow onInk>{dict.products.label}</Eyebrow>
-            <h2 className="mt-5 font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
+            <h2 className="font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
               {dict.products.title}
             </h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-on-ink-variant">{dict.products.subtitle}</p>
-
-            <div className="mt-10 border-t border-ink-line pt-8">
-              <h3 className="font-headline text-2xl font-bold text-on-ink">{dict.products.name}</h3>
-              <p className="mt-2 font-medium text-accent">{dict.products.tagline}</p>
-              <p className="mt-3 max-w-xl leading-relaxed text-on-ink-variant">{dict.products.desc}</p>
-              <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
-                {dict.products.benefits.map(({ title, desc }) => (
-                  <li key={title} className="flex gap-3">
-                    <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
-                    <span>
-                      <span className="block font-semibold text-on-ink">{title}</span>
-                      <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={controlUrl}
-                className="btn-shine group mt-10 inline-flex items-center gap-2 rounded-lg bg-cta-ink px-6 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-cta-ink/20 transition hover:shadow-xl hover:shadow-cta-ink/30"
-              >
-                {dict.products.cta}
-                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
           </div>
           <div className="reveal">
-            <ControlMockup locale={locale} dict={dict.products.mockup} />
+            <h3 className="font-headline text-2xl font-bold text-on-ink">{dict.products.name}</h3>
+            <p className="mt-2 font-medium text-accent">{dict.products.tagline}</p>
+            <p className="mt-3 max-w-xl leading-relaxed text-on-ink-variant">{dict.products.desc}</p>
+            <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+              {dict.products.benefits.map(({ title, desc }) => (
+                <li key={title} className="flex gap-3">
+                  <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
+                  <span>
+                    <span className="block font-semibold text-on-ink">{title}</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <TrackedLink
+                cta="contact"
+                location="products"
+                href="#contato"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
+              >
+                <span className="underline-offset-4 group-hover:underline">{dict.products.ctaContact}</span>
+                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </TrackedLink>
+              <TrackedLink
+                cta="control"
+                location="products"
+                href={controlUrl}
+                className="text-sm text-on-ink-variant underline underline-offset-4 transition-colors hover:text-on-ink"
+              >
+                {dict.products.ctaLogin}
+              </TrackedLink>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="servicos" className="scroll-mt-16 py-24 md:py-32">
+        <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16`}>
+          <SectionHeader
+            title={dict.services.title}
+            subtitle={dict.services.subtitle}
+            className="reveal"
+          />
+          <ul className="reveal divide-y divide-outline-variant border-y border-outline-variant">
+            {dict.services.items.map(({ title, desc }, i) => {
+              const Icon = serviceIcons[i]
+              return (
+                <li key={title} className="flex gap-5 py-7 sm:gap-6 sm:py-8">
+                  <Icon className="mt-0.5 size-6 shrink-0 text-primary" />
+                  <div>
+                    <h3 className="font-headline text-xl font-bold text-on-surface">{title}</h3>
+                    <p className="mt-2 max-w-prose leading-relaxed text-on-surface-variant">{desc}</p>
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </section>
 
@@ -183,7 +197,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       >
         <div className={container}>
           <SectionHeader
-            label={dict.process.label}
             title={dict.process.title}
             subtitle={dict.process.subtitle}
             className="reveal"
@@ -210,7 +223,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section id="equipe" className="scroll-mt-16 py-24 md:py-32">
         <div className={container}>
           <SectionHeader
-            label={dict.team.label}
             title={dict.team.title}
             subtitle={dict.team.subtitle}
             className="reveal"
@@ -247,24 +259,32 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className={`${container} grid items-start gap-14 lg:grid-cols-2 lg:gap-20`}>
           <div className="reveal">
-            <Eyebrow onInk>{dict.contact.label}</Eyebrow>
-            <h2 className="mt-5 font-headline text-4xl font-extrabold tracking-tight text-balance text-on-ink md:text-5xl">
+            <h2 className="font-headline text-4xl font-extrabold tracking-tight text-balance text-on-ink md:text-5xl">
               {dict.contact.title}
             </h2>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-on-ink-variant">{dict.contact.subtitle}</p>
-            <a href="mailto:contato@harpialab.com" className="group mt-10 inline-flex items-center gap-4">
-              <span className="flex size-11 items-center justify-center rounded-lg bg-on-ink/5 text-accent ring-1 ring-on-ink/10 transition-colors group-hover:bg-on-ink/10 group-hover:ring-accent/40">
-                <MailIcon className="size-5" />
-              </span>
-              <span>
-                <span className="block font-mono text-xs tracking-wider text-on-ink-variant uppercase">
-                  {dict.contact.emailLabel}
-                </span>
-                <span className="font-medium text-on-ink underline-offset-4 group-hover:underline">
-                  contato@harpialab.com
-                </span>
-              </span>
-            </a>
+            <ul className="mt-10 flex flex-col gap-5">
+              {channels.map(({ cta, href, label, value, Icon }) => (
+                <li key={cta}>
+                  <TrackedLink
+                    cta={cta}
+                    location="contact"
+                    href={href}
+                    {...(cta === 'whatsapp' && { target: '_blank', rel: 'noopener noreferrer' })}
+                    className="group inline-flex items-center gap-4"
+                  >
+                    <span className="flex size-11 items-center justify-center rounded-lg bg-on-ink/5 text-accent ring-1 ring-on-ink/10 transition-colors group-hover:bg-on-ink/10 group-hover:ring-accent/40">
+                      <Icon className="size-5" />
+                    </span>
+                    <span>
+                      <span className="block font-mono text-xs tracking-wider text-on-ink-variant uppercase">{label}</span>
+                      <span className="font-medium text-on-ink underline-offset-4 group-hover:underline">{value}</span>
+                    </span>
+                  </TrackedLink>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 text-sm text-on-ink-variant">{dict.contact.location}</p>
           </div>
           <div className="reveal relative">
             <div
