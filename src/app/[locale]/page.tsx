@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { TrackedLink } from '@/components/Analytics'
 import ContactForm from '@/components/ContactForm'
 import ControlMockup from '@/components/ControlMockup'
+import FellowsCard from '@/components/FellowsCard'
+import { ControlMark, FellowsMark } from '@/components/ProductMarks'
 import SectionHeader from '@/components/SectionHeader'
 import {
   ArrowRightIcon,
@@ -27,6 +29,7 @@ const serviceIcons = [LayersIcon, NodesIcon, CompassIcon]
 const container = 'mx-auto max-w-6xl px-6 lg:px-8'
 
 const controlUrl = 'https://control.harpialab.com'
+const fellowsUrl = 'https://fellows.harpialab.com'
 
 // Só dígitos, com DDI (ex.: 5541999999999). Vazio = sem WhatsApp no contato.
 const whatsapp = process.env.WHATSAPP_NUMBER?.replace(/\D/g, '')
@@ -114,53 +117,102 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      {/* Products */}
+      {/* Products: cada painel na identidade visual do próprio produto */}
       <section id="produtos" className="on-ink relative isolate scroll-mt-16 overflow-hidden bg-ink py-24 md:py-32">
         <div aria-hidden="true" className="absolute inset-0 -z-10">
           <div className="aurora aurora-a -right-40 -bottom-40 size-[28rem] bg-accent/10" />
           <div className="bg-grid bg-grid-ink absolute inset-0" />
         </div>
-        <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16`}>
-          <div className="reveal">
+        <div className={container}>
+          <div className="reveal max-w-2xl">
             <h2 className="font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
               {dict.products.title}
             </h2>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-on-ink-variant">{dict.products.subtitle}</p>
+            <p className="mt-4 text-lg leading-relaxed text-on-ink-variant">{dict.products.subtitle}</p>
           </div>
-          <div className="reveal">
-            <h3 className="font-headline text-2xl font-bold text-on-ink">{dict.products.name}</h3>
-            <p className="mt-2 font-medium text-accent">{dict.products.tagline}</p>
-            <p className="mt-3 max-w-xl leading-relaxed text-on-ink-variant">{dict.products.desc}</p>
-            <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
-              {dict.products.benefits.map(({ title, desc }) => (
-                <li key={title} className="flex gap-3">
-                  <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
-                  <span>
-                    <span className="block font-semibold text-on-ink">{title}</span>
-                    <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <TrackedLink
-                cta="contact"
-                location="products"
-                href="#contato"
-                className="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
-              >
-                <span className="underline-offset-4 group-hover:underline">{dict.products.ctaContact}</span>
-                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </TrackedLink>
-              <TrackedLink
-                cta="control"
-                location="products"
-                href={controlUrl}
-                className="text-sm text-on-ink-variant underline underline-offset-4 transition-colors hover:text-on-ink"
-              >
-                {dict.products.ctaLogin}
-              </TrackedLink>
-            </div>
+
+          <div className="mt-14 grid gap-6 lg:gap-8">
+            {/* Control: tema escuro do Control (paleta Altitude, Bricolage) */}
+            <article className="reveal grid gap-10 rounded-3xl bg-ink-raised p-6 ring-1 ring-ink-line sm:p-10 lg:grid-cols-2 lg:gap-16 lg:p-12">
+              <div>
+                <div className="flex items-center gap-3">
+                  <ControlMark />
+                  <h3 className="font-headline text-2xl font-bold tracking-[-0.02em] text-on-ink">{dict.products.name}</h3>
+                </div>
+                <p className="mt-6 font-headline text-xl font-semibold text-balance text-accent sm:text-2xl">{dict.products.tagline}</p>
+                <p className="mt-3 max-w-xl leading-relaxed text-on-ink-variant">{dict.products.desc}</p>
+                <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+                  <TrackedLink
+                    cta="contact"
+                    location="products"
+                    href="#contato"
+                    className="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
+                  >
+                    <span className="underline-offset-4 group-hover:underline">{dict.products.ctaContact}</span>
+                    <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  </TrackedLink>
+                  <TrackedLink
+                    cta="control"
+                    location="products"
+                    href={controlUrl}
+                    className="text-sm text-on-ink-variant underline underline-offset-4 transition-colors hover:text-on-ink"
+                  >
+                    {dict.products.ctaLogin}
+                  </TrackedLink>
+                </div>
+              </div>
+              <ul className="grid content-start gap-x-8 gap-y-5 sm:grid-cols-2">
+                {dict.products.benefits.map(({ title, desc }) => (
+                  <li key={title} className="flex gap-3">
+                    <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
+                    <span>
+                      <span className="block font-semibold text-on-ink">{title}</span>
+                      <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            {/* Fellows: claro + cobalto + lima, Archivo (fellows-website/DESIGN.md) */}
+            <article className="fellows reveal grid gap-10 rounded-3xl bg-fellows-bg p-6 font-fellows text-fellows-ink sm:p-10 lg:grid-cols-2 lg:gap-16 lg:p-12">
+              <div>
+                <div className="flex items-center gap-3">
+                  <FellowsMark />
+                  <h3 className="text-2xl font-[650] tracking-[-0.01em] font-stretch-[112%]">{dict.products.fellows.name}</h3>
+                </div>
+                <p className="mt-6 text-xl font-bold tracking-[-0.02em] text-balance font-stretch-[112%] sm:text-2xl">
+                  {dict.products.fellows.tagline}
+                </p>
+                <p className="mt-3 max-w-xl leading-relaxed text-fellows-mute">{dict.products.fellows.desc}</p>
+                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+                  <TrackedLink
+                    cta="fellows"
+                    location="products"
+                    href={fellowsUrl}
+                    className="group inline-flex h-11 items-center gap-2 rounded-xl bg-fellows-accent px-4 font-semibold text-white transition hover:bg-fellows-accent-hover active:scale-[0.97]"
+                  >
+                    {dict.products.fellows.cta}
+                    <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  </TrackedLink>
+                  <span className="text-sm text-fellows-mute">{dict.products.fellows.stores}</span>
+                </div>
+              </div>
+              <div>
+                <FellowsCard dict={dict.products.fellows.card} />
+                <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+                  {dict.products.fellows.benefits.map(({ title, desc }) => (
+                    <li key={title} className="flex gap-3">
+                      <CheckIcon className="mt-0.5 size-5 shrink-0" />
+                      <span>
+                        <span className="block font-semibold">{title}</span>
+                        <span className="mt-1 block text-sm leading-relaxed text-fellows-mute">{desc}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
           </div>
         </div>
       </section>

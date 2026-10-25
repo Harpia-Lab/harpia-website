@@ -38,7 +38,7 @@ const en = {
   },
   products: {
     title: 'Our own software, in production.',
-    subtitle: 'A problem we kept running into became a product. The same team and the same process take care of your project.',
+    subtitle: 'Problems we kept running into became products. The same team and the same process take care of your project.',
     name: 'Harpia Control',
     tagline: 'Quotes and payments in one place, with a portal for your clients.',
     desc: 'Build the quote, send it for approval and follow every installment until it is paid, without spreadsheets or chasing anyone over chat.',
@@ -50,6 +50,26 @@ const en = {
     ],
     ctaContact: 'I want something like this',
     ctaLogin: 'Already use Control? Sign in',
+    fellows: {
+      name: 'Fellows',
+      tagline: 'People to play sports with, near you.',
+      desc: 'Running in the park, football, tennis, trails or walks: Fellows shows activities with open spots near you, and whoever creates the activity decides who joins.',
+      benefits: [
+        { title: 'Verified adults only', desc: 'ID number, date of birth and phone checked at sign-up.' },
+        { title: 'Protected location', desc: 'The exact spot only shows to people accepted into the activity.' },
+        { title: 'Mutual ratings', desc: 'After the activity, participants rate each other with fixed tags.' },
+        { title: 'Audience filters', desc: 'Women-only activities, 60+ or by age range.' },
+      ],
+      cta: 'Discover Fellows',
+      stores: 'Android and iPhone: coming soon.',
+      card: {
+        label: 'Example Fellows card: easy run in the park, Saturday at 7 AM, in Batel, with 3 open spots',
+        title: 'Easy run in the park',
+        when: 'Sat, Oct 24 · 7:00–8:00 AM',
+        where: 'Batel · Curitiba · 1.2 km',
+        slots: 'spots',
+      },
+    },
     mockup: {
       label: 'Example Harpia Control screen: accepted quote with four installments, two paid',
         quote: 'Quote 0142',

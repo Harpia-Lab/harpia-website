@@ -38,7 +38,7 @@ const pt = {
   },
   products: {
     title: 'Software nosso, em produção.',
-    subtitle: 'Um problema que víamos se repetir virou produto. O mesmo time e o mesmo processo cuidam do seu projeto.',
+    subtitle: 'Problemas que víamos se repetir viraram produtos. O mesmo time e o mesmo processo cuidam do seu projeto.',
     name: 'Harpia Control',
     tagline: 'Controle de orçamentos e pagamentos, com portal para o seu cliente.',
     desc: 'Monte o orçamento, envie para aprovação e acompanhe cada parcela até cair na conta, sem planilha e sem cobrar ninguém por mensagem.',
@@ -50,6 +50,26 @@ const pt = {
     ],
     ctaContact: 'Quero um sistema assim',
     ctaLogin: 'Já usa o Control? Entrar',
+    fellows: {
+      name: 'Fellows',
+      tagline: 'Gente para praticar esporte junto, perto de você.',
+      desc: 'Corrida no parque, futebol, tênis, trilha ou caminhada: o Fellows mostra as atividades com vaga perto de você, e quem cria a atividade decide quem entra.',
+      benefits: [
+        { title: 'Só maiores de 18, verificados', desc: 'CPF, data de nascimento e telefone conferidos no cadastro.' },
+        { title: 'Localização protegida', desc: 'O ponto exato só aparece para quem foi aceito na atividade.' },
+        { title: 'Avaliação mútua', desc: 'Depois da atividade, quem foi avalia quem foi, com tags fixas.' },
+        { title: 'Filtros por público', desc: 'Atividades só para mulheres, para 60+ ou por faixa etária.' },
+      ],
+      cta: 'Conhecer o Fellows',
+      stores: 'Android e iPhone: em breve.',
+      card: {
+        label: 'Exemplo de cartão do Fellows: corrida leve no parque, sábado às 7h, no Batel, com 3 vagas',
+        title: 'Corrida leve no parque',
+        when: 'sáb, 24 out · 07:00–08:00',
+        where: 'Batel · Curitiba · 1,2 km',
+        slots: 'vagas',
+      },
+    },
     mockup: {
       label: 'Exemplo de tela do Harpia Control: orçamento aceito com quatro parcelas, duas pagas',
         quote: 'Orçamento 0142',
