@@ -7,10 +7,10 @@ import type { Locale } from '@/lib/getDictionary'
 const pt = (
   <>
     <h1>Política de Privacidade</h1>
-    <p className="policy-updated">Última atualização: 15 de outubro de 2026</p>
+    <p className="policy-updated">Última atualização: 25 de outubro de 2026</p>
     <p>
       Esta política explica quais dados pessoais a Harpia Lab trata nos sites harpialab.com e do Control e no Harpia
-      Control (control.harpialab.com), para quê, por quanto tempo e como você exerce seus direitos pela Lei Geral de
+      Control (app.control.harpialab.com), para quê, por quanto tempo e como você exerce seus direitos pela Lei Geral de
       Proteção de Dados (LGPD, Lei 13.709/2018).
     </p>
 
@@ -218,10 +218,10 @@ const en = (
       one.
     </p>
     <h1>Privacy Policy</h1>
-    <p className="policy-updated">Last updated: October 15, 2026</p>
+    <p className="policy-updated">Last updated: October 25, 2026</p>
     <p>
       This policy explains which personal data Harpia Lab processes on the harpialab.com and Control websites and in
-      Harpia Control (control.harpialab.com), for what purpose, for how long, and how you exercise your rights under the
+      Harpia Control (app.control.harpialab.com), for what purpose, for how long, and how you exercise your rights under the
       Brazilian General Data Protection Law (LGPD, Law 13,709/2018).
     </p>
 
