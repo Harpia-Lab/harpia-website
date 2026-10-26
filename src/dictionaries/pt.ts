@@ -9,6 +9,7 @@ const pt = {
     services: 'Serviços',
     process: 'Processo',
     team: 'Equipe',
+    about: 'Sobre',
     cta: 'Fale conosco',
     openMenu: 'Abrir menu',
     closeMenu: 'Fechar menu',
@@ -101,6 +102,7 @@ const pt = {
     title: 'Quem constrói com você',
     subtitle: 'Três cofundadores com experiência em engenharia de software, design e arquitetura de sistemas.',
     role: 'Cofundador',
+    more: 'Mais sobre a Harpia',
   },
   contact: {
     title: 'Vamos conversar?',
@@ -151,6 +153,10 @@ const pt = {
     title: 'Política de Privacidade',
     description:
       'Quais dados pessoais a Harpia Lab trata nos sites e no Harpia Control, para quê, por quanto tempo e como exercer seus direitos pela LGPD.',
+  },
+  about: {
+    title: 'Sobre a Harpia Lab',
+    description: 'Quem é a Harpia Lab: consultoria e fábrica de software de Curitiba, criada por três cofundadores.',
   },
 }
 

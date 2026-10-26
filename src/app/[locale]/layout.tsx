@@ -88,7 +88,7 @@ export default async function LocaleLayout({
       lang={locale === 'pt' ? 'pt-BR' : 'en'}
       className={`${instrumentSans.variable} ${bricolage.variable} ${jetbrainsMono.variable} ${archivo.variable}`}
     >
-      <body className="bg-background font-body text-on-surface antialiased">
+      <body className="flex min-h-svh flex-col bg-background font-body text-on-surface antialiased">
         <a
           href="#conteudo"
           className="sr-only rounded-lg bg-surface px-4 py-2 text-sm font-semibold text-primary shadow-lg focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]"

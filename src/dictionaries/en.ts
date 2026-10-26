@@ -9,6 +9,7 @@ const en = {
     services: 'Services',
     process: 'Process',
     team: 'Team',
+    about: 'About',
     cta: 'Contact us',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
@@ -101,6 +102,7 @@ const en = {
     title: 'Who builds with you',
     subtitle: 'Three co-founders with experience in software engineering, design, and systems architecture.',
     role: 'Co-founder',
+    more: 'More about Harpia',
   },
   contact: {
     title: "Let's talk.",
@@ -151,6 +153,10 @@ const en = {
     title: 'Privacy Policy',
     description:
       'Which personal data Harpia Lab processes on its websites and in Harpia Control, why, for how long, and how to exercise your rights under the LGPD.',
+  },
+  about: {
+    title: 'About Harpia Lab',
+    description: 'Who Harpia Lab is: a software consultancy and studio from Curitiba, Brazil, founded by three co-founders.',
   },
 }
 

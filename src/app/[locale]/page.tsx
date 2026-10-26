@@ -1,10 +1,11 @@
-import Image from 'next/image'
+import Link from 'next/link'
 import { TrackedLink } from '@/components/Analytics'
 import ContactForm from '@/components/ContactForm'
 import ControlMockup from '@/components/ControlMockup'
 import FellowsCard from '@/components/FellowsCard'
 import { ControlMark, FellowsMark } from '@/components/ProductMarks'
 import SectionHeader from '@/components/SectionHeader'
+import TeamList from '@/components/TeamList'
 import {
   ArrowRightIcon,
   ChatIcon,
@@ -16,12 +17,6 @@ import {
 } from '@/components/icons'
 import type { CtaId } from '@/lib/analytics'
 import { getDictionary } from '@/lib/getDictionary'
-
-const team = [
-  { src: '/images/ttt.jpeg', name: 'Tiago Thomen Taraczuk' },
-  { src: '/images/ggr.png', name: 'Gabriel Gomes Rapozo' },
-  { src: '/images/cm.png', name: 'Cezar Mauricio' },
-]
 
 // Mesma ordem de dict.services.items
 const serviceIcons = [LayersIcon, NodesIcon, CompassIcon]
@@ -273,33 +268,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* Team */}
       <section id="equipe" className="scroll-mt-16 py-24 md:py-32">
-        <div className={container}>
-          <SectionHeader
-            title={dict.team.title}
-            subtitle={dict.team.subtitle}
-            className="reveal"
-          />
-          <ul className="mt-14 grid gap-6 sm:grid-cols-3 sm:gap-8">
-            {team.map(({ src, name }) => (
-              <li key={name} className="reveal group flex items-center gap-5 sm:block">
-                <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-surface-container ring-1 ring-on-surface/5 transition duration-500 group-hover:ring-brand/40 sm:aspect-[4/5] sm:size-auto sm:rounded-2xl sm:group-hover:-translate-y-1 sm:group-hover:shadow-2xl sm:group-hover:shadow-brand/20">
-                  <Image
-                    src={src}
-                    alt={name}
-                    fill
-                    className="object-cover object-top grayscale transition duration-500 group-hover:scale-[1.03] group-hover:grayscale-0"
-                    sizes="(max-width: 640px) 80px, 33vw"
-                  />
-                </div>
-                <div className="sm:mt-5">
-                  <h3 className="font-headline font-bold text-on-surface">{name}</h3>
-                  <p className="mt-1 font-mono text-xs tracking-wider text-on-surface-variant uppercase">
-                    {dict.team.role}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+        {/* No celular o link vem depois dos nomes; no desktop, embaixo do título */}
+        <div className={`${container} grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-8`}>
+          <SectionHeader title={dict.team.title} subtitle={dict.team.subtitle} className="reveal" />
+          <TeamList role={dict.team.role} className="reveal lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:pt-2" />
+          <Link
+            href={`/${locale}/sobre`}
+            className="reveal group inline-flex items-center gap-2 self-start justify-self-start text-sm font-semibold text-primary"
+          >
+            <span className="underline-offset-4 group-hover:underline">{dict.team.more}</span>
+            <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
       </section>
 
