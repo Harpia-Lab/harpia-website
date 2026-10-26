@@ -40,6 +40,9 @@ export default function Footer({ locale, dict }: FooterProps) {
                 {label}
               </a>
             ))}
+            <Link href={`/${locale}/sobre`} className={navLinkClass}>
+              {dict.nav.about}
+            </Link>
             <a
               href={`${home}#contato`}
               onClick={() => track('cta_clicked', { cta_id: 'contact', location: 'footer' })}

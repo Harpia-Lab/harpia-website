@@ -42,3 +42,10 @@ next-env.d.ts
 
 .superpowers/
 .env.local
+
+# skills locais (taste-skill)
+.agents/
+.claude/skills/
+skills-lock.json
+.taste-skill/
+.playwright-mcp/
