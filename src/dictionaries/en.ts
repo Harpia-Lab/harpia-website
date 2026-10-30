@@ -18,6 +18,7 @@ const en = {
     skip: 'Skip to content',
   },
   hero: {
+    eyebrow: 'Consulting & Software Factory · Curitiba, Brazil',
     title: 'Custom software,',
     titleAccent: 'built to last.',
     subtitle:
@@ -25,8 +26,8 @@ const en = {
     ctaPrimary: 'Request a quote',
     ctaSecondary: 'How we work',
     highlights: ['Web systems and apps', 'Support after launch', 'Reply within 24h'],
-    proof: 'A Harpia Control screen, a system we built and keep running.',
-    proofLink: 'See the case study',
+    productsTitle: 'Our own products',
+    productsLabel: 'Our products',
   },
   services: {
     title: 'Three ways to work with us.',
@@ -39,8 +40,23 @@ const en = {
   },
   products: {
     title: 'Our own software, in production.',
-    subtitle: 'Problems we kept running into became products. The same team and the same process take care of your project.',
+    subtitle: 'Problems we kept running into became products. Each one has its own brand; the same team and the same process take care of your project.',
+    pdv: {
+      name: 'Harpia PDV',
+      short: 'Point of sale for events',
+      tagline: 'Point of sale on the card terminal for events, concerts, clubs and bars.',
+      desc: 'Staff learn it in minutes and the line keeps moving. Sales, top-ups, tabs, tickets and cash register in one app, picked for each event.',
+      cta: 'Discover Harpia PDV',
+      mockup: {
+        label: 'Example Harpia PDV screen on a card terminal: choosing the payment method between credit, debit, Pix and cash',
+        when: 'Friday night · Oct 23 · 10 PM',
+        question: 'How will the customer pay?',
+        methods: ['Credit', 'Debit', 'Pix', 'Cash'],
+        note: 'Sample data',
+      },
+    },
     name: 'Harpia Control',
+    short: 'Quotes and payments',
     tagline: 'Quotes and payments in one place, with a portal for your clients.',
     desc: 'Build the quote, send it for approval and follow every installment until it is paid, without spreadsheets or chasing anyone over chat.',
     benefits: [
@@ -53,6 +69,7 @@ const en = {
     ctaLogin: 'Already use Control? Sign in',
     fellows: {
       name: 'Fellows',
+      short: 'Sports together, near you',
       tagline: 'People to play sports with, near you.',
       desc: 'Running in the park, football, tennis, trails or walks: Fellows shows activities with open spots near you, and whoever creates the activity decides who joins.',
       benefits: [
@@ -106,7 +123,7 @@ const en = {
   },
   contact: {
     title: "Let's talk.",
-    subtitle: 'Tell us what you need. We reply with our first questions or with a proposal.',
+    subtitle: 'Tell us what you need. We reply with our first questions or with a proposal, within 24h.',
     emailLabel: 'Email',
     whatsappAction: 'Chat on WhatsApp',
     whatsappText: 'Hi! I found you through the Harpia Lab website.',
@@ -115,6 +132,9 @@ const en = {
   form: {
     name: 'Name',
     namePlaceholder: 'Your name',
+    company: 'Company',
+    optional: '(optional)',
+    companyPlaceholder: 'Company name',
     email: 'Email',
     emailPlaceholder: 'you@email.com',
     message: 'Message',
@@ -131,6 +151,7 @@ const en = {
       emailInvalid: 'Check the email. It should look like name@company.com.',
       messageRequired: 'Tell us a little about what you need.',
       nameTooLong: 'The name can have up to 200 characters.',
+      companyTooLong: 'The company name can have up to 200 characters.',
       messageTooLong: 'The message can have up to 5000 characters.',
     },
   },

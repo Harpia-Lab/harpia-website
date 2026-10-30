@@ -33,9 +33,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   // grow: em telas altas o rodapé encosta no fim da janela
   return (
     <main id="conteudo" className="grow pt-32 pb-24 md:pt-40 md:pb-32">
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:px-8">
+      <div className="mx-auto grid max-w-[1200px] gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
-          <h1 className="hero-enter font-headline text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-on-surface sm:text-6xl lg:text-[3.75rem]">
+          <h1 className="hero-enter font-headline text-[2.6rem] leading-[1.05] font-bold tracking-[-0.035em] text-balance text-primary sm:text-6xl lg:text-[4.1rem]">
             {dict.about.title}
           </h1>
           <p

@@ -6,48 +6,70 @@
 }
 
 @theme {
-  /* ── Cores — paleta Altitude (Harpia Control, SPEC §7), tema claro ajustado para WCAG AA ── */
-  /* Teal orienta (links, ícones, foco); coral só em CTAs. */
-  --color-primary:                  #0b746d;
-  --color-primary-hover:            #095f59;
-  --color-on-primary:               #f3fffd;
+  /* ── Cores — marca Harpia Lab (manual da marca, M05). Sem âmbar na marca-mãe. ── */
+  /* Azul Harpia em títulos, botões e logo; azul médio só como acento (2ª metade do título). */
+  --color-primary:                  #0f3555;
+  --color-primary-hover:            #0a2238;
+  --color-on-primary:               #ffffff;
 
-  --color-cta:                      #e8674a;
-  --color-on-cta:                   #2a0e07;
+  --color-cta:                      #0f3555;
+  --color-on-cta:                   #ffffff;
 
-  /* Teal para texto/ícones (AA no claro) e teal vivo só para traços decorativos */
-  --color-brand:                    #0b746d;
-  --color-brand-2:                  #2ec4b6;
+  --color-brand:                    #0f3555;
+  --color-brand-2:                  #3d6f9e;
+  --color-tint:                     #e6edf5; /* azul-claro: pílulas, fundo de ícone */
+  --color-on-tint:                  #1f4a70;
+  --color-band:                     #e9eef4; /* faixa do processo */
+  --color-feather:                  #c9d1d8; /* cinza pena */
 
   --color-surface:                  #ffffff;
-  --color-surface-container-lowest: #fdfcfa;
-  --color-surface-container-low:    #f3f0eb;
-  --color-surface-container:        #efebe4;
-  --color-surface-container-high:   #e5dfd6;
-  --color-surface-container-highest: #d6cfc4;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low:    #f0f1f2;
+  --color-surface-container:        #eceded;
+  --color-surface-container-high:   #e3e4e6;
+  --color-surface-container-highest: #d5d8dc;
 
-  --color-background:               #f7f5f1;
-  --color-on-background:            #1b1916;
+  --color-background:               #f7f7f5; /* papel */
+  --color-on-background:            #1b1e24;
 
-  --color-on-surface:               #1b1916;
-  --color-on-surface-variant:       #6e675d;
+  --color-on-surface:               #1b1e24; /* nanquim */
+  --color-on-surface-variant:       #4b525c;
+  --color-muted:                    #5d6470;
 
-  --color-outline:                  #7a7268;
-  --color-outline-variant:          #e5dfd6;
+  /* outline: borda de campo (≥ 3:1 sobre branco); outline-variant: divisórias e cards */
+  --color-outline:                  #868e98;
+  --color-outline-variant:          #e3e4e6;
 
   --color-error:                    #b23a35;
   --color-ok:                       #17764d;
 
-  /* ── Cores — faixas escuras (produtos, contato, rodapé, mockup) = tema escuro do Control ── */
+  /* ── Rodapé (nanquim escuro) ── */
+  --color-footer:                   #14181e;
+  --color-on-footer:                #c9ced6;
+
+  /* ── Cores — painel do Harpia Control (tema escuro do Control, paleta Altitude) ── */
   --color-ink:                      #121110;
   --color-ink-raised:               #1d1a17;
   --color-ink-line:                 #2c2825;
   --color-on-ink:                   #f3efe8;
-  --color-on-ink-variant:           #9b9388;
+  --color-on-ink-variant:           #b9b1a5;
+  --color-on-ink-mute:              #9b9388;
   --color-accent:                   #2ec4b6;
   --color-cta-ink:                  #ff7a5c;
+  --color-on-cta-ink:               #2a0e07;
   --color-ok-ink:                   #3dbe86;
   --color-info-ink:                 #6c9bf2;
+
+  /* ── Cores — painel do Harpia PDV (pdv-website, design system Pulso) ── */
+  --color-pdv-bg:                   #f3f2f9;
+  --color-pdv-ink:                  #16122b;
+  --color-pdv-mute:                 #4b4566;
+  --color-pdv-mute-2:               #6b6585;
+  --color-pdv-accent:               #6a3be0;
+  --color-pdv-accent-hover:         #5a2fc9;
+  --color-pdv-soft:                 #d9cef7;
+  --color-pdv-teal:                 #0fa9a4;
+  --color-pdv-teal-bright:          #2ee6df;
 
   /* ── Cores — painel do Fellows (fellows-website/DESIGN.md): claro + cobalto + lima ── */
   /* Cobalto só no que se toca; lima só no Bib. Mudou lá → muda aqui. */
@@ -61,11 +83,14 @@
   --color-fellows-accent-soft:      #eef1ff;
   --color-fellows-lime:             #d9f44a;
 
-  /* ── Fontes ── */
-  --font-headline: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
-  --font-body:     var(--font-instrument), "Instrument Sans", sans-serif;
-  --font-label:    var(--font-instrument), "Instrument Sans", sans-serif;
+  /* ── Fontes: Onest (títulos, logo) + Instrument Sans (texto); produtos com as fontes deles ── */
+  --font-headline: var(--font-onest), "Onest", system-ui, sans-serif;
+  --font-body:     var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
+  --font-label:    var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
   --font-mono:     var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-control:  var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  --font-pdv:      var(--font-unbounded), "Unbounded", sans-serif;
+  --font-pdv-body: var(--font-dm-sans), "DM Sans", sans-serif;
   --font-fellows:  var(--font-archivo), "Archivo", ui-sans-serif, system-ui, sans-serif;
 
   /* ── Border Radius ── */
@@ -90,6 +115,14 @@
     outline-color: var(--color-accent);
   }
 
+  .on-footer :focus-visible {
+    outline-color: var(--color-feather);
+  }
+
+  .pdv :focus-visible {
+    outline-color: var(--color-pdv-accent);
+  }
+
   .fellows :focus-visible {
     outline-color: var(--color-fellows-accent);
   }
@@ -100,7 +133,7 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-brand) 22%, transparent);
+    background: color-mix(in srgb, var(--color-brand-2) 22%, transparent);
   }
 }
 
@@ -110,15 +143,15 @@
 }
 
 .policy h1 {
-  @apply font-headline text-4xl font-extrabold tracking-tight text-balance text-on-surface md:text-5xl;
+  @apply font-headline text-4xl font-bold tracking-[-0.035em] text-balance text-primary md:text-5xl;
 }
 
 .policy h2 {
-  @apply mt-14 scroll-mt-24 border-t border-outline-variant pt-8 font-headline text-2xl font-bold tracking-tight text-on-surface;
+  @apply mt-14 scroll-mt-24 border-t border-outline-variant pt-8 font-headline text-2xl font-bold tracking-[-0.03em] text-primary;
 }
 
 .policy h3 {
-  @apply mt-8 font-headline text-lg font-bold text-on-surface;
+  @apply mt-8 font-headline text-lg font-semibold text-on-surface;
 }
 
 .policy p,
@@ -127,7 +160,7 @@
 }
 
 .policy ul {
-  @apply list-disc space-y-2 pl-6 marker:text-brand;
+  @apply list-disc space-y-2 pl-6 marker:text-brand-2;
 }
 
 .policy strong {
@@ -147,11 +180,11 @@
 }
 
 .policy .policy-note {
-  @apply mt-0 mb-8 rounded-lg border border-outline-variant bg-surface-container-low px-4 py-3 text-sm;
+  @apply mt-0 mb-8 rounded-lg border border-outline-variant bg-surface px-4 py-3 text-sm;
 }
 
 .policy .policy-table {
-  @apply mt-6 overflow-x-auto rounded-lg border border-outline-variant;
+  @apply mt-6 overflow-x-auto rounded-lg border border-outline-variant bg-surface;
 }
 
 .policy table {
@@ -166,77 +199,13 @@
   @apply border-t border-outline-variant px-4 py-3 align-top;
 }
 
-/* ── Grid decorativo de fundo ── */
-.bg-grid {
-  --grid-line: color-mix(in srgb, var(--color-on-surface) 6%, transparent);
-  background-image:
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 65% 70% at 75% 35%, #000 20%, transparent 75%);
-}
-
-.bg-grid-ink {
-  --grid-line: color-mix(in srgb, var(--color-on-ink) 5%, transparent);
-  mask-image: radial-gradient(ellipse 60% 85% at 10% 15%, #000 15%, transparent 70%);
-}
-
-/* ── Manchas de luz ── */
-.aurora {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
-}
-
-/* ── Borda em degradê (mockup do Control, card de contato) ── */
-.glow-border {
-  padding: 1px;
-  border-radius: var(--radius-2xl);
-  background: linear-gradient(
-    140deg,
-    color-mix(in srgb, var(--color-accent) 75%, transparent),
-    color-mix(in srgb, var(--color-on-ink) 12%, transparent) 32%,
-    color-mix(in srgb, var(--color-on-ink) 6%, transparent) 68%,
-    color-mix(in srgb, var(--color-cta-ink) 55%, transparent)
-  );
-}
-
-.glow-border > * {
-  border-radius: calc(var(--radius-2xl) - 1px);
-}
-
-/* ── Brilho que atravessa o botão no hover ── */
-.btn-shine {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-}
-
-.btn-shine::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(110deg, transparent 30%, color-mix(in srgb, var(--color-surface) 28%, transparent) 50%, transparent 70%);
-  transform: translateX(-120%);
-}
-
 /* ── Estados estáticos (sem animação o conteúdo já nasce completo) ── */
-.step-fill {
-  width: 2.5rem;
-}
-
 /* Barra de recebimento do mockup do Control: estática em --meter, cresce até lá ao entrar na tela */
 .meter-fill {
   width: var(--meter);
 }
 
-.scroll-progress {
-  display: none;
-  transform-origin: left;
-}
-
-/* ── Animações ── */
+/* ── Animações (só entrada sóbria; nada de brilho ou manchas) ── */
 @keyframes rise {
   from {
     opacity: 0;
@@ -253,18 +222,6 @@
   }
 }
 
-@keyframes drift-a {
-  50% {
-    transform: translate3d(-7%, 9%, 0) scale(1.12);
-  }
-}
-
-@keyframes drift-b {
-  50% {
-    transform: translate3d(9%, -7%, 0) scale(0.9);
-  }
-}
-
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -275,19 +232,6 @@
     animation-delay: var(--enter-delay, 0ms);
   }
 
-  .aurora-a {
-    animation: drift-a 16s ease-in-out infinite;
-  }
-
-  .aurora-b {
-    animation: drift-b 20s ease-in-out infinite;
-  }
-
-  .btn-shine:hover::after {
-    transform: translateX(120%);
-    transition: transform 0.7s ease;
-  }
-
   /* Entrada ao rolar — só onde há suporte; nos demais o conteúdo já nasce visível */
   @supports (animation-timeline: view()) {
     .reveal {
@@ -296,28 +240,11 @@
       animation-range: entry 0% cover 22%;
     }
 
-    /* Linha do processo: preenche conforme a etapa sobe na tela (faixa definida inline) */
-    .step-fill {
-      width: 100%;
-      transform-origin: left;
-      animation: grow-x linear both;
-      animation-timeline: view();
-    }
-
     .meter-fill {
       transform-origin: left;
       animation: grow-x linear both;
       animation-timeline: view();
       animation-range: entry 40% cover 45%;
     }
-  }
-}
-
-/* Barra de progresso de leitura: acompanha a rolagem, não é movimento autônomo */
-@supports (animation-timeline: scroll()) {
-  .scroll-progress {
-    display: block;
-    animation: grow-x linear both;
-    animation-timeline: scroll(root block);
   }
 }

@@ -3,7 +3,8 @@ import { TrackedLink } from '@/components/Analytics'
 import ContactForm from '@/components/ContactForm'
 import ControlMockup from '@/components/ControlMockup'
 import FellowsCard from '@/components/FellowsCard'
-import { ControlMark, FellowsMark } from '@/components/ProductMarks'
+import PdvMockup from '@/components/PdvMockup'
+import { ControlMark, FellowsMark, PdvMark } from '@/components/ProductMarks'
 import SectionHeader from '@/components/SectionHeader'
 import TeamList from '@/components/TeamList'
 import {
@@ -13,18 +14,17 @@ import {
   CompassIcon,
   LayersIcon,
   MailIcon,
-  NodesIcon,
+  PeopleIcon,
 } from '@/components/icons'
 import type { CtaId } from '@/lib/analytics'
 import { getDictionary } from '@/lib/getDictionary'
+import { controlUrl, fellowsUrl, pdvUrl } from '@/lib/products'
 
 // Mesma ordem de dict.services.items
-const serviceIcons = [LayersIcon, NodesIcon, CompassIcon]
+const serviceIcons = [LayersIcon, PeopleIcon, CompassIcon]
 
-const container = 'mx-auto max-w-6xl px-6 lg:px-8'
-
-const controlUrl = 'https://control.harpialab.com'
-const fellowsUrl = 'https://fellows.harpialab.com'
+const container = 'mx-auto max-w-[1200px] px-4 sm:px-6'
+const card = 'rounded-[18px] border border-outline-variant bg-surface'
 
 // Só dígitos, com DDI (ex.: 5541999999999). Vazio = sem WhatsApp no contato.
 const whatsapp = process.env.WHATSAPP_NUMBER?.replace(/\D/g, '')
@@ -32,6 +32,7 @@ const whatsapp = process.env.WHATSAPP_NUMBER?.replace(/\D/g, '')
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const dict = getDictionary(locale)
+  const { products } = dict
 
   const channels: { cta: CtaId; href: string; label: string; value: string; Icon: typeof MailIcon }[] = [
     { cta: 'email', href: 'mailto:contato@harpialab.com', label: dict.contact.emailLabel, value: 'contato@harpialab.com', Icon: MailIcon },
@@ -41,127 +42,185 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     channels.push({ cta: 'whatsapp', href: `https://wa.me/${whatsapp}?text=${text}`, label: 'WhatsApp', value: dict.contact.whatsappAction, Icon: ChatIcon })
   }
 
+  // Cartão "Produtos da casa": cada produto na fonte dele, ordem PDV, Control, Fellows
+  const houseProducts = [
+    { id: 'pdv', Mark: PdvMark, name: products.pdv.name, short: products.pdv.short, nameClass: 'font-pdv text-[0.95rem] font-bold uppercase' },
+    { id: 'control', Mark: ControlMark, name: products.name, short: products.short, nameClass: 'font-control font-bold' },
+    { id: 'fellows', Mark: FellowsMark, name: products.fellows.name, short: products.fellows.short, nameClass: 'font-fellows font-semibold' },
+  ]
+
   return (
     <main id="conteudo">
       {/* Hero */}
-      <section className="relative isolate overflow-hidden pt-28 pb-20 md:pt-40 md:pb-24">
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <div className="aurora aurora-a -top-24 -right-24 size-[18rem] bg-brand/10 lg:-top-32 lg:size-[34rem] lg:bg-brand/14" />
-          <div className="aurora aurora-b top-1/3 right-1/4 hidden size-[24rem] bg-brand-2/14 lg:block" />
-          <div className="bg-grid absolute inset-0" />
-        </div>
-        <div className={`${container} grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16`}>
-          <div>
-            <h1
-              className="hero-enter font-headline text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-on-surface sm:text-6xl lg:text-[3.75rem]"
-              style={{ '--enter-delay': '80ms' } as React.CSSProperties}
+      <section className={`${container} grid items-end gap-14 pt-28 pb-16 md:pt-[9.5rem] md:pb-[4.5rem] lg:grid-cols-[minmax(0,2.6fr)_minmax(17.5rem,1fr)]`}>
+        <div className="min-w-0">
+          <p className="hero-enter mb-5 inline-block rounded-full bg-tint px-3 py-1 text-[0.9rem] font-semibold text-on-tint">
+            {dict.hero.eyebrow}
+          </p>
+          <h1
+            className="hero-enter font-headline text-[2.6rem] leading-[1.04] font-bold tracking-[-0.035em] text-balance text-primary sm:text-[3.4rem] lg:text-[4.1rem]"
+            style={{ '--enter-delay': '80ms' } as React.CSSProperties}
+          >
+            {dict.hero.title} <span className="text-brand-2">{dict.hero.titleAccent}</span>
+          </h1>
+          <p
+            className="hero-enter mt-6 max-w-[36rem] text-[1.2rem] leading-relaxed text-on-surface-variant"
+            style={{ '--enter-delay': '160ms' } as React.CSSProperties}
+          >
+            {dict.hero.subtitle}
+          </p>
+          <div
+            className="hero-enter mt-9 flex flex-wrap items-center gap-6"
+            style={{ '--enter-delay': '240ms' } as React.CSSProperties}
+          >
+            <TrackedLink
+              cta="contact"
+              location="hero"
+              href="#contato"
+              className="rounded-xl bg-cta px-6 py-4 font-semibold text-on-cta transition-colors hover:bg-primary-hover"
             >
-              {dict.hero.title} <span className="text-primary">{dict.hero.titleAccent}</span>
-            </h1>
-            <p
-              className="hero-enter mt-6 max-w-xl text-lg leading-relaxed text-on-surface-variant"
-              style={{ '--enter-delay': '160ms' } as React.CSSProperties}
+              {dict.hero.ctaPrimary}
+            </TrackedLink>
+            <TrackedLink
+              cta="how_we_work"
+              location="hero"
+              href="#processo"
+              className="font-semibold text-primary underline underline-offset-[0.25em] hover:text-primary-hover"
             >
-              {dict.hero.subtitle}
-            </p>
-            <div
-              className="hero-enter mt-10 flex flex-wrap items-center gap-x-7 gap-y-4"
-              style={{ '--enter-delay': '240ms' } as React.CSSProperties}
-            >
-              <TrackedLink
-                cta="contact"
-                location="hero"
-                href="#contato"
-                className="btn-shine group inline-flex items-center gap-2 rounded-lg bg-cta px-6 py-3.5 text-sm font-semibold text-on-cta shadow-lg shadow-cta/20 transition hover:shadow-xl hover:shadow-cta/30"
-              >
-                {dict.hero.ctaPrimary}
-                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </TrackedLink>
-              <TrackedLink
-                cta="how_we_work"
-                location="hero"
-                href="#processo"
-                className="group inline-flex items-center gap-2 text-sm font-semibold text-primary"
-              >
-                <span className="underline-offset-4 group-hover:underline">{dict.hero.ctaSecondary}</span>
-                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </TrackedLink>
-            </div>
-            <ul
-              className="hero-enter mt-12 flex flex-wrap gap-x-6 gap-y-3 border-t border-outline-variant pt-6 text-sm text-on-surface-variant"
-              style={{ '--enter-delay': '320ms' } as React.CSSProperties}
-            >
-              {dict.hero.highlights.map((highlight) => (
-                <li key={highlight} className="flex items-center gap-2">
-                  <CheckIcon className="size-4 text-brand" />
-                  {highlight}
-                </li>
-              ))}
-            </ul>
+              {dict.hero.ctaSecondary}
+            </TrackedLink>
           </div>
-          {/* Prova: tela de um sistema nosso em produção, com o case logo abaixo */}
-          <figure className="hero-enter" style={{ '--enter-delay': '200ms' } as React.CSSProperties}>
-            <ControlMockup locale={locale} dict={dict.products.mockup} />
-            <figcaption className="mt-4 text-sm text-on-surface-variant">
-              {dict.hero.proof}{' '}
-              <a href="#produtos" className="font-semibold whitespace-nowrap text-primary underline-offset-4 hover:underline">
-                {dict.hero.proofLink}
-              </a>
-            </figcaption>
-          </figure>
+          <ul
+            className="hero-enter mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-outline-variant pt-6 text-[0.95rem] text-on-surface-variant"
+            style={{ '--enter-delay': '320ms' } as React.CSSProperties}
+          >
+            {dict.hero.highlights.map((highlight) => (
+              <li key={highlight} className="flex items-center gap-2">
+                <CheckIcon className="size-4 text-brand-2" />
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <aside
+          aria-label={dict.hero.productsLabel}
+          className={`hero-enter min-w-0 px-5 pt-4 pb-2 ${card}`}
+          style={{ '--enter-delay': '200ms' } as React.CSSProperties}
+        >
+          <p className="mb-1.5 text-[0.9rem] font-semibold text-muted">{dict.hero.productsTitle}</p>
+          <ul className="divide-y divide-surface-container">
+            {houseProducts.map(({ id, Mark, name, short, nameClass }) => (
+              <li key={id}>
+                <a href={`#${id}`} className="group flex items-center gap-3 py-3 text-on-surface">
+                  <Mark className="size-8" />
+                  <span className="leading-snug">
+                    <span className={`block group-hover:underline ${nameClass}`}>{name}</span>
+                    <span className="block text-[0.9rem] text-muted">{short}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </section>
+
+      {/* Services */}
+      <section id="servicos" className="scroll-mt-16">
+        <div className={`${container} pt-12 pb-[4.5rem]`}>
+          <SectionHeader title={dict.services.title} subtitle={dict.services.subtitle} className="reveal" />
+          <ul className="reveal mt-9 grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5">
+            {dict.services.items.map(({ title, desc }, i) => {
+              const Icon = serviceIcons[i]
+              return (
+                <li key={title} className={`${card} p-7`}>
+                  <span className="grid size-10 place-items-center rounded-xl bg-tint text-primary">
+                    <Icon className="size-5" strokeWidth={2} />
+                  </span>
+                  <h3 className="mt-4 mb-2 font-headline text-[1.3rem] font-semibold tracking-[-0.02em]">{title}</h3>
+                  <p className="text-on-surface-variant">{desc}</p>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </section>
 
-      {/* Products: cada painel na identidade visual do próprio produto */}
-      <section id="produtos" className="on-ink relative isolate scroll-mt-16 overflow-hidden bg-ink py-24 md:py-32">
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <div className="aurora aurora-a -right-40 -bottom-40 size-[28rem] bg-accent/10" />
-          <div className="bg-grid bg-grid-ink absolute inset-0" />
-        </div>
-        <div className={container}>
-          <div className="reveal max-w-2xl">
-            <h2 className="font-headline text-3xl font-extrabold tracking-tight text-balance text-on-ink md:text-[2.5rem] md:leading-[1.1]">
-              {dict.products.title}
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-on-ink-variant">{dict.products.subtitle}</p>
-          </div>
+      {/* Products: cada painel na identidade do próprio produto, ordem PDV, Control, Fellows */}
+      <section id="produtos" className="scroll-mt-16">
+        <div className={`${container} pt-4 pb-[4.5rem]`}>
+          <SectionHeader title={products.title} subtitle={products.subtitle} className="reveal" />
 
-          <div className="mt-14 grid gap-6 lg:gap-8">
-            {/* Control: tema escuro do Control (paleta Altitude, Bricolage) */}
-            <article className="reveal grid gap-10 rounded-3xl bg-ink-raised p-6 ring-1 ring-ink-line sm:p-10 lg:grid-cols-2 lg:gap-16 lg:p-12">
-              <div>
+          <div className="mt-10 flex flex-col gap-6">
+            {/* Harpia PDV: lavanda + roxo + verde-água, Unbounded + DM Sans (pdv-website) */}
+            <article
+              id="pdv"
+              className="pdv reveal grid scroll-mt-24 items-center gap-10 rounded-3xl bg-pdv-bg p-6 font-pdv-body text-pdv-ink sm:p-10 lg:grid-cols-2"
+            >
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span aria-hidden="true" className="size-3 rounded-full bg-pdv-teal" />
+                  <span className="font-pdv text-xl font-extrabold uppercase">{products.pdv.name}</span>
+                </div>
+                <h3 className="mt-5 mb-2.5 font-pdv text-[1.35rem] leading-[1.2] font-bold tracking-[-0.01em] text-balance sm:text-[1.6rem]">
+                  {products.pdv.tagline}
+                </h3>
+                <p className="text-pdv-mute">{products.pdv.desc}</p>
+                <TrackedLink
+                  cta="pdv"
+                  location="products"
+                  href={pdvUrl}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-pdv-accent px-5 py-3 font-semibold text-white transition-colors hover:bg-pdv-accent-hover"
+                >
+                  {products.pdv.cta}
+                  <ArrowRightIcon className="size-4" />
+                </TrackedLink>
+              </div>
+              <div className="flex min-w-0 justify-center">
+                <PdvMockup dict={products.pdv.mockup} />
+              </div>
+            </article>
+
+            {/* Harpia Control: tema escuro do Control (paleta Altitude), Bricolage + Instrument Sans */}
+            <article
+              id="control"
+              className="on-ink reveal grid scroll-mt-24 items-center gap-10 rounded-3xl bg-ink p-6 font-body text-on-ink sm:p-10 lg:grid-cols-2"
+            >
+              <div className="min-w-0">
                 <div className="flex items-center gap-3">
                   <ControlMark />
-                  <h3 className="font-headline text-2xl font-bold tracking-[-0.02em] text-on-ink">{dict.products.name}</h3>
+                  <span className="font-control text-2xl font-extrabold tracking-[-0.02em]">{products.name}</span>
                 </div>
-                <p className="mt-6 font-headline text-xl font-semibold text-balance text-accent sm:text-2xl">{dict.products.tagline}</p>
-                <p className="mt-3 max-w-xl leading-relaxed text-on-ink-variant">{dict.products.desc}</p>
-                <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+                <h3 className="mt-5 mb-2.5 font-control text-[1.5rem] leading-[1.15] font-bold tracking-[-0.02em] text-balance sm:text-[1.9rem]">
+                  {products.tagline}
+                </h3>
+                <p className="text-on-ink-variant">{products.desc}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-4">
                   <TrackedLink
                     cta="contact"
                     location="products"
                     href="#contato"
-                    className="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
+                    className="rounded-[10px] bg-cta-ink px-5 py-3 font-semibold text-on-cta-ink transition hover:brightness-105"
                   >
-                    <span className="underline-offset-4 group-hover:underline">{dict.products.ctaContact}</span>
-                    <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    {products.ctaContact}
                   </TrackedLink>
                   <TrackedLink
                     cta="control"
                     location="products"
                     href={controlUrl}
-                    className="text-sm text-on-ink-variant underline underline-offset-4 transition-colors hover:text-on-ink"
+                    className="font-semibold text-accent underline underline-offset-4"
                   >
-                    {dict.products.ctaLogin}
+                    {products.ctaLogin}
                   </TrackedLink>
                 </div>
               </div>
-              <ul className="grid content-start gap-x-8 gap-y-5 sm:grid-cols-2">
-                {dict.products.benefits.map(({ title, desc }) => (
+              <ControlMockup locale={locale} dict={products.mockup} />
+              <ul className="grid gap-x-8 gap-y-5 border-t border-ink-line pt-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
+                {products.benefits.map(({ title, desc }) => (
                   <li key={title} className="flex gap-3">
                     <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
                     <span>
-                      <span className="block font-semibold text-on-ink">{title}</span>
+                      <span className="block font-semibold">{title}</span>
                       <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
                     </span>
                   </li>
@@ -170,96 +229,66 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </article>
 
             {/* Fellows: claro + cobalto + lima, Archivo (fellows-website/DESIGN.md) */}
-            <article className="fellows reveal grid gap-10 rounded-3xl bg-fellows-bg p-6 font-fellows text-fellows-ink sm:p-10 lg:grid-cols-2 lg:gap-16 lg:p-12">
-              <div>
+            <article
+              id="fellows"
+              className="fellows reveal grid scroll-mt-24 items-center gap-10 rounded-3xl border border-fellows-line bg-fellows-bg p-6 font-fellows text-fellows-ink sm:p-10 lg:grid-cols-2"
+            >
+              <div className="min-w-0">
                 <div className="flex items-center gap-3">
                   <FellowsMark />
-                  <h3 className="text-2xl font-[650] tracking-[-0.01em] font-stretch-[112%]">{dict.products.fellows.name}</h3>
+                  <span className="text-2xl font-extrabold tracking-[-0.02em]">{products.fellows.name}</span>
                 </div>
-                <p className="mt-6 text-xl font-bold tracking-[-0.02em] text-balance font-stretch-[112%] sm:text-2xl">
-                  {dict.products.fellows.tagline}
-                </p>
-                <p className="mt-3 max-w-xl leading-relaxed text-fellows-mute">{dict.products.fellows.desc}</p>
-                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <h3 className="mt-5 mb-2.5 text-[1.5rem] leading-[1.15] font-extrabold tracking-[-0.02em] text-balance sm:text-[1.9rem]">
+                  {products.fellows.tagline}
+                </h3>
+                <p className="text-fellows-mute">{products.fellows.desc}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-4">
                   <TrackedLink
                     cta="fellows"
                     location="products"
                     href={fellowsUrl}
-                    className="group inline-flex h-11 items-center gap-2 rounded-xl bg-fellows-accent px-4 font-semibold text-white transition hover:bg-fellows-accent-hover active:scale-[0.97]"
+                    className="inline-flex items-center gap-2 rounded-[10px] bg-fellows-accent px-5 py-3 font-semibold text-white transition hover:bg-fellows-accent-hover active:scale-[0.97]"
                   >
-                    {dict.products.fellows.cta}
-                    <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    {products.fellows.cta}
+                    <ArrowRightIcon className="size-4" />
                   </TrackedLink>
-                  <span className="text-sm text-fellows-mute">{dict.products.fellows.stores}</span>
+                  <span className="text-[0.9rem] text-fellows-mute">{products.fellows.stores}</span>
                 </div>
               </div>
-              <div>
-                <FellowsCard dict={dict.products.fellows.card} />
-                <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
-                  {dict.products.fellows.benefits.map(({ title, desc }) => (
-                    <li key={title} className="flex gap-3">
-                      <CheckIcon className="mt-0.5 size-5 shrink-0" />
-                      <span>
-                        <span className="block font-semibold">{title}</span>
-                        <span className="mt-1 block text-sm leading-relaxed text-fellows-mute">{desc}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="flex min-w-0 justify-center">
+                <FellowsCard dict={products.fellows.card} />
               </div>
+              <ul className="grid gap-x-8 gap-y-5 border-t border-fellows-line pt-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
+                {products.fellows.benefits.map(({ title, desc }) => (
+                  <li key={title} className="flex gap-3">
+                    <CheckIcon className="mt-0.5 size-5 shrink-0 text-fellows-accent" />
+                    <span>
+                      <span className="block font-semibold">{title}</span>
+                      <span className="mt-1 block text-sm leading-relaxed text-fellows-mute">{desc}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </article>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section id="servicos" className="scroll-mt-16 py-24 md:py-32">
-        <div className={`${container} grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16`}>
-          <SectionHeader
-            title={dict.services.title}
-            subtitle={dict.services.subtitle}
-            className="reveal"
-          />
-          <ul className="reveal divide-y divide-outline-variant border-y border-outline-variant">
-            {dict.services.items.map(({ title, desc }, i) => {
-              const Icon = serviceIcons[i]
-              return (
-                <li key={title} className="flex gap-5 py-7 sm:gap-6 sm:py-8">
-                  <Icon className="mt-0.5 size-6 shrink-0 text-primary" />
-                  <div>
-                    <h3 className="font-headline text-xl font-bold text-on-surface">{title}</h3>
-                    <p className="mt-2 max-w-prose leading-relaxed text-on-surface-variant">{desc}</p>
-                  </div>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </section>
-
       {/* Process */}
-      <section
-        id="processo"
-        className="scroll-mt-16 border-y border-outline-variant bg-surface-container-lowest py-24 md:py-32"
-      >
-        <div className={container}>
-          <SectionHeader
-            title={dict.process.title}
-            subtitle={dict.process.subtitle}
-            className="reveal"
-          />
-          <ol className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      <section id="processo" className="scroll-mt-16 bg-band">
+        <div className={`${container} py-[4.5rem]`}>
+          <SectionHeader title={dict.process.title} subtitle={dict.process.subtitle} className="reveal" />
+          <ol className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-8">
             {dict.process.steps.map(({ title, desc }, i) => (
-              <li key={title} className="reveal relative border-t border-outline-variant pt-6">
-                {/* Cada trecho se preenche um pouco depois do anterior */}
+              <li key={title} className="reveal">
                 <span
                   aria-hidden="true"
-                  className="step-fill absolute -top-px left-0 h-0.5 bg-linear-to-r from-brand to-brand-2"
-                  style={{ animationRange: `cover ${16 + i * 7}% cover ${28 + i * 7}%` }}
-                />
-                <span className="font-mono text-xs font-medium text-brand">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="mt-4 font-headline text-lg font-bold text-on-surface">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{desc}</p>
+                  className="grid size-10 place-items-center rounded-full bg-primary font-headline font-bold text-on-primary"
+                >
+                  {i + 1}
+                </span>
+                <h3 className="mt-3.5 mb-1.5 font-headline text-[1.15rem] font-semibold tracking-[-0.02em]">{title}</h3>
+                <p className="text-[0.97rem] text-on-surface-variant">{desc}</p>
               </li>
             ))}
           </ol>
@@ -267,34 +296,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Team */}
-      <section id="equipe" className="scroll-mt-16 py-24 md:py-32">
+      <section id="equipe" className="scroll-mt-16">
         {/* No celular o link vem depois dos nomes; no desktop, embaixo do título */}
-        <div className={`${container} grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-8`}>
+        <div className={`${container} grid gap-10 py-[4.5rem] lg:grid-cols-[0.9fr_1.1fr] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-6`}>
           <SectionHeader title={dict.team.title} subtitle={dict.team.subtitle} className="reveal" />
           <TeamList role={dict.team.role} className="reveal lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:pt-2" />
           <Link
             href={`/${locale}/sobre`}
-            className="reveal group inline-flex items-center gap-2 self-start justify-self-start text-sm font-semibold text-primary"
+            className="reveal group inline-flex items-center gap-2 self-start justify-self-start font-semibold text-primary"
           >
-            <span className="underline-offset-4 group-hover:underline">{dict.team.more}</span>
+            <span className="underline underline-offset-4">{dict.team.more}</span>
             <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
       </section>
 
       {/* Contact */}
-      <section id="contato" className="on-ink relative isolate scroll-mt-16 overflow-hidden bg-ink py-24 md:py-32">
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <div className="aurora aurora-b -top-40 -left-32 size-[30rem] bg-accent/15" />
-          <div className="bg-grid bg-grid-ink absolute inset-0" />
-        </div>
-        <div className={`${container} grid items-start gap-14 lg:grid-cols-2 lg:gap-20`}>
-          <div className="reveal">
-            <h2 className="font-headline text-4xl font-extrabold tracking-tight text-balance text-on-ink md:text-5xl">
+      <section id="contato" className="scroll-mt-16 border-t border-outline-variant">
+        <div className={`${container} grid items-start gap-12 py-[4.5rem] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]`}>
+          <div className="reveal min-w-0">
+            <h2 className="font-headline text-[2rem] leading-[1.15] font-bold tracking-[-0.03em] text-balance text-primary md:text-[2.4rem]">
               {dict.contact.title}
             </h2>
-            <p className="mt-5 max-w-md text-lg leading-relaxed text-on-ink-variant">{dict.contact.subtitle}</p>
-            <ul className="mt-10 flex flex-col gap-5">
+            <p className="mt-4 max-w-md text-on-surface-variant">{dict.contact.subtitle}</p>
+            <ul className="mt-7 flex flex-col gap-4">
               {channels.map(({ cta, href, label, value, Icon }) => (
                 <li key={cta}>
                   <TrackedLink
@@ -302,31 +327,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     location="contact"
                     href={href}
                     {...(cta === 'whatsapp' && { target: '_blank', rel: 'noopener noreferrer' })}
-                    className="group inline-flex items-center gap-4"
+                    className="group inline-flex items-center gap-3"
                   >
-                    <span className="flex size-11 items-center justify-center rounded-lg bg-on-ink/5 text-accent ring-1 ring-on-ink/10 transition-colors group-hover:bg-on-ink/10 group-hover:ring-accent/40">
-                      <Icon className="size-5" />
+                    <span className="grid size-10 place-items-center rounded-xl bg-tint text-primary">
+                      <Icon className="size-5" strokeWidth={2} />
                     </span>
                     <span>
-                      <span className="block font-mono text-xs tracking-wider text-on-ink-variant uppercase">{label}</span>
-                      <span className="font-medium text-on-ink underline-offset-4 group-hover:underline">{value}</span>
+                      <span className="block text-sm text-muted">{label}</span>
+                      <span className="font-semibold text-primary underline-offset-4 group-hover:underline">{value}</span>
                     </span>
                   </TrackedLink>
                 </li>
               ))}
             </ul>
-            <p className="mt-10 text-sm text-on-ink-variant">{dict.contact.location}</p>
-          </div>
-          <div className="reveal relative">
-            <div
-              aria-hidden="true"
-              className="aurora aurora-a -inset-6 -z-10 bg-linear-to-br from-brand-2/40 to-cta-ink/25"
-            />
-            <div className="glow-border shadow-2xl shadow-ink/40">
-              <div className="bg-surface p-6 sm:p-8">
-                <ContactForm dict={dict.form} />
-              </div>
+            <div className="mt-10 flex items-center gap-3 text-[0.95rem] text-muted">
+              {/* eslint-disable-next-line @next/next/no-img-element -- SVG pequeno, next/image não otimiza SVG */}
+              <img src="/brand/curioso.svg" alt="" width={56} height={56} className="size-14" loading="lazy" />
+              <span>{dict.contact.location}</span>
             </div>
+          </div>
+          <div className={`reveal min-w-0 p-5 sm:p-8 ${card}`}>
+            <ContactForm dict={dict.form} />
           </div>
         </div>
       </section>

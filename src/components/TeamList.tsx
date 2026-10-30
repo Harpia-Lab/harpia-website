@@ -11,10 +11,10 @@ export default function TeamList({ role, className = '' }: TeamListProps) {
     <ul className={`flex flex-col gap-7 md:gap-9 ${className}`}>
       {team.map((name) => (
         <li key={name} className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-          <span className="font-headline text-2xl leading-tight font-bold tracking-[-0.02em] text-balance text-on-surface md:text-[2rem]">
+          <span className="font-headline text-2xl leading-tight font-semibold tracking-[-0.03em] text-balance text-on-surface md:text-[1.75rem]">
             {name}
           </span>
-          <span className="shrink-0 text-sm text-on-surface-variant">{role}</span>
+          <span className="shrink-0 text-sm text-muted">{role}</span>
         </li>
       ))}
     </ul>

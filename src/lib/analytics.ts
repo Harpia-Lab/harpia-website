@@ -142,11 +142,12 @@ export const bannerVisible = () => !!ID && surface === 'consent' && readConsent(
 export const sectionIds = ['produtos', 'servicos', 'processo', 'equipe', 'contato'] as const
 export type SectionId = (typeof sectionIds)[number]
 
-export type CtaId = 'contact' | 'how_we_work' | 'control' | 'fellows' | 'email' | 'whatsapp'
+export type CtaId = 'contact' | 'how_we_work' | 'pdv' | 'control' | 'fellows' | 'email' | 'whatsapp'
 export type CtaLocation = 'navbar' | 'hero' | 'products' | 'contact' | 'footer'
 
 export type Events = {
-  // Qual chamada (e de qual lugar da página) leva ao contato, ao Control, ao Fellows, ao e-mail ou ao WhatsApp?
+  // Qual chamada (e de qual lugar da página) leva ao contato, ao PDV, ao Control, ao Fellows, ao e-mail ou ao WhatsApp?
+  // `pdv`: link para o site do Harpia PDV (pdv.harpialab.com), no painel de produtos e no rodapé.
   cta_clicked: { cta_id: CtaId; location: CtaLocation }
   // Até onde as pessoas descem na home: quais seções chegam a ser vistas?
   section_viewed: { section_id: SectionId }

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Archivo, Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
+import { Archivo, Bricolage_Grotesque, DM_Sans, Instrument_Sans, JetBrains_Mono, Onest, Unbounded } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -8,11 +8,11 @@ import { PageTracker } from '@/components/Analytics'
 import { getDictionary, hasLocale, locales } from '@/lib/getDictionary'
 import '../globals.css'
 
-// Tipografia do Harpia Control (SPEC §7)
-const bricolage = Bricolage_Grotesque({
+// Tipografia da Harpia Lab (manual, M07): Onest nos títulos e no logo, Instrument Sans no texto
+const onest = Onest({
   subsets: ['latin'],
-  axes: ['opsz'],
-  variable: '--font-bricolage',
+  weight: ['600', '700'],
+  variable: '--font-onest',
   display: 'swap',
 })
 
@@ -22,13 +22,39 @@ const instrumentSans = Instrument_Sans({
   display: 'swap',
 })
 
+// Fontes dos produtos, só nos painéis deles (abaixo da dobra, sem preload)
+// Harpia PDV: Unbounded + DM Sans (pdv-website)
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  weight: ['700', '800'],
+  variable: '--font-unbounded',
+  display: 'swap',
+  preload: false,
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+  preload: false,
+})
+
+// Harpia Control: Bricolage Grotesque (SPEC §7)
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  axes: ['opsz'],
+  variable: '--font-bricolage',
+  display: 'swap',
+  preload: false,
+})
+
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains-mono',
   display: 'swap',
 })
 
-// Tipografia do Fellows (fellows-website/DESIGN.md), só no painel dele: abaixo da dobra, sem preload
+// Fellows: Archivo (fellows-website/DESIGN.md)
 const archivo = Archivo({
   subsets: ['latin'],
   axes: ['wdth'],
@@ -86,9 +112,9 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === 'pt' ? 'pt-BR' : 'en'}
-      className={`${instrumentSans.variable} ${bricolage.variable} ${jetbrainsMono.variable} ${archivo.variable}`}
+      className={`${onest.variable} ${instrumentSans.variable} ${unbounded.variable} ${dmSans.variable} ${bricolage.variable} ${jetbrainsMono.variable} ${archivo.variable}`}
     >
-      <body className="flex min-h-svh flex-col bg-background font-body text-on-surface antialiased">
+      <body className="flex min-h-svh flex-col bg-background font-body text-[1.0625rem]/[1.6] text-on-surface antialiased">
         <a
           href="#conteudo"
           className="sr-only rounded-lg bg-surface px-4 py-2 text-sm font-semibold text-primary shadow-lg focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]"

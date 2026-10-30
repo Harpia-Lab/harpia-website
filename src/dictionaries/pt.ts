@@ -18,6 +18,7 @@ const pt = {
     skip: 'Pular para o conteúdo',
   },
   hero: {
+    eyebrow: 'Consultoria & Fábrica de Software · Curitiba',
     title: 'Software sob medida,',
     titleAccent: 'feito para durar.',
     subtitle:
@@ -25,8 +26,8 @@ const pt = {
     ctaPrimary: 'Solicitar orçamento',
     ctaSecondary: 'Como trabalhamos',
     highlights: ['Sistemas web e aplicativos', 'Suporte depois da entrega', 'Resposta em até 24h'],
-    proof: 'Tela do Harpia Control, sistema que construímos e mantemos no ar.',
-    proofLink: 'Ver o case',
+    productsTitle: 'Produtos da casa',
+    productsLabel: 'Nossos produtos',
   },
   services: {
     title: 'Três jeitos de trabalhar com a gente.',
@@ -39,8 +40,23 @@ const pt = {
   },
   products: {
     title: 'Software nosso, em produção.',
-    subtitle: 'Problemas que víamos se repetir viraram produtos. O mesmo time e o mesmo processo cuidam do seu projeto.',
+    subtitle: 'Problemas que víamos se repetir viraram produtos. Cada um tem a sua marca; o mesmo time e o mesmo processo cuidam do seu projeto.',
+    pdv: {
+      name: 'Harpia PDV',
+      short: 'Ponto de venda para eventos',
+      tagline: 'Ponto de venda na maquininha para eventos, shows, baladas e bares.',
+      desc: 'O operador aprende em minutos e a fila anda. Venda, recarga, comanda, ingresso e caixa no mesmo app, escolhidos por evento.',
+      cta: 'Conhecer o Harpia PDV',
+      mockup: {
+        label: 'Exemplo de tela do Harpia PDV na maquininha: escolha da forma de pagamento entre crédito, débito, Pix e dinheiro',
+        when: 'Noite de sexta · 23/10 · 22h',
+        question: 'Como o cliente vai pagar?',
+        methods: ['Crédito', 'Débito', 'Pix', 'Dinheiro'],
+        note: 'Dados fictícios',
+      },
+    },
     name: 'Harpia Control',
+    short: 'Orçamentos e pagamentos',
     tagline: 'Controle de orçamentos e pagamentos, com portal para o seu cliente.',
     desc: 'Monte o orçamento, envie para aprovação e acompanhe cada parcela até cair na conta, sem planilha e sem cobrar ninguém por mensagem.',
     benefits: [
@@ -53,6 +69,7 @@ const pt = {
     ctaLogin: 'Já usa o Control? Entrar',
     fellows: {
       name: 'Fellows',
+      short: 'Esporte junto, perto de você',
       tagline: 'Gente para praticar esporte junto, perto de você.',
       desc: 'Corrida no parque, futebol, tênis, trilha ou caminhada: o Fellows mostra as atividades com vaga perto de você, e quem cria a atividade decide quem entra.',
       benefits: [
@@ -106,7 +123,7 @@ const pt = {
   },
   contact: {
     title: 'Vamos conversar?',
-    subtitle: 'Conte o que você precisa. Respondemos com as primeiras perguntas ou com uma proposta.',
+    subtitle: 'Conte o que você precisa. Respondemos com as primeiras perguntas ou com uma proposta, em até 24h.',
     emailLabel: 'E-mail',
     whatsappAction: 'Conversar pelo WhatsApp',
     whatsappText: 'Olá! Vim pelo site da Harpia Lab.',
@@ -115,6 +132,9 @@ const pt = {
   form: {
     name: 'Nome',
     namePlaceholder: 'Seu nome',
+    company: 'Empresa',
+    optional: '(opcional)',
+    companyPlaceholder: 'Nome da empresa',
     email: 'E-mail',
     emailPlaceholder: 'seu@email.com',
     message: 'Mensagem',
@@ -131,6 +151,7 @@ const pt = {
       emailInvalid: 'Confira o e-mail. Ele precisa ser como nome@empresa.com.',
       messageRequired: 'Conte um pouco do que você precisa.',
       nameTooLong: 'O nome pode ter até 200 caracteres.',
+      companyTooLong: 'O nome da empresa pode ter até 200 caracteres.',
       messageTooLong: 'A mensagem pode ter até 5000 caracteres.',
     },
   },

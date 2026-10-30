@@ -38,13 +38,13 @@ export function CompassIcon(props: IconProps) {
   )
 }
 
-export function NodesIcon(props: IconProps) {
+export function PeopleIcon(props: IconProps) {
   return (
     <Icon {...props}>
-      <circle cx="6" cy="6" r="2.5" />
-      <circle cx="18" cy="6" r="2.5" />
-      <circle cx="18" cy="18" r="2.5" />
-      <path d="M8.5 6h7M6 8.5V14a4 4 0 0 0 4 4h5.5" />
+      <circle cx="9" cy="8" r="3" />
+      <circle cx="17" cy="9" r="2.5" />
+      <path d="M3 19c0-3 3-5 6-5s6 2 6 5" />
+      <path d="M15 14.5c2.5 0 6 1.3 6 4.5" />
     </Icon>
   )
 }

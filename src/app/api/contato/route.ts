@@ -13,7 +13,7 @@ function escapeHtml(str: string) {
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 // O front traduz o código pelo dicionário do idioma da página
-type ErrorCode = 'invalid_body' | 'missing_fields' | 'name_too_long' | 'invalid_email' | 'message_too_long' | 'rate_limited' | 'server'
+type ErrorCode = 'invalid_body' | 'missing_fields' | 'name_too_long' | 'company_too_long' | 'invalid_email' | 'message_too_long' | 'rate_limited' | 'server'
 const fail = (error: ErrorCode, status = 400) => Response.json({ error }, { status })
 
 // ponytail: rate limit em memória, por instância serverless (cada instância/região tem o
@@ -45,7 +45,7 @@ export async function POST(req: Request) {
   // (um único IP). Fora da Vercel podem ser forjados.
   const ip = req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
 
-  let body: { name?: unknown; email?: unknown; message?: unknown; website?: unknown }
+  let body: { name?: unknown; company?: unknown; email?: unknown; message?: unknown; website?: unknown }
   try {
     // ponytail: form-urlencoded é o envio nativo do <form method="post"> (sem JS); a resposta continua JSON
     body = req.headers.get('content-type')?.includes('application/x-www-form-urlencoded')
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     return fail('invalid_body')
   }
 
-  const { name, email, message, website } = body
+  const { name, company, email, message, website } = body
 
   // Honeypot: campo invisível para humanos; bot que preenche recebe sucesso falso.
   if (website) {
@@ -64,11 +64,13 @@ export async function POST(req: Request) {
   }
 
   const nameStr = String(name ?? '').trim()
+  const companyStr = String(company ?? '').trim() // opcional
   const emailStr = String(email ?? '').trim()
   const messageStr = String(message ?? '').trim()
 
   if (!nameStr || !emailStr || !messageStr) return fail('missing_fields')
   if (nameStr.length > 200) return fail('name_too_long')
+  if (companyStr.length > 200) return fail('company_too_long')
   if (!emailRegex.test(emailStr) || emailStr.length > 254) return fail('invalid_email')
   if (messageStr.length > 5000) return fail('message_too_long')
 
@@ -91,6 +93,7 @@ export async function POST(req: Request) {
     html: `
       <h2>Novo contato via site</h2>
       <p><strong>Nome:</strong> ${escapeHtml(nameStr)}</p>
+      ${companyStr ? `<p><strong>Empresa:</strong> ${escapeHtml(companyStr)}</p>` : ''}
       <p><strong>E-mail:</strong> ${escapeHtml(emailStr)}</p>
       <p><strong>Mensagem:</strong></p>
       <p>${escapeHtml(messageStr).replace(/\n/g, '<br>')}</p>

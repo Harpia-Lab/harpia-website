@@ -1,23 +1,20 @@
-import Image from 'next/image'
-
+// Logo da Harpia Lab (manual, M03): o Curioso à esquerda + "Harpia Lab" em Onest Bold azul Harpia.
+// Mascote sempre pequeno; no fundo escuro só o nome, em branco.
 interface LogoProps {
   inverted?: boolean
 }
 
 export default function Logo({ inverted = false }: LogoProps) {
   return (
-    <span className="inline-flex items-center gap-2.5">
-      <Image
-        src="/images/logo-mark.png"
-        alt=""
-        width={800}
-        height={600}
-        sizes="48px"
-        loading="eager"
-        className={`h-8 w-auto ${inverted ? 'brightness-0 invert' : ''}`}
-      />
-      <span className={`font-headline text-[15px] tracking-[0.16em] ${inverted ? 'text-on-ink' : 'text-on-surface'}`}>
-        <span className="font-extrabold">HARPIA</span> <span className="font-medium">LAB</span>
+    <span className="inline-flex items-center gap-2">
+      {!inverted && (
+        // eslint-disable-next-line @next/next/no-img-element -- SVG pequeno, next/image não otimiza SVG
+        <img src="/brand/curioso.svg" alt="" width={30} height={30} className="size-[30px]" />
+      )}
+      <span
+        className={`font-headline text-[1.2rem] font-bold tracking-[-0.03em] ${inverted ? 'text-white' : 'text-primary'}`}
+      >
+        Harpia Lab
       </span>
     </span>
   )

@@ -22,8 +22,8 @@ export default function ControlMockup({ locale, dict }: ControlMockupProps) {
   const brl = new Intl.NumberFormat(locale === 'pt' ? 'pt-BR' : 'en-US', { style: 'currency', currency: 'BRL' })
 
   return (
-    <div role="img" aria-label={dict.label} className="glow-border shadow-2xl shadow-ink/60">
-      <div className="overflow-hidden bg-ink-raised">
+    <div role="img" aria-label={dict.label} className="w-full">
+      <div className="overflow-hidden rounded-[14px] border border-ink-line bg-ink-raised">
         <div className="flex items-center gap-2 border-b border-ink-line px-4 py-3">
           <span className="size-2.5 rounded-full bg-on-ink/15" />
           <span className="size-2.5 rounded-full bg-on-ink/15" />
@@ -34,7 +34,7 @@ export default function ControlMockup({ locale, dict }: ControlMockupProps) {
         <div className="p-5 sm:p-7">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
-              <span className="font-headline text-lg font-semibold text-on-ink">{dict.quote}</span>
+              <span className="font-control text-lg font-bold text-on-ink">{dict.quote}</span>
               <span className="rounded-md bg-accent/10 px-1.5 py-0.5 font-mono text-xs text-accent">{dict.version}</span>
             </div>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-ok-ink/10 px-2.5 py-1 text-xs font-medium text-ok-ink">
