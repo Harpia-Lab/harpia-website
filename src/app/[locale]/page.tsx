@@ -192,7 +192,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <ControlMark />
                   <span className="font-control text-2xl font-extrabold tracking-[-0.02em]">{products.name}</span>
                 </div>
-                <h3 className="mt-5 mb-2.5 font-control text-[1.5rem] leading-[1.15] font-bold tracking-[-0.02em] text-balance sm:text-[1.9rem]">
+                <h3 className="mt-5 mb-2.5 font-control text-[1.4rem] leading-[1.2] font-bold tracking-[-0.02em] text-balance sm:text-[1.6rem]">
                   {products.tagline}
                 </h3>
                 <p className="text-on-ink-variant">{products.desc}</p>
@@ -216,9 +216,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
               </div>
               <div className={screen}>
-                <div className="w-full max-w-md">
-                  <ControlMockup locale={locale} dict={products.mockup} />
-                </div>
+                <ControlMockup locale={locale} dict={products.mockup} />
               </div>
             </article>
 
@@ -229,7 +227,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <FellowsMark />
                   <span className="text-2xl font-extrabold tracking-[-0.02em]">{products.fellows.name}</span>
                 </div>
-                <h3 className="mt-5 mb-2.5 text-[1.5rem] leading-[1.15] font-extrabold tracking-[-0.02em] text-balance sm:text-[1.9rem]">
+                <h3 className="mt-5 mb-2.5 text-[1.4rem] leading-[1.2] font-extrabold tracking-[-0.02em] text-balance sm:text-[1.6rem]">
                   {products.fellows.tagline}
                 </h3>
                 <p className="text-fellows-mute">{products.fellows.desc}</p>

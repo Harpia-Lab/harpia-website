@@ -75,16 +75,12 @@ const pt = {
       },
     },
     mockup: {
-      label: 'Exemplo de tela do Harpia Control: orçamento aceito com quatro parcelas, duas pagas',
+      label: 'Exemplo de tela do Harpia Control: orçamento aceito, uma parcela paga, uma com lembrete enviado e uma a vencer',
         quote: 'Orçamento 0142',
       client: 'Cliente Exemplo · Reforma do site',
       version: 'v3',
       accepted: 'Aceito online',
-      total: 'Total',
-      received: 'Recebido',
-      installments: 'Parcelas',
       rows: [
-        { due: '10/09', status: 'Pago', tone: 'ok' },
         { due: '10/10', status: 'Pago', tone: 'ok' },
         { due: '10/11', status: 'Lembrete enviado', tone: 'info' },
         { due: '10/12', status: 'A vencer', tone: 'muted' },

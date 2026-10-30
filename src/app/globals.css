@@ -198,26 +198,11 @@
   @apply border-t border-outline-variant px-4 py-3 align-top;
 }
 
-/* ── Estados estáticos (sem animação o conteúdo já nasce completo) ── */
-/* Barra de recebimento do mockup do Control: estática em --meter, cresce até lá ao entrar na tela */
-.meter-fill {
-  width: var(--meter);
-}
-
 /* ── Animações (só entrada sóbria; nada de brilho ou manchas) ── */
 @keyframes rise {
   from {
     opacity: 0;
     transform: translateY(14px);
-  }
-}
-
-@keyframes grow-x {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
   }
 }
 
@@ -237,13 +222,6 @@
       animation: rise linear both;
       animation-timeline: view();
       animation-range: entry 0% cover 22%;
-    }
-
-    .meter-fill {
-      transform-origin: left;
-      animation: grow-x linear both;
-      animation-timeline: view();
-      animation-range: entry 40% cover 45%;
     }
   }
 }

@@ -75,16 +75,12 @@ const en = {
       },
     },
     mockup: {
-      label: 'Example Harpia Control screen: accepted quote with four installments, two paid',
+      label: 'Example Harpia Control screen: accepted quote, one installment paid, one with a reminder sent and one upcoming',
         quote: 'Quote 0142',
       client: 'Example Client · Website redesign',
       version: 'v3',
       accepted: 'Accepted online',
-      total: 'Total',
-      received: 'Received',
-      installments: 'Installments',
       rows: [
-        { due: 'Sep 10', status: 'Paid', tone: 'ok' },
         { due: 'Oct 10', status: 'Paid', tone: 'ok' },
         { due: 'Nov 10', status: 'Reminder sent', tone: 'info' },
         { due: 'Dec 10', status: 'Upcoming', tone: 'muted' },
