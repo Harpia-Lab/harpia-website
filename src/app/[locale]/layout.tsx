@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Archivo, Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
+import { Archivo, Bricolage_Grotesque, Figtree, Sora, Unbounded } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -8,27 +8,41 @@ import { PageTracker } from '@/components/Analytics'
 import { getDictionary, hasLocale, locales } from '@/lib/getDictionary'
 import '../globals.css'
 
-// Tipografia do Harpia Control (SPEC §7)
+// Tipografia da Harpia Lab (direção B · Azul Harpia): Sora nos títulos e no logo, Figtree no texto
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-sora',
+  display: 'swap',
+})
+
+const figtree = Figtree({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-figtree',
+  display: 'swap',
+})
+
+// Fontes dos produtos, só dentro das mini telas (abaixo da dobra, sem preload)
+// Harpia PDV: Unbounded (pdv-website)
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  weight: '700',
+  variable: '--font-unbounded',
+  display: 'swap',
+  preload: false,
+})
+
+// Harpia Control: Bricolage Grotesque (SPEC §7)
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
   axes: ['opsz'],
   variable: '--font-bricolage',
   display: 'swap',
+  preload: false,
 })
 
-const instrumentSans = Instrument_Sans({
-  subsets: ['latin'],
-  variable: '--font-instrument',
-  display: 'swap',
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
-})
-
-// Tipografia do Fellows (fellows-website/DESIGN.md), só no painel dele: abaixo da dobra, sem preload
+// Fellows: Archivo (fellows-website/DESIGN.md)
 const archivo = Archivo({
   subsets: ['latin'],
   axes: ['wdth'],
@@ -86,9 +100,9 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === 'pt' ? 'pt-BR' : 'en'}
-      className={`${instrumentSans.variable} ${bricolage.variable} ${jetbrainsMono.variable} ${archivo.variable}`}
+      className={`${sora.variable} ${figtree.variable} ${unbounded.variable} ${bricolage.variable} ${archivo.variable}`}
     >
-      <body className="flex min-h-svh flex-col bg-background font-body text-on-surface antialiased">
+      <body className="flex min-h-svh flex-col bg-background font-body text-[1.0625rem]/[1.6] text-on-surface antialiased">
         <a
           href="#conteudo"
           className="sr-only rounded-lg bg-surface px-4 py-2 text-sm font-semibold text-primary shadow-lg focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]"

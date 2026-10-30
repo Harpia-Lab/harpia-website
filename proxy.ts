@@ -26,5 +26,6 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|images|api).*)'],
+  // Arquivos com extensão (favicon, icon.svg, apple-icon.png, /brand/curioso.svg) passam direto
+  matcher: ['/((?!_next/static|_next/image|api|.*\\..*).*)'],
 }

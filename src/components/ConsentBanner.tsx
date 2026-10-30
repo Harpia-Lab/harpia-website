@@ -11,7 +11,7 @@ interface ConsentBannerProps {
 }
 
 const buttonClass =
-  'cursor-pointer rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover'
+  'cursor-pointer rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover'
 
 // Reaberto por "Preferências de cookies": o banner recebe o foco e, depois da escolha, ele volta para quem abriu.
 let returnFocus: HTMLElement | null = null
@@ -50,7 +50,7 @@ export default function ConsentBanner({ locale, dict }: ConsentBannerProps) {
       role="region"
       aria-label={dict.label}
       tabIndex={-1}
-      className="fixed inset-x-4 bottom-4 z-50 rounded-2xl border border-outline-variant bg-surface p-5 shadow-2xl shadow-on-surface/10 sm:right-auto sm:max-w-md"
+      className="fixed inset-x-4 bottom-4 z-50 rounded-[18px] border border-outline-variant bg-surface p-5 shadow-xl shadow-on-surface/10 sm:right-auto sm:max-w-md"
     >
       <p className="text-sm leading-relaxed text-on-surface-variant">
         {dict.text}{' '}

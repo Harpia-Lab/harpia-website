@@ -1,23 +1,23 @@
-import Image from 'next/image'
-
+// Logo da Harpia Lab (direção B · Azul Harpia): o Curioso num círculo branco + "HARPIA LAB" em Sora 600 espaçada.
+// Mascote sempre pequeno. Abaixo de 360px (barra do topo) só o mascote, para caber o botão de orçamento.
 interface LogoProps {
-  inverted?: boolean
+  onDark?: boolean
+  mark?: boolean
 }
 
-export default function Logo({ inverted = false }: LogoProps) {
+export default function Logo({ onDark = false, mark = true }: LogoProps) {
   return (
-    <span className="inline-flex items-center gap-2.5">
-      <Image
-        src="/images/logo-mark.png"
-        alt=""
-        width={800}
-        height={600}
-        sizes="48px"
-        loading="eager"
-        className={`h-8 w-auto ${inverted ? 'brightness-0 invert' : ''}`}
-      />
-      <span className={`font-headline text-[15px] tracking-[0.16em] ${inverted ? 'text-on-ink' : 'text-on-surface'}`}>
-        <span className="font-extrabold">HARPIA</span> <span className="font-medium">LAB</span>
+    <span className="inline-flex items-center gap-2 sm:gap-2.5">
+      {mark && (
+        <span className={`grid size-9 shrink-0 place-items-center sm:size-10 rounded-full bg-white ${onDark ? '' : 'ring-1 ring-outline-variant'}`}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- SVG pequeno, next/image não otimiza SVG */}
+          <img src="/brand/curioso.svg" alt="" width={32} height={32} className="size-7 sm:size-8" />
+        </span>
+      )}
+      <span
+        className={`font-headline text-[0.9rem] font-semibold tracking-[0.1em] sm:text-base sm:tracking-[0.13em] whitespace-nowrap uppercase ${onDark ? 'text-white' : 'text-primary'} ${mark ? 'max-[359px]:sr-only' : ''}`}
+      >
+        Harpia <span className="font-normal">Lab</span>
       </span>
     </span>
   )

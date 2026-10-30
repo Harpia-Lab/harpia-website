@@ -1,4 +1,14 @@
-// Marcas dos produtos, copiadas dos sites deles (control-website e fellows-website, Logo.tsx). Mudou lá → muda aqui.
+// Marcas dos produtos, copiadas dos sites deles (pdv-website, control-website e fellows-website). Mudou lá → muda aqui.
+// Ordem: Harpia PDV, Harpia Control, Fellows (manual, M10).
+
+// PDV: o ponto verde-água sobre o roxo (ícone do mockup da marca)
+export function PdvMark({ className = 'size-10' }: { className?: string }) {
+  return (
+    <span aria-hidden="true" className={`grid shrink-0 place-items-center rounded-lg bg-pdv-accent ${className}`}>
+      <span className="size-[31%] rounded-full bg-pdv-teal-bright" />
+    </span>
+  )
+}
 
 // Control: as asas abertas da harpia sobre o teal (tema escuro do Control)
 export function ControlMark({ className = 'size-10' }: { className?: string }) {

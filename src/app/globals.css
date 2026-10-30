@@ -6,48 +6,72 @@
 }
 
 @theme {
-  /* ── Cores — paleta Altitude (Harpia Control, SPEC §7), tema claro ajustado para WCAG AA ── */
-  /* Teal orienta (links, ícones, foco); coral só em CTAs. */
-  --color-primary:                  #0b746d;
-  --color-primary-hover:            #095f59;
-  --color-on-primary:               #f3fffd;
+  /* ── Cores — marca Harpia Lab, direção B · Azul Harpia. Sem âmbar na marca-mãe. ── */
+  /* Azul Harpia no topo, títulos, botões e logo; azul médio e azul-claro só como acento. */
+  --color-primary:                  #0f3555;
+  --color-primary-hover:            #0a2238;
+  --color-on-primary:               #ffffff;
 
-  --color-cta:                      #e8674a;
-  --color-on-cta:                   #2a0e07;
+  --color-cta:                      #0f3555;
+  --color-on-cta:                   #ffffff;
 
-  /* Teal para texto/ícones (AA no claro) e teal vivo só para traços decorativos */
-  --color-brand:                    #0b746d;
-  --color-brand-2:                  #2ec4b6;
+  --color-brand:                    #0f3555;
+  --color-brand-2:                  #3d6f9e;
+  --color-tint:                     #e6edf5; /* azul-claro: pílulas, fundo de ícone */
+  --color-on-tint:                  #1f4a70;
+  --color-band:                     #f6f8fa; /* faixa dos produtos e cartões claros */
+  --color-sky:                      #a7c4e0; /* acento no azul Harpia (2ª metade do título): 7,2:1 */
+
+  /* Texto sobre o azul Harpia */
+  --color-on-navy:                  #ffffff;
+  --color-on-navy-muted:            #c9d6e3; /* links da barra e texto de apoio (10:1) */
+  --color-navy-divider:             #2a4c6c; /* linha fina sob a barra */
+  --color-navy-line:                #6f8aa6; /* contorno do botão secundário (3,4:1) */
+  --color-feather:                  #c9d1d8; /* cinza pena */
 
   --color-surface:                  #ffffff;
-  --color-surface-container-lowest: #fdfcfa;
-  --color-surface-container-low:    #f3f0eb;
-  --color-surface-container:        #efebe4;
-  --color-surface-container-high:   #e5dfd6;
-  --color-surface-container-highest: #d6cfc4;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low:    #f6f8fa;
+  --color-surface-container:        #eceded;
+  --color-surface-container-high:   #e3e4e6;
+  --color-surface-container-highest: #d5d8dc;
 
-  --color-background:               #f7f5f1;
-  --color-on-background:            #1b1916;
+  --color-background:               #ffffff;
+  --color-on-background:            #1c2430;
 
-  --color-on-surface:               #1b1916;
-  --color-on-surface-variant:       #6e675d;
+  --color-on-surface:               #1c2430;
+  --color-on-surface-variant:       #556273;
+  --color-muted:                    #5a6676;
 
-  --color-outline:                  #7a7268;
-  --color-outline-variant:          #e5dfd6;
+  /* outline: borda de campo (≥ 3:1 sobre branco); outline-variant: divisórias e cards */
+  --color-outline:                  #868e98;
+  --color-outline-variant:          #e3e8ee;
 
   --color-error:                    #b23a35;
   --color-ok:                       #17764d;
 
-  /* ── Cores — faixas escuras (produtos, contato, rodapé, mockup) = tema escuro do Control ── */
+  /* ── Cores — painel do Harpia Control (tema escuro do Control, paleta Altitude) ── */
   --color-ink:                      #121110;
   --color-ink-raised:               #1d1a17;
   --color-ink-line:                 #2c2825;
   --color-on-ink:                   #f3efe8;
-  --color-on-ink-variant:           #9b9388;
+  --color-on-ink-variant:           #b9b1a5;
   --color-accent:                   #2ec4b6;
   --color-cta-ink:                  #ff7a5c;
+  --color-on-cta-ink:               #2a0e07;
   --color-ok-ink:                   #3dbe86;
   --color-info-ink:                 #6c9bf2;
+
+  /* ── Cores — painel do Harpia PDV (pdv-website, design system Pulso) ── */
+  --color-pdv-bg:                   #f3f2f9;
+  --color-pdv-ink:                  #16122b;
+  --color-pdv-mute:                 #4b4566;
+  --color-pdv-mute-2:               #6b6585;
+  --color-pdv-accent:               #6a3be0;
+  --color-pdv-accent-hover:         #5a2fc9;
+  --color-pdv-soft:                 #d9cef7;
+  --color-pdv-teal:                 #0fa9a4;
+  --color-pdv-teal-bright:          #2ee6df;
 
   /* ── Cores — painel do Fellows (fellows-website/DESIGN.md): claro + cobalto + lima ── */
   /* Cobalto só no que se toca; lima só no Bib. Mudou lá → muda aqui. */
@@ -61,11 +85,13 @@
   --color-fellows-accent-soft:      #eef1ff;
   --color-fellows-lime:             #d9f44a;
 
-  /* ── Fontes ── */
-  --font-headline: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
-  --font-body:     var(--font-instrument), "Instrument Sans", sans-serif;
-  --font-label:    var(--font-instrument), "Instrument Sans", sans-serif;
-  --font-mono:     var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  /* ── Fontes: Onest (títulos, logo) + Instrument Sans (texto); fontes dos produtos só nas mini telas ── */
+  --font-headline: var(--font-sora), "Sora", system-ui, sans-serif;
+  --font-body:     var(--font-figtree), "Figtree", system-ui, sans-serif;
+  --font-label:    var(--font-figtree), "Figtree", system-ui, sans-serif;
+  --font-mono:     ui-monospace, "SF Mono", Menlo, Consolas, monospace; /* só código na política */
+  --font-control:  var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  --font-pdv:      var(--font-unbounded), "Unbounded", sans-serif;
   --font-fellows:  var(--font-archivo), "Archivo", ui-sans-serif, system-ui, sans-serif;
 
   /* ── Border Radius ── */
@@ -86,12 +112,13 @@
     border-radius: var(--radius-sm);
   }
 
-  .on-ink :focus-visible {
-    outline-color: var(--color-accent);
+  .on-navy :focus-visible {
+    outline-color: #ffffff;
   }
 
-  .fellows :focus-visible {
-    outline-color: var(--color-fellows-accent);
+  /* Cartão branco dentro de um bloco azul: o foco volta a ser azul */
+  .on-light :focus-visible {
+    outline-color: var(--color-brand);
   }
 
   /* Sem palavra sozinha na última linha de parágrafos */
@@ -100,7 +127,7 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-brand) 22%, transparent);
+    background: color-mix(in srgb, var(--color-brand-2) 22%, transparent);
   }
 }
 
@@ -110,15 +137,15 @@
 }
 
 .policy h1 {
-  @apply font-headline text-4xl font-extrabold tracking-tight text-balance text-on-surface md:text-5xl;
+  @apply font-headline text-4xl font-bold tracking-[-0.025em] text-balance text-primary md:text-5xl;
 }
 
 .policy h2 {
-  @apply mt-14 scroll-mt-24 border-t border-outline-variant pt-8 font-headline text-2xl font-bold tracking-tight text-on-surface;
+  @apply mt-14 scroll-mt-24 border-t border-outline-variant pt-8 font-headline text-2xl font-bold tracking-[-0.02em] text-primary;
 }
 
 .policy h3 {
-  @apply mt-8 font-headline text-lg font-bold text-on-surface;
+  @apply mt-8 font-headline text-lg font-semibold text-on-surface;
 }
 
 .policy p,
@@ -127,7 +154,7 @@
 }
 
 .policy ul {
-  @apply list-disc space-y-2 pl-6 marker:text-brand;
+  @apply list-disc space-y-2 pl-6 marker:text-brand-2;
 }
 
 .policy strong {
@@ -143,15 +170,15 @@
 }
 
 .policy .policy-updated {
-  @apply mt-3 font-mono text-xs tracking-wider uppercase;
+  @apply mt-3 text-xs font-semibold tracking-wider uppercase;
 }
 
 .policy .policy-note {
-  @apply mt-0 mb-8 rounded-lg border border-outline-variant bg-surface-container-low px-4 py-3 text-sm;
+  @apply mt-0 mb-8 rounded-lg border border-outline-variant bg-surface px-4 py-3 text-sm;
 }
 
 .policy .policy-table {
-  @apply mt-6 overflow-x-auto rounded-lg border border-outline-variant;
+  @apply mt-6 overflow-x-auto rounded-lg border border-outline-variant bg-surface;
 }
 
 .policy table {
@@ -166,102 +193,11 @@
   @apply border-t border-outline-variant px-4 py-3 align-top;
 }
 
-/* ── Grid decorativo de fundo ── */
-.bg-grid {
-  --grid-line: color-mix(in srgb, var(--color-on-surface) 6%, transparent);
-  background-image:
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 65% 70% at 75% 35%, #000 20%, transparent 75%);
-}
-
-.bg-grid-ink {
-  --grid-line: color-mix(in srgb, var(--color-on-ink) 5%, transparent);
-  mask-image: radial-gradient(ellipse 60% 85% at 10% 15%, #000 15%, transparent 70%);
-}
-
-/* ── Manchas de luz ── */
-.aurora {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
-}
-
-/* ── Borda em degradê (mockup do Control, card de contato) ── */
-.glow-border {
-  padding: 1px;
-  border-radius: var(--radius-2xl);
-  background: linear-gradient(
-    140deg,
-    color-mix(in srgb, var(--color-accent) 75%, transparent),
-    color-mix(in srgb, var(--color-on-ink) 12%, transparent) 32%,
-    color-mix(in srgb, var(--color-on-ink) 6%, transparent) 68%,
-    color-mix(in srgb, var(--color-cta-ink) 55%, transparent)
-  );
-}
-
-.glow-border > * {
-  border-radius: calc(var(--radius-2xl) - 1px);
-}
-
-/* ── Brilho que atravessa o botão no hover ── */
-.btn-shine {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-}
-
-.btn-shine::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(110deg, transparent 30%, color-mix(in srgb, var(--color-surface) 28%, transparent) 50%, transparent 70%);
-  transform: translateX(-120%);
-}
-
-/* ── Estados estáticos (sem animação o conteúdo já nasce completo) ── */
-.step-fill {
-  width: 2.5rem;
-}
-
-/* Barra de recebimento do mockup do Control: estática em --meter, cresce até lá ao entrar na tela */
-.meter-fill {
-  width: var(--meter);
-}
-
-.scroll-progress {
-  display: none;
-  transform-origin: left;
-}
-
-/* ── Animações ── */
+/* ── Animações (só entrada sóbria; nada de brilho ou manchas) ── */
 @keyframes rise {
   from {
     opacity: 0;
     transform: translateY(14px);
-  }
-}
-
-@keyframes grow-x {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes drift-a {
-  50% {
-    transform: translate3d(-7%, 9%, 0) scale(1.12);
-  }
-}
-
-@keyframes drift-b {
-  50% {
-    transform: translate3d(9%, -7%, 0) scale(0.9);
   }
 }
 
@@ -275,19 +211,6 @@
     animation-delay: var(--enter-delay, 0ms);
   }
 
-  .aurora-a {
-    animation: drift-a 16s ease-in-out infinite;
-  }
-
-  .aurora-b {
-    animation: drift-b 20s ease-in-out infinite;
-  }
-
-  .btn-shine:hover::after {
-    transform: translateX(120%);
-    transition: transform 0.7s ease;
-  }
-
   /* Entrada ao rolar — só onde há suporte; nos demais o conteúdo já nasce visível */
   @supports (animation-timeline: view()) {
     .reveal {
@@ -295,29 +218,5 @@
       animation-timeline: view();
       animation-range: entry 0% cover 22%;
     }
-
-    /* Linha do processo: preenche conforme a etapa sobe na tela (faixa definida inline) */
-    .step-fill {
-      width: 100%;
-      transform-origin: left;
-      animation: grow-x linear both;
-      animation-timeline: view();
-    }
-
-    .meter-fill {
-      transform-origin: left;
-      animation: grow-x linear both;
-      animation-timeline: view();
-      animation-range: entry 40% cover 45%;
-    }
-  }
-}
-
-/* Barra de progresso de leitura: acompanha a rolagem, não é movimento autônomo */
-@supports (animation-timeline: scroll()) {
-  .scroll-progress {
-    display: block;
-    animation: grow-x linear both;
-    animation-timeline: scroll(root block);
   }
 }
