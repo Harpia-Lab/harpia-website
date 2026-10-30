@@ -1,4 +1,4 @@
-// Só os nomes por ora; as fotos seguem em public/images para voltar na página Sobre
+// Só os nomes; as fotos antigas saíram do repositório (ficam no histórico, se voltarem)
 const team = ['Tiago Thomen Taraczuk', 'Gabriel Gomes Rapozo', 'Cezar Mauricio']
 
 interface TeamListProps {

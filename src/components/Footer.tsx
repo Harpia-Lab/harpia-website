@@ -66,7 +66,8 @@ export default function Footer({ locale, dict }: FooterProps) {
                 contato@harpialab.com
               </a>
             </nav>
-            <ul aria-label={dict.nav.products} className="-my-2 flex flex-wrap gap-x-6">
+            <nav aria-label={dict.nav.products}>
+              <ul className="-my-2 flex flex-wrap gap-x-6">
               {products.map(({ cta, href, label }) => (
                 <li key={cta}>
                   <a
@@ -78,7 +79,8 @@ export default function Footer({ locale, dict }: FooterProps) {
                   </a>
                 </li>
               ))}
-            </ul>
+              </ul>
+            </nav>
           </div>
         </div>
         <div className="flex flex-col gap-2 border-t border-white/10 py-6 text-sm sm:flex-row sm:items-center sm:justify-between">

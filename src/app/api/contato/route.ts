@@ -89,7 +89,8 @@ export async function POST(req: Request) {
     from: process.env.CONTACT_FROM_EMAIL || 'Harpia Lab <onboarding@resend.dev>',
     to: toEmail,
     replyTo: emailStr,
-    subject: `Novo contato: ${escapeHtml(nameStr)}`,
+    // Assunto é texto puro (sem escape HTML); sem CR/LF para não injetar cabeçalho
+    subject: `Novo contato: ${nameStr.replace(/[\r\n]+/g, ' ')}`,
     html: `
       <h2>Novo contato via site</h2>
       <p><strong>Nome:</strong> ${escapeHtml(nameStr)}</p>
