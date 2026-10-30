@@ -16,7 +16,6 @@ const en = {
     skip: 'Skip to content',
   },
   hero: {
-    eyebrow: 'Consulting & Software Studio · Curitiba, Brazil',
     title: 'Custom software,',
     titleAccent: 'built to last.',
     subtitle:

@@ -16,7 +16,6 @@ const pt = {
     skip: 'Pular para o conteúdo',
   },
   hero: {
-    eyebrow: 'Consultoria & Fábrica de Software · Curitiba',
     title: 'Software sob medida,',
     titleAccent: 'feito para durar.',
     subtitle:

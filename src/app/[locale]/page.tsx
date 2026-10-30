@@ -52,11 +52,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Hero: bloco azul Harpia de ponta a ponta (a barra do topo é a mesma cor); o Curioso no arco branco,
           tamanho médio, apoiado na borda de baixo */}
       <section className="on-navy bg-primary text-on-navy">
-        <div className={`${container} grid items-end gap-x-12 pt-[6.5rem] md:pt-[8.5rem] lg:grid-cols-[minmax(0,1fr)_auto]`}>
+        <div className={`${container} grid items-end gap-x-12 pt-[7rem] md:pt-[8.5rem] lg:grid-cols-[minmax(0,1fr)_auto]`}>
           <div className="min-w-0 pb-12 md:pb-20">
-            <p className="hero-enter mb-6 inline-block rounded-full bg-white/10 px-3 py-1 text-[0.9rem] font-semibold text-on-navy-variant">
-              {dict.hero.eyebrow}
-            </p>
             {/* Sem animação de entrada: o h1 é o LCP */}
             <h1 className="font-headline text-[2.5rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance sm:text-[3.2rem] lg:text-[3.7rem]">
               {dict.hero.title} <span className="text-sky">{dict.hero.titleAccent}</span>

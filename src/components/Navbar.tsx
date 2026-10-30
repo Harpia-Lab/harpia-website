@@ -89,7 +89,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
             href={`/${l}${pathname.slice(locale.length + 1)}`}
             hrefLang={l}
             onClick={() => track('language_switched', { to: l })}
-            className={`${langItem} text-on-navy-variant transition-colors hover:text-white`}
+            className={`${langItem} text-on-navy-muted transition-colors hover:text-white`}
           >
             {l.toUpperCase()}
           </a>
@@ -99,7 +99,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
   )
 
   return (
-    <nav ref={navRef} aria-label={dict.label} className="on-navy fixed top-0 z-50 w-full bg-primary text-white">
+    <nav ref={navRef} aria-label={dict.label} className="on-navy fixed top-0 z-50 w-full border-b border-navy-divider bg-primary text-white">
       <div className="mx-auto flex h-[4.5rem] max-w-[1200px] items-center justify-between px-4 sm:px-6">
         <a href={`/${locale}`} aria-label="Harpia Lab">
           <Logo onDark />
@@ -115,7 +115,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
                   key={id}
                   href={`${home}#${id}`}
                   aria-current={active ? 'true' : undefined}
-                  className={`group relative py-1 text-[0.95rem] transition-colors hover:text-white ${active ? 'text-white' : 'text-on-navy-variant'}`}
+                  className={`group relative py-1 text-[0.95rem] transition-colors hover:text-white ${active ? 'text-white' : 'text-on-navy-muted'}`}
                 >
                   {label}
                   <span
@@ -134,7 +134,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
               trackContact()
               setMenuOpen(false)
             }}
-            className="rounded-full bg-white px-3.5 py-2 text-[0.95rem] font-semibold whitespace-nowrap text-primary transition-colors hover:bg-tint sm:px-4 md:px-[1.15rem] md:py-2.5"
+            className="rounded-full bg-white px-3 py-2 text-sm font-semibold whitespace-nowrap text-primary transition-colors hover:bg-tint sm:px-4 sm:text-[0.95rem] md:px-[1.15rem] md:py-2.5"
           >
             {dict.cta}
           </a>
@@ -157,14 +157,14 @@ export default function Navbar({ locale, dict }: NavbarProps) {
       {/* Mobile menu */}
       <div
         id="menu-mobile"
-        className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col gap-1 border-t border-white/15 bg-primary px-4 pt-3 pb-6 shadow-lg sm:px-6 md:hidden`}
+        className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col gap-1 bg-primary px-4 pt-3 pb-6 shadow-lg sm:px-6 md:hidden`}
       >
         {links.map(({ id, label }) => (
           <a
             key={id}
             href={`${home}#${id}`}
             onClick={() => setMenuOpen(false)}
-            className="border-b border-white/15 py-3.5 text-base font-medium text-white transition-colors hover:text-on-navy-variant"
+            className="border-b border-navy-divider py-3.5 text-base font-medium text-white transition-colors hover:text-on-navy-muted"
           >
             {label}
           </a>

@@ -24,8 +24,8 @@
 
   /* Texto sobre o azul Harpia */
   --color-on-navy:                  #ffffff;
-  --color-on-navy-variant:          #d6e2ee; /* links da barra */
-  --color-on-navy-muted:            #c9d6e3; /* texto de apoio */
+  --color-on-navy-muted:            #c9d6e3; /* links da barra e texto de apoio (10:1) */
+  --color-navy-divider:             #2a4c6c; /* linha fina sob a barra */
   --color-navy-line:                #6f8aa6; /* contorno do botão secundário (3,4:1) */
   --color-feather:                  #c9d1d8; /* cinza pena */
 
