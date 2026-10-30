@@ -190,7 +190,7 @@ export default function ContactForm({ dict }: ContactFormProps) {
       <button
         type="submit"
         disabled={state === 'loading'}
-        className="group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-cta px-6 py-3.5 font-semibold text-on-cta transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:self-start"
+        className="group inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-cta px-6 py-3.5 font-semibold text-on-cta transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:self-start"
       >
         {state === 'loading' ? dict.sending : dict.submit}
         {state !== 'loading' && (

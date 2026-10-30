@@ -6,8 +6,8 @@
 }
 
 @theme {
-  /* ── Cores — marca Harpia Lab (manual da marca, M05). Sem âmbar na marca-mãe. ── */
-  /* Azul Harpia em títulos, botões e logo; azul médio só como acento (2ª metade do título). */
+  /* ── Cores — marca Harpia Lab, direção B · Azul Harpia. Sem âmbar na marca-mãe. ── */
+  /* Azul Harpia no topo, títulos, botões e logo; azul médio e azul-claro só como acento. */
   --color-primary:                  #0f3555;
   --color-primary-hover:            #0a2238;
   --color-on-primary:               #ffffff;
@@ -19,33 +19,36 @@
   --color-brand-2:                  #3d6f9e;
   --color-tint:                     #e6edf5; /* azul-claro: pílulas, fundo de ícone */
   --color-on-tint:                  #1f4a70;
-  --color-band:                     #e9eef4; /* faixa do processo */
+  --color-band:                     #f6f8fa; /* faixa dos produtos e cartões claros */
+  --color-sky:                      #a7c4e0; /* acento no azul Harpia (2ª metade do título): 7,2:1 */
+
+  /* Texto sobre o azul Harpia */
+  --color-on-navy:                  #ffffff;
+  --color-on-navy-variant:          #d6e2ee; /* links da barra */
+  --color-on-navy-muted:            #c9d6e3; /* texto de apoio */
+  --color-navy-line:                #6f8aa6; /* contorno do botão secundário (3,4:1) */
   --color-feather:                  #c9d1d8; /* cinza pena */
 
   --color-surface:                  #ffffff;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low:    #f0f1f2;
+  --color-surface-container-low:    #f6f8fa;
   --color-surface-container:        #eceded;
   --color-surface-container-high:   #e3e4e6;
   --color-surface-container-highest: #d5d8dc;
 
-  --color-background:               #f7f7f5; /* papel */
-  --color-on-background:            #1b1e24;
+  --color-background:               #ffffff;
+  --color-on-background:            #1c2430;
 
-  --color-on-surface:               #1b1e24; /* nanquim */
-  --color-on-surface-variant:       #4b525c;
-  --color-muted:                    #5d6470;
+  --color-on-surface:               #1c2430;
+  --color-on-surface-variant:       #556273;
+  --color-muted:                    #5a6676;
 
   /* outline: borda de campo (≥ 3:1 sobre branco); outline-variant: divisórias e cards */
   --color-outline:                  #868e98;
-  --color-outline-variant:          #e3e4e6;
+  --color-outline-variant:          #e3e8ee;
 
   --color-error:                    #b23a35;
   --color-ok:                       #17764d;
-
-  /* ── Rodapé (nanquim escuro) ── */
-  --color-footer:                   #14181e;
-  --color-on-footer:                #c9ced6;
 
   /* ── Cores — painel do Harpia Control (tema escuro do Control, paleta Altitude) ── */
   --color-ink:                      #121110;
@@ -83,9 +86,9 @@
   --color-fellows-lime:             #d9f44a;
 
   /* ── Fontes: Onest (títulos, logo) + Instrument Sans (texto); fontes dos produtos só nas mini telas ── */
-  --font-headline: var(--font-onest), "Onest", system-ui, sans-serif;
-  --font-body:     var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
-  --font-label:    var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
+  --font-headline: var(--font-sora), "Sora", system-ui, sans-serif;
+  --font-body:     var(--font-figtree), "Figtree", system-ui, sans-serif;
+  --font-label:    var(--font-figtree), "Figtree", system-ui, sans-serif;
   --font-mono:     ui-monospace, "SF Mono", Menlo, Consolas, monospace; /* só código na política */
   --font-control:  var(--font-bricolage), "Bricolage Grotesque", sans-serif;
   --font-pdv:      var(--font-unbounded), "Unbounded", sans-serif;
@@ -109,8 +112,13 @@
     border-radius: var(--radius-sm);
   }
 
-  .on-footer :focus-visible {
-    outline-color: var(--color-feather);
+  .on-navy :focus-visible {
+    outline-color: #ffffff;
+  }
+
+  /* Cartão branco dentro de um bloco azul: o foco volta a ser azul */
+  .on-light :focus-visible {
+    outline-color: var(--color-brand);
   }
 
   /* Sem palavra sozinha na última linha de parágrafos */
@@ -129,11 +137,11 @@
 }
 
 .policy h1 {
-  @apply font-headline text-4xl font-bold tracking-[-0.035em] text-balance text-primary md:text-5xl;
+  @apply font-headline text-4xl font-bold tracking-[-0.025em] text-balance text-primary md:text-5xl;
 }
 
 .policy h2 {
-  @apply mt-14 scroll-mt-24 border-t border-outline-variant pt-8 font-headline text-2xl font-bold tracking-[-0.03em] text-primary;
+  @apply mt-14 scroll-mt-24 border-t border-outline-variant pt-8 font-headline text-2xl font-bold tracking-[-0.02em] text-primary;
 }
 
 .policy h3 {

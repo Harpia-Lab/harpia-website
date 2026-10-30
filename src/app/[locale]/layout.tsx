@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Archivo, Bricolage_Grotesque, Instrument_Sans, Onest, Unbounded } from 'next/font/google'
+import { Archivo, Bricolage_Grotesque, Figtree, Sora, Unbounded } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -8,17 +8,18 @@ import { PageTracker } from '@/components/Analytics'
 import { getDictionary, hasLocale, locales } from '@/lib/getDictionary'
 import '../globals.css'
 
-// Tipografia da Harpia Lab (manual, M07): Onest nos títulos e no logo, Instrument Sans no texto
-const onest = Onest({
+// Tipografia da Harpia Lab (direção B · Azul Harpia): Sora nos títulos e no logo, Figtree no texto
+const sora = Sora({
   subsets: ['latin'],
-  weight: ['600', '700'],
-  variable: '--font-onest',
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-sora',
   display: 'swap',
 })
 
-const instrumentSans = Instrument_Sans({
+const figtree = Figtree({
   subsets: ['latin'],
-  variable: '--font-instrument',
+  weight: ['400', '500', '600'],
+  variable: '--font-figtree',
   display: 'swap',
 })
 
@@ -99,7 +100,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === 'pt' ? 'pt-BR' : 'en'}
-      className={`${onest.variable} ${instrumentSans.variable} ${unbounded.variable} ${bricolage.variable} ${archivo.variable}`}
+      className={`${sora.variable} ${figtree.variable} ${unbounded.variable} ${bricolage.variable} ${archivo.variable}`}
     >
       <body className="flex min-h-svh flex-col bg-background font-body text-[1.0625rem]/[1.6] text-on-surface antialiased">
         <a

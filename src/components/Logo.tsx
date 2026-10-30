@@ -1,21 +1,23 @@
-// Logo da Harpia Lab (manual, M03): o Curioso à esquerda + "Harpia Lab" em Onest Bold azul Harpia.
-// Mascote sempre pequeno; no fundo escuro só o nome, em branco.
-// Abaixo de 360px (barra do topo) só o mascote, para caber o botão de orçamento.
+// Logo da Harpia Lab (direção B · Azul Harpia): o Curioso num círculo branco + "HARPIA LAB" em Sora espaçada.
+// Mascote sempre pequeno. Abaixo de 360px (barra do topo) só o mascote, para caber o botão de orçamento.
 interface LogoProps {
-  inverted?: boolean
+  onDark?: boolean
+  mark?: boolean
 }
 
-export default function Logo({ inverted = false }: LogoProps) {
+export default function Logo({ onDark = false, mark = true }: LogoProps) {
   return (
-    <span className="inline-flex items-center gap-2">
-      {!inverted && (
-        // eslint-disable-next-line @next/next/no-img-element -- SVG pequeno, next/image não otimiza SVG
-        <img src="/brand/curioso.svg" alt="" width={30} height={30} className="size-[30px]" />
+    <span className="inline-flex items-center gap-2.5">
+      {mark && (
+        <span className={`grid size-10 shrink-0 place-items-center rounded-full bg-white ${onDark ? '' : 'ring-1 ring-outline-variant'}`}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- SVG pequeno, next/image não otimiza SVG */}
+          <img src="/brand/curioso.svg" alt="" width={32} height={32} className="size-8" />
+        </span>
       )}
       <span
-        className={`font-headline text-[1.2rem] font-bold tracking-[-0.03em] whitespace-nowrap ${inverted ? 'text-white' : 'text-primary max-[359px]:sr-only'}`}
+        className={`font-headline text-base font-extrabold tracking-[0.14em] whitespace-nowrap uppercase ${onDark ? 'text-white' : 'text-primary'} ${mark ? 'max-[359px]:sr-only' : ''}`}
       >
-        Harpia Lab
+        Harpia <span className="font-medium">Lab</span>
       </span>
     </span>
   )

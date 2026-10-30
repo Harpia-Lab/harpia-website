@@ -19,9 +19,9 @@ const panel = 'reveal grid h-full scroll-mt-24 content-center gap-6 sm:gap-8 lg:
 const panelName = 'font-headline text-2xl font-bold tracking-[-0.02em] text-primary'
 const panelTagline = 'mt-5 mb-2.5 font-headline text-[1.2rem] leading-[1.3] font-semibold tracking-[-0.015em] text-balance text-on-surface sm:text-[1.35rem]'
 const actions = 'flex flex-wrap items-center gap-x-5 gap-y-3 lg:col-start-1 lg:self-start'
-// Botão de produto: contorno, para nunca disputar com o "Solicitar orçamento"
+// Botão de produto: contorno, para nunca disputar com o "Pedir orçamento"
 const productButton =
-  'inline-flex items-center gap-2 rounded-xl border border-outline px-5 py-3 font-semibold text-primary transition-colors hover:border-primary hover:bg-tint'
+  'inline-flex items-center gap-2 rounded-full border-[1.5px] border-outline px-5 py-3 font-semibold text-primary transition-colors hover:border-primary hover:bg-tint'
 const stage = 'flex min-w-0 items-center justify-center rounded-2xl px-3 py-6 sm:p-10 lg:col-start-2 lg:row-span-2 lg:row-start-1'
 
 // Só dígitos, com DDI (ex.: 5541999999999). Vazio = sem WhatsApp no contato.
@@ -40,7 +40,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     channels.push({ cta: 'whatsapp', href: `https://wa.me/${whatsapp}?text=${text}`, label: 'WhatsApp', value: dict.contact.whatsappAction, Icon: ChatIcon })
   }
 
-  // Cartão "Produtos da casa": marca de cada produto, nome na fonte da Harpia (nada de fonte de produto na dobra)
+  // Faixa "Produtos da casa" logo abaixo do topo: marca, nome e uma linha de cada produto (ordem PDV, Control, Fellows)
   const houseProducts = [
     { id: 'pdv', Mark: PdvMark, name: products.pdv.name, short: products.pdv.short },
     { id: 'control', Mark: ControlMark, name: products.name, short: products.short },
@@ -49,53 +49,40 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <main id="conteudo">
-      {/* Hero: pílula em cima; o título e o cartão "Produtos da casa" começam na mesma linha */}
-      <section className={`${container} pt-28 pb-16 md:pt-[9.5rem] md:pb-[4.5rem]`}>
-        <p className="hero-enter mb-5 inline-block rounded-full bg-tint px-3 py-1 text-[0.9rem] font-semibold text-on-tint">
-          {dict.hero.eyebrow}
-        </p>
-        <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,2.6fr)_minmax(17.5rem,1fr)]">
-          <div className="min-w-0">
+      {/* Hero: bloco azul Harpia de ponta a ponta (a barra do topo é a mesma cor); o Curioso no arco branco,
+          tamanho médio, apoiado na borda de baixo */}
+      <section className="on-navy bg-primary text-on-navy">
+        <div className={`${container} grid items-end gap-x-12 pt-[6.5rem] md:pt-[8.5rem] lg:grid-cols-[minmax(0,1fr)_auto]`}>
+          <div className="min-w-0 pb-12 md:pb-20">
+            <p className="hero-enter mb-6 inline-block rounded-full bg-white/10 px-3 py-1 text-[0.9rem] font-semibold text-on-navy-variant">
+              {dict.hero.eyebrow}
+            </p>
             {/* Sem animação de entrada: o h1 é o LCP */}
-            <h1 className="font-headline text-[2.6rem] leading-[1.04] font-bold tracking-[-0.035em] text-balance text-primary sm:text-[3.4rem] lg:text-[4.1rem]">
-              {dict.hero.title} <span className="text-brand-2">{dict.hero.titleAccent}</span>
+            <h1 className="font-headline text-[2.5rem] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance sm:text-[3.2rem] lg:text-[3.7rem]">
+              {dict.hero.title} <span className="text-sky">{dict.hero.titleAccent}</span>
             </h1>
             <p
-              className="hero-enter mt-6 max-w-[36rem] text-[1.2rem] leading-relaxed text-on-surface-variant"
+              className="hero-enter mt-6 max-w-[34rem] text-[1.2rem] leading-relaxed text-on-navy-muted"
               style={{ '--enter-delay': '160ms' } as React.CSSProperties}
             >
               {dict.hero.subtitle}
             </p>
             {/* O diferencial: o mesmo time opera software próprio em produção */}
             <p
-              className="hero-enter mt-4 max-w-[36rem] text-[1.05rem] leading-relaxed font-semibold text-balance text-on-surface"
+              className="hero-enter mt-4 max-w-[34rem] text-[1.05rem] leading-relaxed font-semibold text-balance"
               style={{ '--enter-delay': '200ms' } as React.CSSProperties}
             >
               {dict.hero.proof}
             </p>
-            {/* Celular: as marcas dos produtos logo abaixo, no lugar do cartão lateral (que só aparece no desktop) */}
-            <ul aria-label={dict.hero.productsLabel} className="hero-enter mt-4 flex flex-wrap gap-2 lg:hidden">
-              {houseProducts.map(({ id, Mark, name }) => (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    className="flex min-h-11 items-center gap-2 rounded-full border border-outline-variant bg-surface py-1.5 pr-3.5 pl-1.5 text-[0.95rem] font-semibold text-on-surface"
-                  >
-                    <Mark className="size-7" />
-                    {name}
-                  </a>
-                </li>
-              ))}
-            </ul>
             <div
-              className="hero-enter mt-9 flex flex-wrap items-center gap-6"
+              className="hero-enter mt-8 flex flex-wrap items-center gap-4"
               style={{ '--enter-delay': '240ms' } as React.CSSProperties}
             >
               <TrackedLink
                 cta="contact"
                 location="hero"
                 href="#contato"
-                className="rounded-xl bg-cta px-6 py-4 font-semibold text-on-cta transition-colors hover:bg-primary-hover"
+                className="rounded-full bg-white px-6 py-3.5 font-semibold text-primary transition-colors hover:bg-tint"
               >
                 {dict.hero.ctaPrimary}
               </TrackedLink>
@@ -103,55 +90,63 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 cta="how_we_work"
                 location="hero"
                 href="#processo"
-                className="font-semibold text-primary underline underline-offset-[0.25em] hover:text-primary-hover"
+                className="rounded-full border-[1.5px] border-navy-line px-6 py-3.5 font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
               >
                 {dict.hero.ctaSecondary}
               </TrackedLink>
             </div>
             <ul
-              className="hero-enter mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-outline-variant pt-6 text-[0.95rem] text-on-surface-variant"
+              className="hero-enter mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[0.95rem] text-on-navy-muted"
               style={{ '--enter-delay': '320ms' } as React.CSSProperties}
             >
               {dict.hero.highlights.map((highlight) => (
                 <li key={highlight} className="flex items-center gap-2">
-                  <CheckIcon className="size-4 text-brand-2" />
+                  <CheckIcon className="size-4 text-sky" />
                   {highlight}
                 </li>
               ))}
             </ul>
           </div>
 
-          <aside
-            aria-label={dict.hero.productsLabel}
-            className={`hero-enter hidden min-w-0 px-5 pt-4 pb-2 lg:block ${card}`}
-            style={{ '--enter-delay': '200ms' } as React.CSSProperties}
-          >
-            <p className="mb-1.5 text-[0.9rem] font-semibold text-muted">{dict.hero.productsTitle}</p>
-            <ul className="divide-y divide-surface-container">
-              {houseProducts.map(({ id, Mark, name, short }) => (
-                <li key={id}>
-                  <a href={`#${id}`} className="group flex items-center gap-3 py-3 text-on-surface">
-                    <Mark className="size-8" />
-                    <span className="leading-snug">
-                      <span className="block font-headline font-semibold group-hover:underline">{name}</span>
-                      <span className="block text-[0.9rem] text-muted">{short}</span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </aside>
+          {/* Arco branco com o mascote: tamanho médio, nunca o protagonista */}
+          <div aria-hidden="true" className="flex justify-center lg:justify-end">
+            <div className="flex aspect-[1/0.86] w-52 items-end justify-center overflow-hidden rounded-t-full bg-white sm:w-60 lg:w-[17rem]">
+              {/* eslint-disable-next-line @next/next/no-img-element -- SVG pequeno, next/image não otimiza SVG */}
+              <img src="/brand/curioso.svg" alt="" width={190} height={190} className="-mb-[3%] w-[70%]" />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Services: três colunas abertas, cada uma diz quando escolher aquele formato */}
-      <section id="servicos" className="scroll-mt-16">
-        <div className={`${container} pt-12 pb-[4.5rem]`}>
+      {/* Faixa "Produtos da casa": leva aos painéis */}
+      <nav aria-label={dict.hero.productsLabel} className={container}>
+        <div className="flex flex-col gap-3 border-b border-outline-variant py-5 lg:flex-row lg:items-center lg:gap-10">
+          <p className="shrink-0 text-[0.8rem] font-semibold tracking-[0.12em] text-muted uppercase">{dict.hero.productsTitle}</p>
+          <ul className="grid flex-1 gap-1 sm:grid-cols-3 sm:gap-6">
+            {houseProducts.map(({ id, Mark, name, short }) => (
+              <li key={id} className="min-w-0">
+                <a href={`#${id}`} className="group flex min-h-11 items-center gap-3 py-1.5">
+                  <Mark className="size-9" />
+                  <span className="min-w-0 leading-snug">
+                    <span className="block font-headline font-semibold text-primary group-hover:underline">{name}</span>
+                    <span className="block text-[0.9rem] text-muted">{short}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      {/* Services: cartões claros, cada um diz quando escolher aquele formato */}
+      <section id="servicos" className="scroll-mt-20">
+        <div className={`${container} py-[4.5rem]`}>
           <SectionHeader title={dict.services.title} subtitle={dict.services.subtitle} className="reveal" />
-          <ul className="reveal mt-9 grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-x-10 gap-y-8">
+          <ul className="reveal mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-6">
             {dict.services.items.map(({ title, when, desc }) => (
-              <li key={title} className="border-t-2 border-primary pt-5">
-                <h3 className="font-headline text-[1.3rem] font-semibold tracking-[-0.02em] text-primary">{title}</h3>
+              <li key={title} className="rounded-[18px] border border-outline-variant bg-band p-7">
+                <span aria-hidden="true" className="block h-1.5 w-10 rounded-full bg-brand-2" />
+                <h3 className="mt-4 font-headline text-[1.3rem] font-semibold tracking-[-0.02em] text-primary">{title}</h3>
                 <p className="mt-1.5 mb-3 font-semibold text-brand-2">{when}</p>
                 <p className="text-on-surface-variant">{desc}</p>
               </li>
@@ -162,8 +157,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* Products: os três painéis com a mesma estrutura e altura (marca + nome, frase, texto, botões | mini tela),
           ordem PDV, Control, Fellows. A identidade de cada produto fica só no palco da mini tela. */}
-      <section id="produtos" className="scroll-mt-16">
-        <div className={`${container} pt-4 pb-[4.5rem]`}>
+      <section id="produtos" className="scroll-mt-20 border-y border-outline-variant bg-band">
+        <div className={`${container} py-[4.5rem]`}>
           <SectionHeader title={products.title} subtitle={products.subtitle} className="reveal" />
 
           <div className="mt-10 grid gap-6 lg:auto-rows-fr">
@@ -242,20 +237,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      {/* Process */}
-      <section id="processo" className="scroll-mt-16 bg-band">
+      {/* Process: régua azul de 3px em cima de cada etapa, número pequeno em azul médio */}
+      <section id="processo" className="scroll-mt-20">
         <div className={`${container} py-[4.5rem]`}>
           <SectionHeader title={dict.process.title} subtitle={dict.process.subtitle} className="reveal" />
           <ol className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-8">
             {dict.process.steps.map(({ title, desc }, i) => (
-              <li key={title} className="reveal">
-                <span
-                  aria-hidden="true"
-                  className="grid size-10 place-items-center rounded-full bg-primary font-headline font-bold text-on-primary"
-                >
-                  {i + 1}
+              <li key={title} className="reveal border-t-[3px] border-primary pt-5">
+                <span aria-hidden="true" className="font-headline font-extrabold text-brand-2">
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mt-3.5 mb-1.5 font-headline text-[1.15rem] font-semibold tracking-[-0.02em]">{title}</h3>
+                <h3 className="mt-1.5 mb-1.5 font-headline text-[1.15rem] font-semibold tracking-[-0.02em] text-primary">{title}</h3>
                 <p className="text-[0.97rem] text-on-surface-variant">{desc}</p>
               </li>
             ))}
@@ -263,49 +255,51 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contato" className="scroll-mt-16">
-        <div className={`${container} grid items-start gap-12 py-[4.5rem] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]`}>
-          <div className="reveal min-w-0">
-            <h2 className="font-headline text-[2rem] leading-[1.15] font-bold tracking-[-0.03em] text-balance text-primary md:text-[2.4rem]">
-              {dict.contact.title}
-            </h2>
-            <p className="mt-4 max-w-md text-on-surface-variant">{dict.contact.subtitle}</p>
-            <ul className="mt-7 flex flex-col gap-4">
-              {channels.map(({ cta, href, label, value, Icon }) => (
-                <li key={cta}>
-                  <TrackedLink
-                    cta={cta}
-                    location="contact"
-                    href={href}
-                    {...(cta === 'whatsapp' && { target: '_blank', rel: 'noopener noreferrer' })}
-                    className="group inline-flex items-center gap-3"
-                  >
-                    <span className="grid size-10 place-items-center rounded-xl bg-tint text-primary">
-                      <Icon className="size-5" strokeWidth={2} />
-                    </span>
-                    <span>
-                      <span className="block text-sm text-muted">{label}</span>
-                      <span className="font-semibold text-primary underline-offset-4 group-hover:underline">{value}</span>
-                    </span>
-                  </TrackedLink>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-10 flex items-center gap-3 text-[0.95rem] text-muted">
-              {/* eslint-disable-next-line @next/next/no-img-element -- SVG pequeno, next/image não otimiza SVG */}
-              <img src="/brand/curioso.svg" alt="" width={56} height={56} className="size-14" loading="lazy" />
-              <span>{dict.contact.location}</span>
+      {/* Contact: bloco azul arredondado com o Curioso no círculo branco; o formulário num cartão branco */}
+      <section id="contato" className="scroll-mt-20">
+        <div className={`${container} pb-[4.5rem]`}>
+          <div className="on-navy reveal grid items-start gap-10 rounded-[28px] bg-primary p-5 text-on-navy sm:p-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12 lg:p-12">
+            <div className="min-w-0">
+              <span aria-hidden="true" className="grid size-24 place-items-center rounded-full bg-white">
+                {/* eslint-disable-next-line @next/next/no-img-element -- SVG pequeno, next/image não otimiza SVG */}
+                <img src="/brand/curioso.svg" alt="" width={76} height={76} className="size-[4.75rem]" loading="lazy" />
+              </span>
+              <h2 className="mt-6 font-headline text-[2rem] leading-[1.15] font-bold tracking-[-0.02em] text-balance md:text-[2.2rem]">
+                {dict.contact.title}
+              </h2>
+              <p className="mt-3 max-w-md text-on-navy-muted">{dict.contact.subtitle}</p>
+              <ul className="mt-7 flex flex-col gap-4">
+                {channels.map(({ cta, href, label, value, Icon }) => (
+                  <li key={cta}>
+                    <TrackedLink
+                      cta={cta}
+                      location="contact"
+                      href={href}
+                      {...(cta === 'whatsapp' && { target: '_blank', rel: 'noopener noreferrer' })}
+                      className="group inline-flex items-center gap-3"
+                    >
+                      <span className="grid size-10 place-items-center rounded-full bg-white/10 text-white">
+                        <Icon className="size-5" strokeWidth={2} />
+                      </span>
+                      <span>
+                        <span className="block text-sm text-on-navy-muted">{label}</span>
+                        <span className="font-semibold text-white underline-offset-4 group-hover:underline">{value}</span>
+                      </span>
+                    </TrackedLink>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-8 text-[0.95rem] text-on-navy-muted">{dict.contact.location}</p>
             </div>
-          </div>
-          <div className={`reveal min-w-0 p-5 sm:p-8 ${card}`}>
-            <ContactForm dict={dict.form} />
-            <p className="mt-5 border-t border-outline-variant pt-4 text-sm text-muted">
-              {dict.form.privacy}{' '}
-              <Link href={`/${locale}/privacidade`} className="font-medium text-primary underline underline-offset-4 hover:text-primary-hover">
-                {dict.form.privacyLink}
-              </Link>
-            </p>
+            <div className={`on-light min-w-0 p-5 text-on-surface sm:p-8 ${card}`}>
+              <ContactForm dict={dict.form} />
+              <p className="mt-5 border-t border-outline-variant pt-4 text-sm text-muted">
+                {dict.form.privacy}{' '}
+                <Link href={`/${locale}/privacidade`} className="font-medium text-primary underline underline-offset-4 hover:text-primary-hover">
+                  {dict.form.privacyLink}
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

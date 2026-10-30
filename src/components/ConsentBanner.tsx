@@ -11,7 +11,7 @@ interface ConsentBannerProps {
 }
 
 const buttonClass =
-  'cursor-pointer rounded-[10px] bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover'
+  'cursor-pointer rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover'
 
 // Reaberto por "Preferências de cookies": o banner recebe o foco e, depois da escolha, ele volta para quem abriu.
 let returnFocus: HTMLElement | null = null

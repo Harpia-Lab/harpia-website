@@ -29,16 +29,16 @@ export default function Footer({ locale, dict }: FooterProps) {
     { href: `${home}#produtos`, label: dict.nav.products },
     { href: `${home}#processo`, label: dict.nav.process },
   ]
-  const linkClass = 'underline-offset-4 transition-colors hover:text-white hover:underline'
+  const linkClass = 'underline-offset-4 transition-colors hover:text-primary hover:underline'
   // Alvo de toque com altura confortável sem mudar o espaçamento visível
   const navLinkClass = `inline-block py-2 ${linkClass}`
 
   return (
-    <footer className="on-footer bg-footer text-[0.95rem] text-on-footer">
+    <footer className="border-t border-outline-variant bg-surface text-[0.95rem] text-on-surface-variant">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
         <div className="flex flex-col gap-8 py-10 md:flex-row md:items-start md:justify-between">
           <div>
-            <Logo inverted />
+            <Logo mark={false} />
             <p className="mt-2 text-sm">{dict.footer.tagline}</p>
           </div>
           <div className="flex flex-col gap-2">
@@ -70,7 +70,7 @@ export default function Footer({ locale, dict }: FooterProps) {
                   <a
                     href={href}
                     onClick={() => track('cta_clicked', { cta_id: cta, location: 'footer' })}
-                    className={`${navLinkClass} inline-flex items-center gap-1 text-white`}
+                    className={`${navLinkClass} inline-flex items-center gap-1 font-semibold text-primary`}
                   >
                     {label}
                     <ArrowUpRightIcon className="size-3.5" strokeWidth={2} />
@@ -81,7 +81,7 @@ export default function Footer({ locale, dict }: FooterProps) {
             </nav>
           </div>
         </div>
-        <div className="flex flex-col gap-2 border-t border-white/10 py-6 text-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 border-t border-outline-variant py-6 text-sm sm:flex-row sm:items-center sm:justify-between">
           {/* Ano do build no HTML estático; o cliente pode estar em outro ano */}
           <p suppressHydrationWarning>
             © {new Date().getFullYear()} Harpia Lab. {dict.footer.copyright}
