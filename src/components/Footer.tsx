@@ -27,7 +27,6 @@ export default function Footer({ locale, dict }: FooterProps) {
     { href: `${home}#produtos`, label: dict.nav.products },
     { href: `${home}#servicos`, label: dict.nav.services },
     { href: `${home}#processo`, label: dict.nav.process },
-    { href: `${home}#equipe`, label: dict.nav.team },
   ]
   const linkClass = 'underline-offset-4 transition-colors hover:text-white hover:underline'
   // Alvo de toque com altura confortável sem mudar o espaçamento visível
@@ -48,9 +47,6 @@ export default function Footer({ locale, dict }: FooterProps) {
                   {label}
                 </a>
               ))}
-              <Link href={`/${locale}/sobre`} className={navLinkClass}>
-                {dict.nav.about}
-              </Link>
               <a
                 href={`${home}#contato`}
                 onClick={() => track('cta_clicked', { cta_id: 'contact', location: 'footer' })}

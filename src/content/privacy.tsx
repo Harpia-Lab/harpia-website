@@ -55,7 +55,7 @@ const pt = (
 
     <h3>3.4 Formulário de contato (harpialab.com)</h3>
     <p>
-      Nome, e-mail e a mensagem que você escreve, para responder o contato e conversar sobre um possível projeto (art.
+      Nome, e-mail, empresa (opcional) e a mensagem que você escreve, para responder o contato e conversar sobre um possível projeto (art.
       7º, V, procedimentos preliminares a um contrato). Ficam na nossa caixa de e-mail enquanto a conversa for útil.
     </p>
 
@@ -266,7 +266,7 @@ const en = (
 
     <h3>3.4 Contact form (harpialab.com)</h3>
     <p>
-      Name, email, and the message you write, to reply to you and discuss a possible project (art. 7, V, preliminary
+      Name, email, company (optional), and the message you write, to reply to you and discuss a possible project (art. 7, V, preliminary
       procedures to a contract). They stay in our mailbox for as long as the conversation is useful.
     </p>
 

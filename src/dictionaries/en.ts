@@ -8,8 +8,6 @@ const en = {
     products: 'Products',
     services: 'Services',
     process: 'Process',
-    team: 'Team',
-    about: 'About',
     cta: 'Contact us',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
@@ -59,12 +57,6 @@ const en = {
     short: 'Quotes and payments',
     tagline: 'Quotes and payments in one place, with a portal for your clients.',
     desc: 'Build the quote, send it for approval and follow every installment until it is paid, without spreadsheets or chasing anyone over chat.',
-    benefits: [
-      { title: 'PDF quotes with versions', desc: 'Every change becomes a new version, and the client accepts online.' },
-      { title: 'Automatic installments and reminders', desc: 'Set the installments once; due-date reminders go out on their own.' },
-      { title: 'Client portal', desc: 'Clients see their quotes and installments in their own space.' },
-      { title: 'Team permissions', desc: 'Each team member only sees what they need.' },
-    ],
     ctaContact: 'I want something like this',
     ctaLogin: 'Already use Control? Sign in',
     fellows: {
@@ -72,12 +64,6 @@ const en = {
       short: 'Sports together, near you',
       tagline: 'People to play sports with, near you.',
       desc: 'Running in the park, football, tennis, trails or walks: Fellows shows activities with open spots near you, and whoever creates the activity decides who joins.',
-      benefits: [
-        { title: 'Verified adults only', desc: 'ID number, date of birth and phone checked at sign-up.' },
-        { title: 'Protected location', desc: 'The exact spot only shows to people accepted into the activity.' },
-        { title: 'Mutual ratings', desc: 'After the activity, participants rate each other with fixed tags.' },
-        { title: 'Audience filters', desc: 'Women-only activities, 60+ or by age range.' },
-      ],
       cta: 'Discover Fellows',
       stores: 'Android and iPhone: coming soon.',
       card: {
@@ -114,12 +100,6 @@ const en = {
       { title: 'Development', desc: 'Frequent deliveries you can see working, with reviewed code.' },
       { title: 'Delivery & support', desc: 'We ship to production and stay with you as the product evolves.' },
     ],
-  },
-  team: {
-    title: 'Who builds with you',
-    subtitle: 'Three co-founders with experience in software engineering, design, and systems architecture.',
-    role: 'Co-founder',
-    more: 'More about Harpia',
   },
   contact: {
     title: "Let's talk.",
@@ -174,10 +154,6 @@ const en = {
     title: 'Privacy Policy',
     description:
       'Which personal data Harpia Lab processes on its websites and in Harpia Control, why, for how long, and how to exercise your rights under the LGPD.',
-  },
-  about: {
-    title: 'About Harpia Lab',
-    description: 'Who Harpia Lab is: a software consultancy and studio from Curitiba, Brazil, founded by three co-founders.',
   },
 }
 

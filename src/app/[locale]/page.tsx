@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { TrackedLink } from '@/components/Analytics'
 import ContactForm from '@/components/ContactForm'
 import ControlMockup from '@/components/ControlMockup'
@@ -6,7 +5,6 @@ import FellowsCard from '@/components/FellowsCard'
 import PdvMockup from '@/components/PdvMockup'
 import { ControlMark, FellowsMark, PdvMark } from '@/components/ProductMarks'
 import SectionHeader from '@/components/SectionHeader'
-import TeamList from '@/components/TeamList'
 import {
   ArrowRightIcon,
   ChatIcon,
@@ -18,13 +16,17 @@ import {
 } from '@/components/icons'
 import type { CtaId } from '@/lib/analytics'
 import { getDictionary } from '@/lib/getDictionary'
-import { controlUrl, fellowsUrl, pdvUrl } from '@/lib/products'
+import { controlAppUrl, fellowsUrl, pdvUrl } from '@/lib/products'
 
 // Mesma ordem de dict.services.items
 const serviceIcons = [LayersIcon, PeopleIcon, CompassIcon]
 
 const container = 'mx-auto max-w-[1200px] px-4 sm:px-6'
 const card = 'rounded-[18px] border border-outline-variant bg-surface'
+// Painéis de produto: mesma estrutura (texto | mini tela); a altura igual vem do auto-rows-fr do grid
+const panel = 'reveal grid h-full scroll-mt-24 items-center gap-10 rounded-3xl p-6 sm:p-10 lg:grid-cols-2'
+const actions = 'mt-6 flex flex-wrap items-center gap-4'
+const screen = 'flex min-w-0 justify-center'
 
 // Só dígitos, com DDI (ex.: 5541999999999). Vazio = sem WhatsApp no contato.
 const whatsapp = process.env.WHATSAPP_NUMBER?.replace(/\D/g, '')
@@ -51,78 +53,80 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <main id="conteudo">
-      {/* Hero */}
-      <section className={`${container} grid items-end gap-14 pt-28 pb-16 md:pt-[9.5rem] md:pb-[4.5rem] lg:grid-cols-[minmax(0,2.6fr)_minmax(17.5rem,1fr)]`}>
-        <div className="min-w-0">
-          <p className="hero-enter mb-5 inline-block rounded-full bg-tint px-3 py-1 text-[0.9rem] font-semibold text-on-tint">
-            {dict.hero.eyebrow}
-          </p>
-          <h1
-            className="hero-enter font-headline text-[2.6rem] leading-[1.04] font-bold tracking-[-0.035em] text-balance text-primary sm:text-[3.4rem] lg:text-[4.1rem]"
-            style={{ '--enter-delay': '80ms' } as React.CSSProperties}
-          >
-            {dict.hero.title} <span className="text-brand-2">{dict.hero.titleAccent}</span>
-          </h1>
-          <p
-            className="hero-enter mt-6 max-w-[36rem] text-[1.2rem] leading-relaxed text-on-surface-variant"
-            style={{ '--enter-delay': '160ms' } as React.CSSProperties}
-          >
-            {dict.hero.subtitle}
-          </p>
-          <div
-            className="hero-enter mt-9 flex flex-wrap items-center gap-6"
-            style={{ '--enter-delay': '240ms' } as React.CSSProperties}
-          >
-            <TrackedLink
-              cta="contact"
-              location="hero"
-              href="#contato"
-              className="rounded-xl bg-cta px-6 py-4 font-semibold text-on-cta transition-colors hover:bg-primary-hover"
+      {/* Hero: pílula em cima; o título e o cartão "Produtos da casa" começam na mesma linha */}
+      <section className={`${container} pt-28 pb-16 md:pt-[9.5rem] md:pb-[4.5rem]`}>
+        <p className="hero-enter mb-5 inline-block rounded-full bg-tint px-3 py-1 text-[0.9rem] font-semibold text-on-tint">
+          {dict.hero.eyebrow}
+        </p>
+        <div className="grid items-start gap-14 lg:grid-cols-[minmax(0,2.6fr)_minmax(17.5rem,1fr)]">
+          <div className="min-w-0">
+            <h1
+              className="hero-enter font-headline text-[2.6rem] leading-[1.04] font-bold tracking-[-0.035em] text-balance text-primary sm:text-[3.4rem] lg:text-[4.1rem]"
+              style={{ '--enter-delay': '80ms' } as React.CSSProperties}
             >
-              {dict.hero.ctaPrimary}
-            </TrackedLink>
-            <TrackedLink
-              cta="how_we_work"
-              location="hero"
-              href="#processo"
-              className="font-semibold text-primary underline underline-offset-[0.25em] hover:text-primary-hover"
+              {dict.hero.title} <span className="text-brand-2">{dict.hero.titleAccent}</span>
+            </h1>
+            <p
+              className="hero-enter mt-6 max-w-[36rem] text-[1.2rem] leading-relaxed text-on-surface-variant"
+              style={{ '--enter-delay': '160ms' } as React.CSSProperties}
             >
-              {dict.hero.ctaSecondary}
-            </TrackedLink>
+              {dict.hero.subtitle}
+            </p>
+            <div
+              className="hero-enter mt-9 flex flex-wrap items-center gap-6"
+              style={{ '--enter-delay': '240ms' } as React.CSSProperties}
+            >
+              <TrackedLink
+                cta="contact"
+                location="hero"
+                href="#contato"
+                className="rounded-xl bg-cta px-6 py-4 font-semibold text-on-cta transition-colors hover:bg-primary-hover"
+              >
+                {dict.hero.ctaPrimary}
+              </TrackedLink>
+              <TrackedLink
+                cta="how_we_work"
+                location="hero"
+                href="#processo"
+                className="font-semibold text-primary underline underline-offset-[0.25em] hover:text-primary-hover"
+              >
+                {dict.hero.ctaSecondary}
+              </TrackedLink>
+            </div>
+            <ul
+              className="hero-enter mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-outline-variant pt-6 text-[0.95rem] text-on-surface-variant"
+              style={{ '--enter-delay': '320ms' } as React.CSSProperties}
+            >
+              {dict.hero.highlights.map((highlight) => (
+                <li key={highlight} className="flex items-center gap-2">
+                  <CheckIcon className="size-4 text-brand-2" />
+                  {highlight}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul
-            className="hero-enter mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-outline-variant pt-6 text-[0.95rem] text-on-surface-variant"
-            style={{ '--enter-delay': '320ms' } as React.CSSProperties}
-          >
-            {dict.hero.highlights.map((highlight) => (
-              <li key={highlight} className="flex items-center gap-2">
-                <CheckIcon className="size-4 text-brand-2" />
-                {highlight}
-              </li>
-            ))}
-          </ul>
-        </div>
 
-        <aside
-          aria-label={dict.hero.productsLabel}
-          className={`hero-enter min-w-0 px-5 pt-4 pb-2 ${card}`}
-          style={{ '--enter-delay': '200ms' } as React.CSSProperties}
-        >
-          <p className="mb-1.5 text-[0.9rem] font-semibold text-muted">{dict.hero.productsTitle}</p>
-          <ul className="divide-y divide-surface-container">
-            {houseProducts.map(({ id, Mark, name, short, nameClass }) => (
-              <li key={id}>
-                <a href={`#${id}`} className="group flex items-center gap-3 py-3 text-on-surface">
-                  <Mark className="size-8" />
-                  <span className="leading-snug">
-                    <span className={`block group-hover:underline ${nameClass}`}>{name}</span>
-                    <span className="block text-[0.9rem] text-muted">{short}</span>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </aside>
+          <aside
+            aria-label={dict.hero.productsLabel}
+            className={`hero-enter min-w-0 px-5 pt-4 pb-2 ${card}`}
+            style={{ '--enter-delay': '200ms' } as React.CSSProperties}
+          >
+            <p className="mb-1.5 text-[0.9rem] font-semibold text-muted">{dict.hero.productsTitle}</p>
+            <ul className="divide-y divide-surface-container">
+              {houseProducts.map(({ id, Mark, name, short, nameClass }) => (
+                <li key={id}>
+                  <a href={`#${id}`} className="group flex items-center gap-3 py-3 text-on-surface">
+                    <Mark className="size-8" />
+                    <span className="leading-snug">
+                      <span className={`block group-hover:underline ${nameClass}`}>{name}</span>
+                      <span className="block text-[0.9rem] text-muted">{short}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
       </section>
 
       {/* Services */}
@@ -146,19 +150,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      {/* Products: cada painel na identidade do próprio produto, ordem PDV, Control, Fellows */}
+      {/* Products: os três painéis com a mesma estrutura e altura (marca, título, texto, botão | mini tela),
+          cada um na identidade do próprio produto, ordem PDV, Control, Fellows */}
       <section id="produtos" className="scroll-mt-16">
         <div className={`${container} pt-4 pb-[4.5rem]`}>
           <SectionHeader title={products.title} subtitle={products.subtitle} className="reveal" />
 
-          <div className="mt-10 flex flex-col gap-6">
+          <div className="mt-10 grid gap-6 lg:auto-rows-fr">
             {/* Harpia PDV: lavanda + roxo + verde-água, Unbounded + DM Sans (pdv-website) */}
-            <article
-              id="pdv"
-              className="pdv reveal grid scroll-mt-24 items-center gap-10 rounded-3xl bg-pdv-bg p-6 font-pdv-body text-pdv-ink sm:p-10 lg:grid-cols-2"
-            >
+            <article id="pdv" className={`pdv bg-pdv-bg font-pdv-body text-pdv-ink ${panel}`}>
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
+                <div className="flex h-10 items-center gap-2">
                   <span aria-hidden="true" className="size-3 rounded-full bg-pdv-teal" />
                   <span className="font-pdv text-xl font-extrabold uppercase">{products.pdv.name}</span>
                 </div>
@@ -166,28 +168,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   {products.pdv.tagline}
                 </h3>
                 <p className="text-pdv-mute">{products.pdv.desc}</p>
-                <TrackedLink
-                  cta="pdv"
-                  location="products"
-                  href={pdvUrl}
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-pdv-accent px-5 py-3 font-semibold text-white transition-colors hover:bg-pdv-accent-hover"
-                >
-                  {products.pdv.cta}
-                  <ArrowRightIcon className="size-4" />
-                </TrackedLink>
+                <div className={actions}>
+                  <TrackedLink
+                    cta="pdv"
+                    location="products"
+                    href={pdvUrl}
+                    className="inline-flex items-center gap-2 rounded-full bg-pdv-accent px-5 py-3 font-semibold text-white transition-colors hover:bg-pdv-accent-hover"
+                  >
+                    {products.pdv.cta}
+                    <ArrowRightIcon className="size-4" />
+                  </TrackedLink>
+                </div>
               </div>
-              <div className="flex min-w-0 justify-center">
+              <div className={screen}>
                 <PdvMockup dict={products.pdv.mockup} />
               </div>
             </article>
 
             {/* Harpia Control: tema escuro do Control (paleta Altitude), Bricolage + Instrument Sans */}
-            <article
-              id="control"
-              className="on-ink reveal grid scroll-mt-24 items-center gap-10 rounded-3xl bg-ink p-6 font-body text-on-ink sm:p-10 lg:grid-cols-2"
-            >
+            <article id="control" className={`on-ink bg-ink font-body text-on-ink ${panel}`}>
               <div className="min-w-0">
-                <div className="flex items-center gap-3">
+                <div className="flex h-10 items-center gap-3">
                   <ControlMark />
                   <span className="font-control text-2xl font-extrabold tracking-[-0.02em]">{products.name}</span>
                 </div>
@@ -195,7 +196,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   {products.tagline}
                 </h3>
                 <p className="text-on-ink-variant">{products.desc}</p>
-                <div className="mt-6 flex flex-wrap items-center gap-4">
+                <div className={actions}>
                   <TrackedLink
                     cta="contact"
                     location="products"
@@ -207,34 +208,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <TrackedLink
                     cta="control"
                     location="products"
-                    href={controlUrl}
+                    href={controlAppUrl}
                     className="font-semibold text-accent underline underline-offset-4"
                   >
                     {products.ctaLogin}
                   </TrackedLink>
                 </div>
               </div>
-              <ControlMockup locale={locale} dict={products.mockup} />
-              <ul className="grid gap-x-8 gap-y-5 border-t border-ink-line pt-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
-                {products.benefits.map(({ title, desc }) => (
-                  <li key={title} className="flex gap-3">
-                    <CheckIcon className="mt-0.5 size-5 shrink-0 text-accent" />
-                    <span>
-                      <span className="block font-semibold">{title}</span>
-                      <span className="mt-1 block text-sm leading-relaxed text-on-ink-variant">{desc}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <div className={screen}>
+                <div className="w-full max-w-md">
+                  <ControlMockup locale={locale} dict={products.mockup} />
+                </div>
+              </div>
             </article>
 
             {/* Fellows: claro + cobalto + lima, Archivo (fellows-website/DESIGN.md) */}
-            <article
-              id="fellows"
-              className="fellows reveal grid scroll-mt-24 items-center gap-10 rounded-3xl border border-fellows-line bg-fellows-bg p-6 font-fellows text-fellows-ink sm:p-10 lg:grid-cols-2"
-            >
+            <article id="fellows" className={`fellows border border-fellows-line bg-fellows-bg font-fellows text-fellows-ink ${panel}`}>
               <div className="min-w-0">
-                <div className="flex items-center gap-3">
+                <div className="flex h-10 items-center gap-3">
                   <FellowsMark />
                   <span className="text-2xl font-extrabold tracking-[-0.02em]">{products.fellows.name}</span>
                 </div>
@@ -242,7 +233,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   {products.fellows.tagline}
                 </h3>
                 <p className="text-fellows-mute">{products.fellows.desc}</p>
-                <div className="mt-6 flex flex-wrap items-center gap-4">
+                <div className={actions}>
                   <TrackedLink
                     cta="fellows"
                     location="products"
@@ -255,20 +246,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <span className="text-[0.9rem] text-fellows-mute">{products.fellows.stores}</span>
                 </div>
               </div>
-              <div className="flex min-w-0 justify-center">
+              <div className={screen}>
                 <FellowsCard dict={products.fellows.card} />
               </div>
-              <ul className="grid gap-x-8 gap-y-5 border-t border-fellows-line pt-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
-                {products.fellows.benefits.map(({ title, desc }) => (
-                  <li key={title} className="flex gap-3">
-                    <CheckIcon className="mt-0.5 size-5 shrink-0 text-fellows-accent" />
-                    <span>
-                      <span className="block font-semibold">{title}</span>
-                      <span className="mt-1 block text-sm leading-relaxed text-fellows-mute">{desc}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </article>
           </div>
         </div>
@@ -295,24 +275,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      {/* Team */}
-      <section id="equipe" className="scroll-mt-16">
-        {/* No celular o link vem depois dos nomes; no desktop, embaixo do título */}
-        <div className={`${container} grid gap-10 py-[4.5rem] lg:grid-cols-[0.9fr_1.1fr] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-6`}>
-          <SectionHeader title={dict.team.title} subtitle={dict.team.subtitle} className="reveal" />
-          <TeamList role={dict.team.role} className="reveal lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:pt-2" />
-          <Link
-            href={`/${locale}/sobre`}
-            className="reveal group inline-flex items-center gap-2 self-start justify-self-start font-semibold text-primary"
-          >
-            <span className="underline underline-offset-4">{dict.team.more}</span>
-            <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      </section>
-
       {/* Contact */}
-      <section id="contato" className="scroll-mt-16 border-t border-outline-variant">
+      <section id="contato" className="scroll-mt-16">
         <div className={`${container} grid items-start gap-12 py-[4.5rem] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]`}>
           <div className="reveal min-w-0">
             <h2 className="font-headline text-[2rem] leading-[1.15] font-bold tracking-[-0.03em] text-balance text-primary md:text-[2.4rem]">

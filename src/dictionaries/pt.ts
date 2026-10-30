@@ -8,8 +8,6 @@ const pt = {
     products: 'Produtos',
     services: 'Serviços',
     process: 'Processo',
-    team: 'Equipe',
-    about: 'Sobre',
     cta: 'Fale conosco',
     openMenu: 'Abrir menu',
     closeMenu: 'Fechar menu',
@@ -59,12 +57,6 @@ const pt = {
     short: 'Orçamentos e pagamentos',
     tagline: 'Controle de orçamentos e pagamentos, com portal para o seu cliente.',
     desc: 'Monte o orçamento, envie para aprovação e acompanhe cada parcela até cair na conta, sem planilha e sem cobrar ninguém por mensagem.',
-    benefits: [
-      { title: 'Orçamentos em PDF com versões', desc: 'Cada ajuste vira uma nova versão, e o cliente aceita online.' },
-      { title: 'Parcelas e lembretes automáticos', desc: 'Defina as parcelas uma vez; os lembretes de vencimento saem sozinhos.' },
-      { title: 'Portal do cliente', desc: 'O cliente vê orçamentos e parcelas em um acesso só dele.' },
-      { title: 'Equipe com permissões', desc: 'Cada pessoa da equipe acessa apenas o que precisa.' },
-    ],
     ctaContact: 'Quero um sistema assim',
     ctaLogin: 'Já usa o Control? Entrar',
     fellows: {
@@ -72,12 +64,6 @@ const pt = {
       short: 'Esporte junto, perto de você',
       tagline: 'Gente para praticar esporte junto, perto de você.',
       desc: 'Corrida no parque, futebol, tênis, trilha ou caminhada: o Fellows mostra as atividades com vaga perto de você, e quem cria a atividade decide quem entra.',
-      benefits: [
-        { title: 'Só maiores de 18, verificados', desc: 'CPF, data de nascimento e telefone conferidos no cadastro.' },
-        { title: 'Localização protegida', desc: 'O ponto exato só aparece para quem foi aceito na atividade.' },
-        { title: 'Avaliação mútua', desc: 'Depois da atividade, quem foi avalia quem foi, com tags fixas.' },
-        { title: 'Filtros por público', desc: 'Atividades só para mulheres, para 60+ ou por faixa etária.' },
-      ],
       cta: 'Conhecer o Fellows',
       stores: 'Android e iPhone: em breve.',
       card: {
@@ -114,12 +100,6 @@ const pt = {
       { title: 'Desenvolvimento', desc: 'Entregas frequentes, que você vê funcionando, com código revisado.' },
       { title: 'Entrega e suporte', desc: 'Colocamos em produção e seguimos junto na evolução do produto.' },
     ],
-  },
-  team: {
-    title: 'Quem constrói com você',
-    subtitle: 'Três cofundadores com experiência em engenharia de software, design e arquitetura de sistemas.',
-    role: 'Cofundador',
-    more: 'Mais sobre a Harpia',
   },
   contact: {
     title: 'Vamos conversar?',
@@ -174,10 +154,6 @@ const pt = {
     title: 'Política de Privacidade',
     description:
       'Quais dados pessoais a Harpia Lab trata nos sites e no Harpia Control, para quê, por quanto tempo e como exercer seus direitos pela LGPD.',
-  },
-  about: {
-    title: 'Sobre a Harpia Lab',
-    description: 'Quem é a Harpia Lab: consultoria e fábrica de software de Curitiba, criada por três cofundadores.',
   },
 }
 
