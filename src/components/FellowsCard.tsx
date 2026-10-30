@@ -9,7 +9,7 @@ export default function FellowsCard({ dict }: { dict: Dictionary['products']['fe
     <div
       role="img"
       aria-label={dict.label}
-      className="w-full max-w-[22rem] rounded-[14px] border border-fellows-line bg-fellows-card p-3 text-fellows-ink shadow-[0_1px_2px_rgb(14_19_32/0.08),0_8px_24px_-12px_rgb(14_19_32/0.12)]"
+      className="w-full max-w-[22rem] rounded-[14px] border border-fellows-line bg-fellows-card p-3 font-fellows text-fellows-ink shadow-[0_1px_2px_rgb(14_19_32/0.08),0_8px_24px_-12px_rgb(14_19_32/0.12)]"
     >
       <div className="flex items-start gap-3">
         <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-fellows-accent-soft text-fellows-accent">

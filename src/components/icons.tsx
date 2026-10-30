@@ -19,36 +19,6 @@ function Icon({ children, ...props }: IconProps) {
   )
 }
 
-export function LayersIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <path d="m12 3 9 4.5-9 4.5-9-4.5L12 3Z" />
-      <path d="m3 12 9 4.5 9-4.5" />
-      <path d="m3 16.5 9 4.5 9-4.5" />
-    </Icon>
-  )
-}
-
-export function CompassIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <circle cx="12" cy="12" r="9" />
-      <path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" />
-    </Icon>
-  )
-}
-
-export function PeopleIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <circle cx="9" cy="8" r="3" />
-      <circle cx="17" cy="9" r="2.5" />
-      <path d="M3 19c0-3 3-5 6-5s6 2 6 5" />
-      <path d="M15 14.5c2.5 0 6 1.3 6 4.5" />
-    </Icon>
-  )
-}
-
 export function ArrowRightIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -61,6 +31,24 @@ export function CheckIcon(props: IconProps) {
   return (
     <Icon {...props}>
       <path d="m5 12.5 4.5 4.5L19 7.5" />
+    </Icon>
+  )
+}
+
+export function AlertIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7.5v5.5M12 16.5h.01" />
+    </Icon>
+  )
+}
+
+// Link que sai para o site de um produto
+export function ArrowUpRightIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M7 17 17 7M8 7h9v9" />
     </Icon>
   )
 }

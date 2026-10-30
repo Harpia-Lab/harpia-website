@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowRightIcon, CheckIcon } from '@/components/icons'
+import { AlertIcon, ArrowRightIcon, CheckIcon } from '@/components/icons'
 import { track } from '@/lib/analytics'
 import type { Dictionary } from '@/lib/getDictionary'
 
@@ -122,10 +122,14 @@ export default function ContactForm({ dict }: ContactFormProps) {
 
   const fieldError = (f: Field) =>
     fieldErrors[f] && (
-      <p id={`${f}-error`} className="mt-2 text-sm text-error">
+      <p id={`${f}-error`} className="mt-2 flex items-start gap-1.5 text-sm text-error">
+        <AlertIcon className="mt-px size-4 shrink-0" strokeWidth={2} />
         {fieldErrors[f]}
       </p>
     )
+
+  // O foco vai só para o primeiro campo com erro; este aviso lê todos de uma vez
+  const errorList = Object.values(fieldErrors).filter(Boolean)
 
   return (
     <form
@@ -141,6 +145,9 @@ export default function ContactForm({ dict }: ContactFormProps) {
         <label htmlFor="website">Website</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" data-1p-ignore data-lpignore="true" data-bwignore />
       </div>
+      <p aria-live="polite" className="sr-only">
+        {errorList.length > 0 && `${dict.errorsSummary} ${errorList.join(' ')}`}
+      </p>
       {/* Nome e empresa lado a lado no desktop, empilhados no celular */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
@@ -169,12 +176,15 @@ export default function ContactForm({ dict }: ContactFormProps) {
         <label htmlFor="message" className={labelClass}>
           {dict.message}
         </label>
-        <textarea {...fieldProps('message')} rows={4} placeholder={dict.messagePlaceholder} className={`${inputClass} resize-none`} />
+        <textarea {...fieldProps('message')} rows={4} placeholder={dict.messagePlaceholder} className={`${inputClass} resize-y`} />
         {fieldError('message')}
       </div>
 
       {state === 'error' && (
-        <p role="alert" className="text-sm text-error">{errorMsg}</p>
+        <p role="alert" className="flex items-start gap-1.5 text-sm text-error">
+          <AlertIcon className="mt-px size-4 shrink-0" strokeWidth={2} />
+          {errorMsg}
+        </p>
       )}
 
       <button

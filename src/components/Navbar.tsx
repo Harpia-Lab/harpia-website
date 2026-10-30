@@ -63,21 +63,24 @@ export default function Navbar({ locale, dict }: NavbarProps) {
     }
   }, [menuOpen])
 
+  // Mesma ordem das seções na página
   const links = [
-    { id: 'produtos', label: dict.products },
     { id: 'servicos', label: dict.services },
+    { id: 'produtos', label: dict.products },
     { id: 'processo', label: dict.process },
   ]
 
+  // Alvo de toque de 44px no menu do celular; compacto no desktop
+  const langItem = 'grid min-h-11 min-w-11 place-items-center rounded px-2 md:min-h-0 md:min-w-0 md:py-1'
   const languageSwitch = (
     <div
       role="group"
       aria-label={dict.language}
-      className="inline-flex items-center rounded-md border border-outline-variant p-0.5 font-mono text-xs"
+      className="inline-flex items-center rounded-md border border-outline-variant p-0.5 text-sm font-medium tracking-[0.04em] md:text-xs"
     >
       {locales.map((l) =>
         l === locale ? (
-          <span key={l} aria-current="true" className="rounded bg-surface-container-low px-2 py-1 font-medium text-on-surface">
+          <span key={l} aria-current="true" className={`${langItem} bg-surface-container-low text-on-surface`}>
             {l.toUpperCase()}
           </span>
         ) : (
@@ -86,7 +89,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
             href={`/${l}${pathname.slice(locale.length + 1)}`}
             hrefLang={l}
             onClick={() => track('language_switched', { to: l })}
-            className="rounded px-2 py-1 text-on-surface-variant transition-colors hover:text-primary"
+            className={`${langItem} text-on-surface-variant transition-colors hover:text-primary`}
           >
             {l.toUpperCase()}
           </a>
@@ -98,11 +101,11 @@ export default function Navbar({ locale, dict }: NavbarProps) {
   return (
     <nav ref={navRef} aria-label={dict.label} className="fixed top-0 z-50 w-full border-b border-outline-variant bg-background/95 backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-4 sm:px-6">
-        <a href={home || '#'} aria-label="Harpia Lab">
+        <a href={`/${locale}`} aria-label="Harpia Lab">
           <Logo />
         </a>
 
-        <div className="flex items-center gap-3 md:gap-8">
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-8">
           {/* Desktop */}
           <div className="hidden items-center gap-7 md:flex">
             {links.map(({ id, label }) => {
@@ -131,7 +134,7 @@ export default function Navbar({ locale, dict }: NavbarProps) {
               trackContact()
               setMenuOpen(false)
             }}
-            className="rounded-[10px] bg-cta px-3.5 py-2 text-[0.95rem] font-semibold whitespace-nowrap text-on-cta transition-colors hover:bg-primary-hover md:px-[1.15rem] md:py-2.5"
+            className="rounded-[10px] bg-cta px-3 py-2 text-[0.95rem] font-semibold sm:px-3.5 whitespace-nowrap text-on-cta transition-colors hover:bg-primary-hover md:px-[1.15rem] md:py-2.5"
           >
             {dict.cta}
           </a>

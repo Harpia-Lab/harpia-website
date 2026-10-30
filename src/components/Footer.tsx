@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Logo from '@/components/Logo'
+import { ArrowUpRightIcon } from '@/components/icons'
 import { reopenConsentBanner } from '@/components/ConsentBanner'
 import { analyticsEnabled, track, type CtaId } from '@/lib/analytics'
 import type { Dictionary, Locale } from '@/lib/getDictionary'
@@ -24,8 +25,8 @@ export default function Footer({ locale, dict }: FooterProps) {
   // Fora da home (ex.: /pt/privacidade) as âncoras apontam para /<locale>#secao
   const home = usePathname() === `/${locale}` ? '' : `/${locale}`
   const links = [
-    { href: `${home}#produtos`, label: dict.nav.products },
     { href: `${home}#servicos`, label: dict.nav.services },
+    { href: `${home}#produtos`, label: dict.nav.products },
     { href: `${home}#processo`, label: dict.nav.process },
   ]
   const linkClass = 'underline-offset-4 transition-colors hover:text-white hover:underline'
@@ -69,9 +70,10 @@ export default function Footer({ locale, dict }: FooterProps) {
                   <a
                     href={href}
                     onClick={() => track('cta_clicked', { cta_id: cta, location: 'footer' })}
-                    className={`${navLinkClass} text-white`}
+                    className={`${navLinkClass} inline-flex items-center gap-1 text-white`}
                   >
                     {label}
+                    <ArrowUpRightIcon className="size-3.5" strokeWidth={2} />
                   </a>
                 </li>
               ))}

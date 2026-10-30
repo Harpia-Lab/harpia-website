@@ -1,6 +1,6 @@
 const en = {
   meta: {
-    title: 'Harpia Lab | Consulting & Software Factory',
+    title: 'Harpia Lab | Consulting & Software Studio',
     description:
       'Custom systems, apps and integrations for your business, from understanding the problem to support after launch.',
   },
@@ -8,7 +8,7 @@ const en = {
     products: 'Products',
     services: 'Services',
     process: 'Process',
-    cta: 'Contact us',
+    cta: 'Get a quote',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     language: 'Language',
@@ -16,14 +16,15 @@ const en = {
     skip: 'Skip to content',
   },
   hero: {
-    eyebrow: 'Consulting & Software Factory · Curitiba, Brazil',
+    eyebrow: 'Consulting & Software Studio · Curitiba, Brazil',
     title: 'Custom software,',
     titleAccent: 'built to last.',
     subtitle:
       'Systems, apps and integrations for your business. We understand the problem, build the solution and stay with you after launch.',
-    ctaPrimary: 'Request a quote',
+    ctaPrimary: 'Get a quote',
     ctaSecondary: 'How we work',
-    highlights: ['Web systems and apps', 'Support after launch', 'Reply within 24h'],
+    proof: 'The same team that builds and runs Harpia PDV, Harpia Control and Fellows.',
+    highlights: ['Support after launch', 'Reply within 24h'],
     productsTitle: 'Our own products',
     productsLabel: 'Our products',
   },
@@ -31,9 +32,9 @@ const en = {
     title: 'Three ways to work with us.',
     subtitle: 'Pick the format that fits where your business is right now.',
     items: [
-      { title: 'Custom project', desc: 'You bring the problem or the idea and we deliver working software: a website, an app, an internal system or an integration, with scope and timeline agreed before we start.' },
-      { title: 'Dedicated team', desc: 'People from our team working on your product, alongside your own team, for as long as it makes sense.' },
-      { title: 'Technical consulting', desc: 'A second opinion before you invest: architecture, a review of the system you already have, and technology choices.' },
+      { title: 'Custom project', when: 'When you know what you need and want it delivered.', desc: 'You bring the problem or the idea and we deliver working software: a website, an app, an internal system or an integration, with scope and timeline agreed before we start.' },
+      { title: 'Dedicated team', when: 'When the product exists and needs more people to grow.', desc: 'People from our team working on your product, alongside your own team, for as long as it makes sense.' },
+      { title: 'Technical consulting', when: 'When you need to decide before you invest.', desc: 'A second opinion before you invest: architecture, a review of the system you already have, and technology choices.' },
     ],
   },
   products: {
@@ -41,12 +42,12 @@ const en = {
     subtitle: 'Problems we kept running into became products. Each one has its own brand; the same team and the same process take care of your project.',
     pdv: {
       name: 'Harpia PDV',
-      short: 'Point of sale for events',
-      tagline: 'Point of sale on the card terminal for events, concerts, clubs and bars.',
+      short: 'Point of sale (POS) for events',
+      tagline: 'A point of sale (POS) that runs on the card machine, for events, concerts, clubs and bars.',
       desc: 'Staff learn it in minutes and the line keeps moving. Sales, top-ups, tabs, tickets and cash register in one app, picked for each event.',
       cta: 'Discover Harpia PDV',
       mockup: {
-        label: 'Example Harpia PDV screen on a card terminal: choosing the payment method between credit, debit, Pix and cash',
+        label: 'Example Harpia PDV screen on a card machine: choosing the payment method between credit, debit, Pix and cash',
         when: 'Friday night · Oct 23 · 10 PM',
         question: 'How will the customer pay?',
         methods: ['Credit', 'Debit', 'Pix', 'Cash'],
@@ -57,7 +58,7 @@ const en = {
     short: 'Quotes and payments',
     tagline: 'Quotes and payments in one place, with a portal for your clients.',
     desc: 'Build the quote, send it for approval and follow every installment until it is paid, without spreadsheets or chasing anyone over chat.',
-    ctaContact: 'I want something like this',
+    cta: 'Discover Harpia Control',
     ctaLogin: 'Already use Control? Sign in',
     fellows: {
       name: 'Fellows',
@@ -70,13 +71,13 @@ const en = {
         label: 'Example Fellows card: easy run in the park, Saturday at 7 AM, in Batel, with 3 open spots',
         title: 'Easy run in the park',
         when: 'Sat, Oct 24 · 7:00–8:00 AM',
-        where: 'Batel · Curitiba · 1.2 km',
+        where: 'Batel · Curitiba\u00a0·\u00a01.2\u00a0km', // nbsp: "1.2 km" never sits alone on a line
         slots: 'spots',
       },
     },
     mockup: {
       label: 'Example Harpia Control screen: accepted quote, one installment paid, one with a reminder sent and one upcoming',
-        quote: 'Quote 0142',
+      quote: 'Quote 0142',
       client: 'Example Client · Website redesign',
       version: 'v3',
       accepted: 'Accepted online',
@@ -98,8 +99,8 @@ const en = {
     ],
   },
   contact: {
-    title: "Let's talk.",
-    subtitle: 'Tell us what you need. We reply with our first questions or with a proposal, within 24h.',
+    title: 'Get a quote.',
+    subtitle: 'Tell us what you need. We reply with our first questions or with a proposal.',
     emailLabel: 'Email',
     whatsappAction: 'Chat on WhatsApp',
     whatsappText: 'Hi! I found you through the Harpia Lab website.',
@@ -115,10 +116,13 @@ const en = {
     emailPlaceholder: 'you@email.com',
     message: 'Message',
     messagePlaceholder: 'What do you want to build or solve?',
-    submit: 'Send message',
+    submit: 'Send request',
     sending: 'Sending…',
     nextStep: 'We reply within 24h, to the email you provide.',
-    success: 'Message sent. We will reply within 24h, to the email you provided.',
+    privacy: 'We use your details only to reply and talk about your project.',
+    privacyLink: 'Privacy Policy',
+    errorsSummary: 'Check these fields:',
+    success: 'Request sent. We will reply within 24h, to the email you provided.',
     error: 'We could not send it. Try again or write to contato@harpialab.com.',
     rateLimited: 'Too many attempts in a short time. Wait a few minutes or write to contato@harpialab.com.',
     errors: {
@@ -132,7 +136,7 @@ const en = {
     },
   },
   footer: {
-    tagline: 'Consulting & Software Factory',
+    tagline: 'Consulting & Software Studio',
     nav: 'Footer links',
     copyright: 'All rights reserved.',
     madeWith: 'Made in Brazil',

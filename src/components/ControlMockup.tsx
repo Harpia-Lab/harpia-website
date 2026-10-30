@@ -40,7 +40,7 @@ export default function ControlMockup({ locale, dict }: ControlMockupProps) {
         {dict.rows.map(({ due, status, tone }) => (
           <li key={due} className="flex items-center justify-between gap-3 py-2.5">
             <span className="flex items-baseline gap-2.5">
-              <span className="font-mono text-sm text-on-ink tabular-nums">{brl.format(installment)}</span>
+              <span className="text-sm font-medium text-on-ink tabular-nums">{brl.format(installment)}</span>
               <span className="text-xs whitespace-nowrap text-on-ink-variant">{due}</span>
             </span>
             <span className={`rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap ${toneClass[tone]}`}>

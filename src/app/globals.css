@@ -82,14 +82,13 @@
   --color-fellows-accent-soft:      #eef1ff;
   --color-fellows-lime:             #d9f44a;
 
-  /* ── Fontes: Onest (títulos, logo) + Instrument Sans (texto); produtos com as fontes deles ── */
+  /* ── Fontes: Onest (títulos, logo) + Instrument Sans (texto); fontes dos produtos só nas mini telas ── */
   --font-headline: var(--font-onest), "Onest", system-ui, sans-serif;
   --font-body:     var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
   --font-label:    var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
-  --font-mono:     var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-mono:     ui-monospace, "SF Mono", Menlo, Consolas, monospace; /* só código na política */
   --font-control:  var(--font-bricolage), "Bricolage Grotesque", sans-serif;
   --font-pdv:      var(--font-unbounded), "Unbounded", sans-serif;
-  --font-pdv-body: var(--font-dm-sans), "DM Sans", sans-serif;
   --font-fellows:  var(--font-archivo), "Archivo", ui-sans-serif, system-ui, sans-serif;
 
   /* ── Border Radius ── */
@@ -110,20 +109,8 @@
     border-radius: var(--radius-sm);
   }
 
-  .on-ink :focus-visible {
-    outline-color: var(--color-accent);
-  }
-
   .on-footer :focus-visible {
     outline-color: var(--color-feather);
-  }
-
-  .pdv :focus-visible {
-    outline-color: var(--color-pdv-accent);
-  }
-
-  .fellows :focus-visible {
-    outline-color: var(--color-fellows-accent);
   }
 
   /* Sem palavra sozinha na última linha de parágrafos */
@@ -175,7 +162,7 @@
 }
 
 .policy .policy-updated {
-  @apply mt-3 font-mono text-xs tracking-wider uppercase;
+  @apply mt-3 text-xs font-semibold tracking-wider uppercase;
 }
 
 .policy .policy-note {

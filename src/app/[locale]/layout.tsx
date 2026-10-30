@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Archivo, Bricolage_Grotesque, DM_Sans, Instrument_Sans, JetBrains_Mono, Onest, Unbounded } from 'next/font/google'
+import { Archivo, Bricolage_Grotesque, Instrument_Sans, Onest, Unbounded } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -22,19 +22,12 @@ const instrumentSans = Instrument_Sans({
   display: 'swap',
 })
 
-// Fontes dos produtos, só nos painéis deles (abaixo da dobra, sem preload)
-// Harpia PDV: Unbounded + DM Sans (pdv-website)
+// Fontes dos produtos, só dentro das mini telas (abaixo da dobra, sem preload)
+// Harpia PDV: Unbounded (pdv-website)
 const unbounded = Unbounded({
   subsets: ['latin'],
-  weight: ['700', '800'],
+  weight: '700',
   variable: '--font-unbounded',
-  display: 'swap',
-  preload: false,
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
   display: 'swap',
   preload: false,
 })
@@ -46,12 +39,6 @@ const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
   display: 'swap',
   preload: false,
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
 })
 
 // Fellows: Archivo (fellows-website/DESIGN.md)
@@ -112,7 +99,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === 'pt' ? 'pt-BR' : 'en'}
-      className={`${onest.variable} ${instrumentSans.variable} ${unbounded.variable} ${dmSans.variable} ${bricolage.variable} ${jetbrainsMono.variable} ${archivo.variable}`}
+      className={`${onest.variable} ${instrumentSans.variable} ${unbounded.variable} ${bricolage.variable} ${archivo.variable}`}
     >
       <body className="flex min-h-svh flex-col bg-background font-body text-[1.0625rem]/[1.6] text-on-surface antialiased">
         <a
