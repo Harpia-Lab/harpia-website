@@ -40,11 +40,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     channels.push({ cta: 'whatsapp', href: `https://wa.me/${whatsapp}?text=${text}`, label: 'WhatsApp', value: dict.contact.whatsappAction, Icon: ChatIcon })
   }
 
-  // Faixa "Produtos da casa" logo abaixo do topo: marca, nome e uma linha de cada produto (ordem PDV, Control, Fellows)
+  // Faixa "Produtos da casa" logo abaixo do topo: marca, nome e uma linha de cada produto (ordem PDV, Control, Parças)
   const houseProducts = [
     { id: 'pdv', Mark: PdvMark, name: products.pdv.name, short: products.pdv.short },
     { id: 'control', Mark: ControlMark, name: products.name, short: products.short },
-    { id: 'fellows', Mark: FellowsMark, name: products.fellows.name, short: products.fellows.short },
+    { id: 'parcas', Mark: FellowsMark, name: products.fellows.name, short: products.fellows.short },
   ]
 
   return (
@@ -153,7 +153,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Products: os três painéis com a mesma estrutura e altura (marca + nome, frase, texto, botões | mini tela),
-          ordem PDV, Control, Fellows. A identidade de cada produto fica só no palco da mini tela. */}
+          ordem PDV, Control, Parças. A identidade de cada produto fica só no palco da mini tela. */}
       <section id="produtos" className="scroll-mt-20 border-y border-outline-variant bg-band">
         <div className={`${container} py-[4.5rem]`}>
           <SectionHeader title={products.title} subtitle={products.subtitle} className="reveal" />
@@ -209,7 +209,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </div>
             </article>
 
-            <article id="fellows" className={panel}>
+            <article id="parcas" className={panel}>
               <div className="min-w-0">
                 <div className="flex items-center gap-3">
                   <FellowsMark />
@@ -218,7 +218,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <p className={panelTagline}>{products.fellows.tagline}</p>
                 <p className="text-on-surface-variant">{products.fellows.desc}</p>
               </div>
-              {/* Fellows: claro + cobalto + lima (fellows-website/DESIGN.md) */}
+              {/* Parças: claro + cobalto + lima (fellows-website/DESIGN.md) */}
               <div className={`${stage} bg-fellows-bg`}>
                 <FellowsCard dict={products.fellows.card} />
               </div>

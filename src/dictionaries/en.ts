@@ -22,7 +22,7 @@ const en = {
       'Systems, apps and integrations for your business. We understand the problem, build the solution and stay with you after launch.',
     ctaPrimary: 'Get a quote',
     ctaSecondary: 'How we work',
-    proof: 'The same team that builds and runs Harpia PDV, Harpia Control and Fellows.',
+    proof: 'The same team that builds and runs Harpia PDV, Harpia Control and Parças.',
     highlights: ['Support after launch', 'Reply within 24h'],
     productsTitle: 'Our own products',
     productsLabel: 'Our products',
@@ -60,14 +60,14 @@ const en = {
     cta: 'Discover Harpia Control',
     ctaLogin: 'Already use Control? Sign in',
     fellows: {
-      name: 'Fellows',
+      name: 'Parças',
       short: 'Sports together, near you',
       tagline: 'People to play sports with, near you.',
-      desc: 'Running in the park, football, tennis, trails or walks: Fellows shows activities with open spots near you, and whoever creates the activity decides who joins.',
-      cta: 'Discover Fellows',
+      desc: 'Running in the park, football, tennis, trails or walks: Parças shows activities with open spots near you, and whoever creates the activity decides who joins.',
+      cta: 'Discover Parças',
       stores: 'Android and iPhone: coming soon.',
       card: {
-        label: 'Example Fellows card: easy run in the park, Saturday at 7 AM, in Batel, with 3 open spots',
+        label: 'Example Parças card: easy run in the park, Saturday at 7 AM, in Batel, with 3 open spots',
         title: 'Easy run in the park',
         when: 'Sat, Oct 24 · 7:00–8:00 AM',
         where: 'Batel · Curitiba\u00a0·\u00a01.2\u00a0km', // nbsp: "1.2 km" never sits alone on a line
