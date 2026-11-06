@@ -22,7 +22,7 @@ const pt = {
       'Sistemas, aplicativos e integrações para a sua empresa. Entendemos o problema, construímos a solução e seguimos junto depois da entrega.',
     ctaPrimary: 'Pedir orçamento',
     ctaSecondary: 'Como trabalhamos',
-    proof: 'O mesmo time que constrói e opera o Harpia PDV, o Harpia Control e o Fellows.',
+    proof: 'O mesmo time que constrói e opera o Harpia PDV, o Harpia Control e o Parças.',
     highlights: ['Suporte depois da entrega', 'Resposta em até 24h'],
     productsTitle: 'Produtos da casa',
     productsLabel: 'Nossos produtos',
@@ -60,14 +60,14 @@ const pt = {
     cta: 'Conhecer o Harpia Control',
     ctaLogin: 'Já usa o Control? Entrar',
     fellows: {
-      name: 'Fellows',
+      name: 'Parças',
       short: 'Esporte junto, perto de você',
       tagline: 'Gente para praticar esporte junto, perto de você.',
-      desc: 'Corrida no parque, futebol, tênis, trilha ou caminhada: o Fellows mostra as atividades com vaga perto de você, e quem cria a atividade decide quem entra.',
-      cta: 'Conhecer o Fellows',
+      desc: 'Corrida no parque, futebol, tênis, trilha ou caminhada: o Parças mostra as atividades com vaga perto de você, e quem cria a atividade decide quem entra.',
+      cta: 'Conhecer o Parças',
       stores: 'Android e iPhone: em breve.',
       card: {
-        label: 'Exemplo de cartão do Fellows: corrida leve no parque, sábado às 7h, no Batel, com 3 vagas',
+        label: 'Exemplo de cartão do Parças: corrida leve no parque, sábado às 7h, no Batel, com 3 vagas',
         title: 'Corrida leve no parque',
         when: 'sáb, 24 out · 07:00–08:00',
         where: 'Batel · Curitiba\u00a0·\u00a01,2\u00a0km', // nbsp: "1,2 km" nunca fica sozinho na linha

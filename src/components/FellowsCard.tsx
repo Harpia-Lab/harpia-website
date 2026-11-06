@@ -3,7 +3,7 @@ import type { Dictionary } from '@/lib/getDictionary'
 // Furinhos de alfinete do número de peito
 const pins = ['top-1 left-1', 'top-1 right-1', 'bottom-1 left-1', 'bottom-1 right-1']
 
-// Ilustração do cartão de atividade do Fellows (ActivityCard + Bib do fellows-website), sem dados reais
+// Ilustração do cartão de atividade do Parças (ActivityCard + Bib do fellows-website), sem dados reais
 export default function FellowsCard({ dict }: { dict: Dictionary['products']['fellows']['card'] }) {
   return (
     <div

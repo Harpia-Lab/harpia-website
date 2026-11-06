@@ -14,11 +14,11 @@ interface FooterProps {
   dict: Pick<Dictionary, 'nav' | 'footer'>
 }
 
-// Ordem dos produtos: Harpia PDV, Harpia Control, Fellows (manual, M10)
+// Ordem dos produtos: Harpia PDV, Harpia Control, Parças (manual, M10)
 const products: { cta: CtaId; href: string; label: string }[] = [
   { cta: 'pdv', href: pdvUrl, label: 'Harpia PDV' },
   { cta: 'control', href: controlUrl, label: 'Harpia Control' },
-  { cta: 'fellows', href: fellowsUrl, label: 'Fellows' },
+  { cta: 'fellows', href: fellowsUrl, label: 'Parças' },
 ]
 
 export default function Footer({ locale, dict }: FooterProps) {
